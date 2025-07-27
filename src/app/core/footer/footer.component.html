@@ -1,0 +1,71 @@
+<div
+  class="footer w-full z-10 font-body text-gray-300 bg-gray-800 text-sm font-medium p-4 flex flex-col items-center"
+>
+  <div
+    class="cursor-pointer flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto md:space-y-0 md:space-x-4"
+  >
+    <p
+      routerLink="/about"
+      class="px-3 py-2 rounded-md hover:bg-gray-700 hover:text-white"
+    >
+      {{ about }}
+    </p>
+    <p
+      routerLink="/legal"
+      class="px-3 py-2 rounded-md hover:bg-gray-700 hover:text-white"
+    >
+      {{ legal }}
+    </p>
+    <p
+      routerLink="/privacy"
+      class="px-3 py-2 rounded-md hover:bg-gray-700 hover:text-white"
+    >
+      {{ privacy }}
+    </p>
+    <p
+      routerLink="/contact"
+      class="px-3 py-2 rounded-md hover:bg-gray-700 hover:text-white"
+    >
+      {{ contact }}
+    </p>
+    <!-- Facebook -->
+    <a
+      href="https://www.facebook.com/julien.poudras"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="[&>svg]:h-4 [&>svg]:w-4 px-3 py-2 rounded-md hover:bg-gray-700 hover:text-white"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 320 512"
+      >
+        <path
+          d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
+        />
+      </svg>
+    </a>
+  </div>
+  <p class="mt-6 text-center w-full text-xs">{{ copyright }}</p>
+  <div class="flex-col mt-6 text-center w-full text-[10px] font-thin">
+    <p>Inscrit au R.S.A.C de Nanterre sous le numéro 908 219 108</p>
+    <p>
+      Mandataire d’intermédiaire en assurances, Intermédiaire en opérations de
+      banque et de services de paiement, inscrit à l’ORIAS sous le n°22001454
+      (www.orias.fr )
+    </p>
+    <p>
+      Sous le contrôle de l’Autorité de Contrôle Prudentiel et de Résolution
+      (ACPR), 4 Place de Budapest - 75436 PARIS Cedex 09
+    </p>
+    <p>
+      Assurance RCP auprès de ZURICH INSURANCE PLC - 112, avenue de Wagram 75017
+      PARIS
+    </p>
+    <p>
+      Attestation d’habilitation délivrée par la CCI de Toulouse n° unique
+      d’immatriculation 384 850 095
+    </p>
+    <p>Membre de l’ANACOFI association agréée par l’AMF</p>
+  </div>
+</div>
