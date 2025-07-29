@@ -7,7 +7,8 @@
  */
 
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -16,7 +17,19 @@ import { RouterLink } from '@angular/router';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
+  private meta = inject(Meta);
+  private title = inject(Title);
+
+  ngOnInit() {
+    this.title.setTitle('Formulaire de contact - Conseiller en Gestion de Patrimoine');
+    
+    this.meta.updateTag({ 
+      name: 'description', 
+      content: 'Contactez votre Conseiller en Gestion de Patrimoine pour un rendez-vous personnalisé. Obtenez des conseils experts en investissement et optimisation patrimoniale.' 
+    });
+  }
+
   private platformId = inject(PLATFORM_ID);
   emailValue = '';
 

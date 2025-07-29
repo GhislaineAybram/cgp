@@ -6,7 +6,8 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -15,7 +16,18 @@ import { RouterModule } from '@angular/router';
   templateUrl: './legal.component.html',
   styleUrl: './legal.component.scss'
 })
-export class LegalComponent {
+export class LegalComponent implements OnInit {
+  private meta = inject(Meta);
+  private title = inject(Title);
+
+  ngOnInit() {
+    this.title.setTitle('Mentions Légales - Julien Poudras');
+    
+    this.meta.updateTag({ 
+      name: 'description', 
+      content: 'Mentions légales et informations juridiques du Conseiller en Gestion de Patrimoine Julien Poudras.' 
+    });
+  }
 
   summaryItems = [
     { id: 'edition-site', title: 'Edition du site' },
@@ -27,9 +39,6 @@ export class LegalComponent {
     { id: 'droit-applicable', title: 'Droit applicable et attribution de juridiction' }
   ];
 
-  constructor() {}
-
-  // Méthode pour faire défiler vers un élément spécifique
   scrollTo(elementId: string): void {
     const element = document.getElementById(elementId);
     if (element) {

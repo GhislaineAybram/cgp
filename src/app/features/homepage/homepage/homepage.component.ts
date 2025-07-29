@@ -6,13 +6,14 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TestimonialComponent } from '../testimonial/testimonial.component';
 import { EventsComponent } from '../events/events.component';
 import { MediasComponent } from '../medias/medias.component';
 import { NewsComponent } from '../news/news.component';
 import { PillarsComponent } from '../pillars/pillars.component';
 import { AboutComponent } from '../about/about.component';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-homepage',
@@ -20,6 +21,16 @@ import { AboutComponent } from '../about/about.component';
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
+  private meta = inject(Meta);
+  private title = inject(Title);
 
+  ngOnInit() {
+    this.title.setTitle('Conseiller en Gestion de Patrimoine - Julien Poudras');
+    
+    this.meta.updateTag({ 
+      name: 'description', 
+      content: 'Expert en gestion de patrimoine, je vous accompagne dans vos investissements, optimisation fiscale et stratégies patrimoniales. Actualités, conseils personnalisés et suivi clientèle.' 
+    });
+  }
 }

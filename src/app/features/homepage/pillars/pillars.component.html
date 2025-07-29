@@ -14,21 +14,18 @@
 <dl class="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
   @for (pillar of pillars; track pillar.id) {
     <div class="bg-blue-very-light rounded-2xl p-6 hover:shadow-md transition-shadow duration-300">
-      <div class="flex items-start gap-4">
-        <div class="flex-shrink-0 size-12 flex items-center justify-center rounded-lg icons bg-blue text-white">
-          <!-- Icône personnalisable -->
+      <dt class="text-lg font-semibold text-blue-dark italic flex items-center gap-4">
+        <span class="flex-shrink-0 size-12 flex items-center justify-center rounded-lg icons bg-blue text-white">
+          <!-- Icône -->
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="size-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 7.756a4.5 4.5 0 1 0 0 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
-        </div>
-
-        <div>
-          <dt class="text-lg font-semibold text-blue-dark italic">{{ pillar.name }}</dt>
-          <dd class="mt-2 text-sm sm:text-base text-grey-dark leading-snug">
-            {{ pillar.description }}
-          </dd>
-        </div>
-      </div>
+        </span>
+        {{ pillar.name }}
+      </dt>
+      <dd class="mt-2 ml-16 text-sm sm:text-base text-grey-dark leading-snug">
+        {{ pillar.description }}
+      </dd>
     </div>
   }
 </dl>

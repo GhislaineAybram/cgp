@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "generate-env": "node scripts/generate-env.js",
-    "start": "npm run generate-env && ng serve",
-    "build": "npm run generate-env && ng build",
+    "prestart": "node scripts/generate-env.js",
+    "start": "ng serve",
+    "prebuild": "node scripts/generate-env.js",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:stellium": "node dist/stellium/server/server.mjs"

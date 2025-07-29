@@ -10,7 +10,6 @@ export class SupabaseService {
   private supabase: SupabaseClient | null = null;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    // Initialiser Supabase uniquement côté client
     if (isPlatformBrowser(this.platformId)) {
       this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
     }

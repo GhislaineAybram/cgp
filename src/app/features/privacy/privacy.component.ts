@@ -6,7 +6,8 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -15,7 +16,19 @@ import { RouterModule } from '@angular/router';
   templateUrl: './privacy.component.html',
   styleUrl: './privacy.component.scss'
 })
-export class PrivacyComponent {
+export class PrivacyComponent implements OnInit {
+  private meta = inject(Meta);
+  private title = inject(Title);
+
+  ngOnInit() {
+    this.title.setTitle('Politique de Confidentialité - Protection des Données');
+    
+    this.meta.updateTag({ 
+      name: 'description', 
+      content: 'Ma politique de confidentialité détaille la collecte, l\'utilisation et la protection de vos données personnelles conformément au RGPD.' 
+    });
+  }
+
   summaryItems = [
     { id: 'preambule', title: 'Préambule' },
     { id: 'principes-collecte', title: 'Principes relatifs à la collecte et au traitement des données personnelles' },
@@ -25,9 +38,6 @@ export class PrivacyComponent {
     { id: 'modification-politique', title: 'Modification de la politique de confidentialité' }
   ];
 
-  constructor() {}
-
-  // Méthode pour faire défiler vers un élément spécifique
   scrollTo(elementId: string): void {
     const element = document.getElementById(elementId);
     if (element) {
