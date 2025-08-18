@@ -63,6 +63,13 @@ body {
 .color-grey-light {
   color: $color-grey-300;
 }
+.color-grey-very-light {
+  color: $color-grey-100;
+}
+.hover-bg-black:hover {
+  background-color: $color-black;
+  color: $color-white;
+}
 .color-white {
   color: $color-white;
 }
@@ -76,6 +83,10 @@ body {
 .bg-blue-very-light {
   background-color: $color-blue-100;
 }
+.hover-bg-blue-very-light:hover {
+  background-color: $color-blue-100;
+  color: $color-blue-800;
+}
 .bg-blue-light {
   background-color: $color-blue-200;
 }
@@ -84,6 +95,9 @@ body {
 }
 .bg-grey-very-light {
   background-color: $color-grey-100;
+}
+.bg-grey-dark {
+  background-color: $color-grey-800;
 }
 
 // title decoration

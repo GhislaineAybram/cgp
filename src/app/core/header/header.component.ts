@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isMenuOpen = false;
-    this.logo = 'assets/logo-mini-dark-mode.png';
+    this.logo = 'assets/logo-mini-light-mode.png';
     this.alt = 'logo site';
     this.homepage = 'Accueil';
     this.about = 'A propos';
