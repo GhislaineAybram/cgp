@@ -39,10 +39,12 @@
               </p>
               <div>
                 <a
-                  href="#"
-                  class="text-slate-800 font-semibold text-sm hover:underline flex items-center"
+                  [href]="article.link"
+                  class="visible-link text-slate-800 font-semibold text-sm flex items-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >
-                  Learn More
+                  Lire l'article complet sur {{ article.source }}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="ml-2 h-4 w-4"
@@ -65,5 +67,15 @@
       }
 
     </div>
+    <div class="flex justify-end">
+      <button
+        type="button"
+        class="mt-6 ml-auto px-3.5 py-2.5 text-center text-sm font-semibold button-action"
+        routerLink="/"
+      >
+        Retour vers la page d'accueil
+      </button>
+    </div>
+
   </div>
 </div>

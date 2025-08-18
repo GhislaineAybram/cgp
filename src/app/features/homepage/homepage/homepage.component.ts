@@ -10,14 +10,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { TestimonialComponent } from '../testimonial/testimonial.component';
 import { EventsComponent } from '../events/events.component';
 import { MediasComponent } from '../medias/medias.component';
-import { NewsComponent } from '../news/news.component';
 import { PillarsComponent } from '../pillars/pillars.component';
 import { AboutComponent } from '../about/about.component';
 import { Meta, Title } from '@angular/platform-browser';
+import { NewsPreviewComponent } from '../news-preview/news-preview.component';
 
 @Component({
   selector: 'app-homepage',
-  imports: [AboutComponent, PillarsComponent, TestimonialComponent, EventsComponent, MediasComponent, NewsComponent],
+  imports: [AboutComponent, PillarsComponent, TestimonialComponent, EventsComponent, MediasComponent, NewsPreviewComponent],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
