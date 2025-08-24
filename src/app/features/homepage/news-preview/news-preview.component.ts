@@ -18,8 +18,8 @@ export class NewsPreviewComponent implements OnInit {
     private articlesService: ArticlesService,
   ) {}
   
-  ngOnInit(): void {
-    this.articles = this.articlesService.getFirstArticles(3);
+  async ngOnInit(): Promise<void> {
+    this.articles = await this.articlesService.getFirstArticles(3);
   }
 
 }

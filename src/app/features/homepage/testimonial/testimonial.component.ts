@@ -6,18 +6,19 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component, Inject, OnInit, AfterViewInit, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Feedback } from '../../../models/feedback';
 import { SupabaseService } from '../../../supabase.service';
 
 @Component({
   selector: 'app-testimonial',
+  standalone: true, // Si vous utilisez Angular 14+ avec des composants standalone
   imports: [CommonModule],
   templateUrl: './testimonial.component.html',
-  styleUrl: './testimonial.component.scss'
+  styleUrls: ['./testimonial.component.scss']
 })
-export class TestimonialComponent implements OnInit, AfterViewInit {
+export class TestimonialComponent implements OnInit {
   feedbacks: Feedback[] = [];
   currentIndex = 0;
   isLoading = true;
@@ -29,27 +30,21 @@ export class TestimonialComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
+    this.loadFeedbacks();
   }
 
-  ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      setTimeout(() => {
-        this.getFeedbacks();
-      }, 0);
-    } else {
+  async loadFeedbacks(): Promise<void> {
+    if (!isPlatformBrowser(this.platformId)) {
       this.isLoading = false;
       this.cdr.detectChanges();
+      return;
     }
-  }
 
-  async getFeedbacks() {
     try {
       this.isLoading = true;
       console.log('Loading feedbacks...');
-      
-      const { data, error } = await this.supabase.getFeedbacks();
 
+      const { data, error } = await this.supabase.getFeedbacks();
       if (error) {
         console.error('Error loading feedbacks:', error);
         this.feedbacks = [];
@@ -78,17 +73,15 @@ export class TestimonialComponent implements OnInit, AfterViewInit {
 
   previousSlide(): void {
     if (this.feedbacks.length === 0) return;
-    
-    this.currentIndex = this.currentIndex === 0 
-      ? this.feedbacks.length - 1 
+    this.currentIndex = this.currentIndex === 0
+      ? this.feedbacks.length - 1
       : this.currentIndex - 1;
   }
 
   nextSlide(): void {
     if (this.feedbacks.length === 0) return;
-    
-    this.currentIndex = this.currentIndex === this.feedbacks.length - 1 
-      ? 0 
+    this.currentIndex = this.currentIndex === this.feedbacks.length - 1
+      ? 0
       : this.currentIndex + 1;
   }
 

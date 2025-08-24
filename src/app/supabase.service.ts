@@ -2,10 +2,18 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../environments/environment';
+import { Article } from './models/article';
+import { Feedback } from './models/feedback';
+
+interface SupabaseResponse<T> {
+  data: T[] | null;
+  error: Error | null;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class SupabaseService {
   private supabase: SupabaseClient | null = null;
 
@@ -19,7 +27,7 @@ export class SupabaseService {
     return this.supabase;
   }
 
-  async getFeedbacks() {
+  async getFeedbacks(): Promise<SupabaseResponse<Feedback>> {
     // Vérifier si nous sommes côté client et si Supabase est initialisé
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
@@ -39,7 +47,53 @@ export class SupabaseService {
       return { data, error };
     } catch (error) {
       console.error('Error in getFeedbacks:', error);
-      return { data: [], error };
+      return { data: [], error: error as Error };
     }
   }
+
+  async getAllArticles(): Promise<SupabaseResponse<Article>> {
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: [], error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('article')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      return { data, error };
+    } catch (error) {
+      console.error('Erreur in getAllArticles:', error);
+      return { data: [], error: error as Error };
+    }
+  }
+
+  async getArticlesByLimit(limit: number): Promise<SupabaseResponse<Article>> {
+    
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: [], error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('article')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(limit);
+
+      return { data, error };
+    } catch (error) {
+      console.error('Error in getArticlesByLimit:', error);
+      return { data: [], error: error as Error };
+    }
+  }
+
 }

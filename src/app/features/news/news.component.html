@@ -27,7 +27,7 @@
                   >
                   {{ article.theme }}
                 </div>
-                <time *ngIf="article.date" [attr.datetime]="article.date.toISOString()" class="color-grey-dark text-sm">
+                <time *ngIf="article.date" class="color-grey-dark text-sm">
                   {{ article.date | date: 'd MMMM yyyy' : '':'fr'}}
                 </time>
               </div>

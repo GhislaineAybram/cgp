@@ -24,7 +24,7 @@ export class NewsComponent implements OnInit {
 
   constructor(private articlesService: ArticlesService) {}
 
-  ngOnInit(): void {
-    this.articles = this.articlesService.getAllArticles();
+  async ngOnInit(): Promise<void> {
+    this.articles = await this.articlesService.getAllArticles();
   }
 }
