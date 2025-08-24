@@ -4,6 +4,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../environments/environment';
 import { Article } from './models/article';
 import { Feedback } from './models/feedback';
+import { Video } from './models/video';
 
 interface SupabaseResponse<T> {
   data: T[] | null;
@@ -92,6 +93,28 @@ export class SupabaseService {
       return { data, error };
     } catch (error) {
       console.error('Error in getArticlesByLimit:', error);
+      return { data: [], error: error as Error };
+    }
+  }
+
+  async getAllVideos(): Promise<SupabaseResponse<Video>> {
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: [], error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('video')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      return { data, error };
+    } catch (error) {
+      console.error('Erreur in getAllVideos:', error);
       return { data: [], error: error as Error };
     }
   }

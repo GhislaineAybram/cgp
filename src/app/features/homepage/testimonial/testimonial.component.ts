@@ -49,7 +49,6 @@ export class TestimonialComponent implements OnInit {
         console.error('Error loading feedbacks:', error);
         this.feedbacks = [];
       } else {
-        console.log('Feedbacks loaded:', data);
         this.feedbacks = data || [];
       }
     } catch (error) {

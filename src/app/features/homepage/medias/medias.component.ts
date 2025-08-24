@@ -6,9 +6,10 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Video } from '../../../models/video';
 import { CommonModule } from '@angular/common';
+import { SupabaseService } from '../../../supabase.service';
 
 @Component({
   selector: 'app-medias',
@@ -16,28 +17,34 @@ import { CommonModule } from '@angular/common';
   templateUrl: './medias.component.html',
   styleUrl: './medias.component.scss'
 })
-export class MediasComponent implements OnInit {
-  medias: Video[] = [];
 
+export class MediasComponent implements OnInit {
+
+  medias: Video[] = [];
+  isLoading = true;
+
+  constructor(private supabase: SupabaseService) {}
+  
   ngOnInit(): void {
-    this.medias = [
-      {
-        id: '1',
-        date: new Date('2021-04-22'),
-        channel: 'BFM Business',
-        title: `Le surplus d’épargne lié à la crise de Covid-19 va-t-il pousser les Français à investir davantage ?`,
-        text: `Ce jeudi 22 avril, Philippe Lauzeral, directeur général délégué de Stellium, s'est penché sur les produits d'investissement à privilégier pour les Français qui ont cumulé des montagnes d'épargne en un an, dans l'émission BFM Bourse présentée par Guillaume Sommerer.`,
-        link: 'https://www.dailymotion.com/video/x80slvn'
-      },
-      {
-        id: '2',
-        date: new Date('2022-12-08'),
-        channel: 'BFM Business',
-        title: `L'immobilier constitue-t-il encore un rempart contre l'inflation ?`,
-        text: `Philippe Lauzeral, directeur général délégué de Stellium`,
-        link: 'https://www.youtube.com/watch?v=A8wxZFfOsqQ'
-      },
-    ];
+    this.loadAllVideos();
+  }
+
+  async loadAllVideos(): Promise<void> {
+    try {
+      this.isLoading = true;
+      const { data, error } = await this.supabase.getAllVideos();
+      if (error) {
+        console.error('Error loading videos:', error);
+        this.medias = [];
+      } else {
+        this.medias = data as Video[];
+      }
+    } catch (error) {
+      console.error('Unexpected error loading videos:', error);
+      this.medias = [];
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   getMediaThumbnail(link: string): string {
