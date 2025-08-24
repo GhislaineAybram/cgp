@@ -5,6 +5,7 @@ import { environment } from '../environments/environment';
 import { Article } from './models/article';
 import { Feedback } from './models/feedback';
 import { Video } from './models/video';
+import { Evening } from './models/evening';
 
 interface SupabaseResponse<T> {
   data: T[] | null;
@@ -115,6 +116,31 @@ export class SupabaseService {
       return { data, error };
     } catch (error) {
       console.error('Erreur in getAllVideos:', error);
+      return { data: [], error: error as Error };
+    }
+  }
+
+  async getAllEvenings(): Promise<SupabaseResponse<Evening>> {
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: [], error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const today = new Date().toISOString().split('T')[0];
+
+      const { data, error } = await this.supabase
+        .from('evening')
+        .select('*')
+        .gte('date', today)
+        .order('date', { ascending: true });
+      
+      return { data, error };
+    } catch (error) {
+      console.error('Erreur in getAllEvenings:', error);
       return { data: [], error: error as Error };
     }
   }

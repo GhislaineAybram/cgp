@@ -14,6 +14,17 @@
         </p>
       </div>
     </div>
+
+    @if (isLoading) {
+      <p class="text-center py-8 text-gray-500">
+        Chargement des événements en cours...
+      </p>
+    } @else if (evenings.length === 0) {
+      <p class="text-center py-8 text-gray-500">
+        Aucun événement à venir pour le moment. Resté connecté !
+      </p>
+    } @else {
+
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       @for (evening of evenings; track evening.id) {
         <article
@@ -69,7 +80,6 @@
                   </svg>
                   <p
                     *ngIf="evening.date"
-                    [attr.datetime]="evening.date.toISOString()"
                     class="text-slate-600 font-light"
                     >
                     {{ evening.date | date : 'd MMMM yyyy' : '':'fr' }}
@@ -90,7 +100,7 @@
                       d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                       />
                   </svg>
-                  <p class="text-slate-600 font-light">{{ evening.hour }}</p>
+                  <p class="text-slate-600 font-light">{{ evening.hour.slice(0,5) }}</p>
                 </div>
               </div>
             </div>
@@ -98,5 +108,6 @@
         </article>
       }
     </div>
+    }
   </div>
 </div>
