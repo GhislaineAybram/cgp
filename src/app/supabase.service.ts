@@ -120,6 +120,29 @@ export class SupabaseService {
     }
   }
 
+  async getVideosByLimit(limit: number): Promise<SupabaseResponse<Video>> {
+    
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: [], error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase
+        .from('video')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(limit);
+
+      return { data, error };
+    } catch (error) {
+      console.error('Error in getVideosByLimit:', error);
+      return { data: [], error: error as Error };
+    }
+  }
+
   async getAllEvenings(): Promise<SupabaseResponse<Evening>> {
 
     if (!isPlatformBrowser(this.platformId)) {

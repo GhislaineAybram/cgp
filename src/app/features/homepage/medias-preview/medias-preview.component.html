@@ -56,16 +56,20 @@
           </h3>
           
           <div class="text-sm color-grey-dark relative">
-            <p [ngClass]="{ 'line-clamp-3': !expandedMediaIds.has(media.id) }">
+          <p>
+            <span *ngIf="!mediasService.isTextExpanded(media.id) && mediasService.shouldShowToggle(media.text)">
+              {{ media.text | slice:0:250 }}...
+            </span>
+            <span *ngIf="mediasService.isTextExpanded(media.id) || !mediasService.shouldShowToggle(media.text)">
               {{ media.text }}
-            </p>
+            </span>
             <button
-              *ngIf="shouldShowToggle(media.text) && !expandedMediaIds.has(media.id)"
-              (click)="toggleText(media.id)"
-              class="mt-1 hover:underline text-sm font-medium"
+              *ngIf="mediasService.shouldShowToggle(media.text)"
+              (click)="mediasService.toggleText(media.id)"
             >
-              … voir plus
+              {{ mediasService.isTextExpanded(media.id) ? 'Voir moins' : 'Voir plus' }}
             </button>
+          </p>
           </div>
           
         </div>
@@ -78,6 +82,7 @@
       <button
         type="submit"
         class="mt-6 ml-auto px-3.5 py-2.5 text-center text-sm font-semibold button-action"
+        routerLink="/medias"
       >
         Voir toutes les vidéos
       </button>
@@ -85,3 +90,4 @@
   }
   </div>
 </div>
+
