@@ -31,7 +31,7 @@ export class MediasService {
     if (!link) return '';
 
     // YouTube (youtu.be or youtube.com)
-    const youtubeMatch = link.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&\s]+)/);
+    const youtubeMatch = link.match(/(?:youtu\.be\/|youtube\.com.*[?&]v=)([^&]+)/);
     if (youtubeMatch) {
       return `https://img.youtube.com/vi/${youtubeMatch[1]}/hqdefault.jpg`;
     }
@@ -39,36 +39,25 @@ export class MediasService {
     // Vimeo
     const vimeoMatch = link.match(/vimeo\.com\/(\d+)/);
     if (vimeoMatch) {
-      const vimeoId = vimeoMatch[1];
-      return `https://vumbnail.com/${vimeoId}.jpg`;
+      return `https://vumbnail.com/${vimeoMatch[1]}.jpg`;
     }
 
-    // Dailymotion
+    // Dailymotion classique
     const dailymotionMatch = link.match(/dailymotion\.com\/video\/([a-zA-Z0-9]+)/);
     if (dailymotionMatch) {
       return `https://www.dailymotion.com/thumbnail/video/${dailymotionMatch[1]}`;
     }
 
-    // Fallback
-    return '/assets/default-video-thumbnail.jpg';
-  }
-
-  expandedMediaIds = new Set<string>();
-
-  shouldShowToggle(text: string | null | undefined): boolean {
-    return !!text && text.length > 250;
-  }
-
-  toggleText(mediaId: string): void {
-    if (this.expandedMediaIds.has(mediaId)) {
-      this.expandedMediaIds.delete(mediaId);
-    } else {
-      this.expandedMediaIds.add(mediaId);
+    // Dailymotion embedded (geo.dailymotion.com/player.html?video=ID)
+    const dailymotionEmbedMatch = link.match(/geo\.dailymotion\.com\/player\.html\?video=([a-zA-Z0-9]+)/);
+    if (dailymotionEmbedMatch) {
+      return `https://www.dailymotion.com/thumbnail/video/${dailymotionEmbedMatch[1]}`;
     }
+
+    // BFMTV (pas de miniature officielle, on utilise un placeholder)
+    // Fallback
+    return 'assets/default-video-thumbnail.png';
   }
 
-  isTextExpanded(mediaId: string): boolean {
-    return this.expandedMediaIds.has(mediaId);
-  }
 }
 

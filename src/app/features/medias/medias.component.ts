@@ -11,10 +11,11 @@ import { CommonModule } from '@angular/common';
 import { MediasService } from '../../core/services/medias.service';
 import { Video } from '../../models/video';
 import { RouterModule } from '@angular/router';
+import { MediasListComponent } from '../../shared/components/medias-list/medias-list.component';
 
 @Component({
   selector: 'app-medias',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MediasListComponent],
   templateUrl: './medias.component.html',
   styleUrl: './medias.component.scss'
 })
@@ -25,37 +26,10 @@ export class MediasComponent implements OnInit {
   isLoading = true;
 
   constructor(public mediasService: MediasService) {}
-  
-  ngOnInit(): void {
-    this.loadAllVideos();
-  }
 
-  async loadAllVideos(): Promise<void> {
-    try {
-      this.isLoading = true;
-      this.medias = await this.mediasService.getAllVideos();
-    } catch (error) {
-      console.error('Unexpected error loading videos:', error);
-      this.medias = [];
-    } finally {
-      this.isLoading = false;
-    }
-  }
-
-  getMediaThumbnail(link: string): string {
-    return this.mediasService.getMediaThumbnail(link);
-  }
-
-  shouldShowToggle(text: string | null | undefined): boolean {
-    return this.mediasService.shouldShowToggle(text);
-  }
-
-  toggleText(mediaId: string): void {
-    this.mediasService.toggleText(mediaId);
-  }
-
-  isTextExpanded(mediaId: string): boolean {
-    return this.mediasService.isTextExpanded(mediaId);
+  async ngOnInit() {
+    this.medias = await this.mediasService.getAllVideos();
+    this.isLoading = false;
   }
 
 }

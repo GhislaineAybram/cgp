@@ -66,7 +66,7 @@ export class SupabaseService {
       const { data, error } = await this.supabase
         .from('article')
         .select('*')
-        .order('created_at', { ascending: false });
+        .order('date', { ascending: false });
       
       return { data, error };
     } catch (error) {
@@ -88,7 +88,7 @@ export class SupabaseService {
       const { data, error } = await this.supabase
         .from('article')
         .select('*')
-        .order('created_at', { ascending: false })
+        .order('date', { ascending: false })
         .limit(limit);
 
       return { data, error };
@@ -111,7 +111,7 @@ export class SupabaseService {
       const { data, error } = await this.supabase
         .from('video')
         .select('*')
-        .order('created_at', { ascending: false });
+        .order('date', { ascending: false });
       
       return { data, error };
     } catch (error) {
@@ -133,7 +133,7 @@ export class SupabaseService {
       const { data, error } = await this.supabase
         .from('video')
         .select('*')
-        .order('created_at', { ascending: false })
+        .order('date', { ascending: false })
         .limit(limit);
 
       return { data, error };

@@ -31,20 +31,22 @@
                   {{ article.date | date: 'd MMMM yyyy' : '':'fr'}}
                 </time>
               </div>
-              <h4 class="mb-2 text-slate-800 text-xl font-semibold">
+              <h4 class="mb-2 text-slate-800 text-lg font-semibold min-h-[4.5rem]">
                 {{ article.title }}
               </h4>
-              <p class="line-clamp-6 mb-8 text-slate-600 leading-normal font-light">
+              <p class="text-sm line-clamp-6 mb-8 text-slate-600 leading-normal font-light">
                 {{ article.text }}
               </p>
               <div>
                 <a
                   [href]="article.link"
-                  class="visible-link text-slate-800 font-semibold text-sm flex items-center"
+                  class="visible-link text-slate-800 font-semibold text-sm flex items-center underline decoration-current"
                   target="_blank"
                   rel="noopener noreferrer"
                   >
-                  Lire l'article complet sur {{ article.source }}
+                  <span>
+                    Lire l'article complet sur <i>{{ article.source }}</i>
+                  </span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="ml-2 h-4 w-4"
