@@ -11,20 +11,23 @@ import { Article } from '../../models/article';
 import { CommonModule } from '@angular/common';
 import { ArticlesService } from '../../core/services/articles.service';
 import { RouterModule } from '@angular/router';
+import { NewsListComponent } from '../../shared/components/news-list/news-list.component';
 
 @Component({
   selector: 'app-news',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NewsListComponent],
   templateUrl: './news.component.html',
   styleUrl: './news.component.scss'
 })
 
 export class NewsComponent implements OnInit {
   articles: Article[] = [];
+  isLoading = true;
 
-  constructor(private articlesService: ArticlesService) {}
+  constructor(public articlesService: ArticlesService) {}
 
   async ngOnInit(): Promise<void> {
     this.articles = await this.articlesService.getAllArticles();
+    this.isLoading = false;
   }
 }
