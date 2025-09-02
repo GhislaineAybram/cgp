@@ -23,7 +23,7 @@
     color: $color-blue-100
   }
   
-  li strong {
+  li strong, ul li::marker {
     color: $color-bronze-400;
     font-weight: 600;
   }

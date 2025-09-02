@@ -223,6 +223,7 @@ body {
 .visible-link:hover {
   color: $color-blue-800;
   text-decoration-color: $color-blue-800;
+  transform: translateY(-1px);
 }
 
 .summary-link {
