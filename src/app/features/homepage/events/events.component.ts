@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Evening } from '../../../models/evening';
 import { CommonModule } from '@angular/common';
 import { SupabaseService } from '../../../supabase.service';
@@ -15,14 +15,14 @@ import { SupabaseService } from '../../../supabase.service';
   selector: 'app-events',
   imports: [CommonModule],
   templateUrl: './events.component.html',
-  styleUrl: './events.component.scss'
+  styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
 
   evenings: Evening[] = [];
   isLoading = true;
 
-  constructor(private supabase: SupabaseService) {}
+  private readonly supabase = inject(SupabaseService);
 
   ngOnInit(): void {
     this.loadAllEvenings();

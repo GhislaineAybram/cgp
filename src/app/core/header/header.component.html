@@ -44,13 +44,47 @@
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover-bg-blue-very-light" -->
       <!-- <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">{{ presentation }}</a> -->
       <a routerLink="" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{ homepage }}</a>
-      <a (click)="goTo('about')" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{ about }}</a>
-      <a (click)="goTo('pillars')" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{ pillars }}</a>
-      <a (click)="goTo('news')" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{ news }}</a>
-      <a (click)="goTo('medias')" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{ medias }}</a>
-      <a (click)="goTo('events')" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{ events }}</a>
-      <a (click)="goTo('testimonial')" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{ feedback }}</a>
-      <a routerLink="/contact" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{ contact }}</a>
+      <a 
+        [routerLink]="['/']"
+        fragment="about"
+        (click)="isMenuOpen = false"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+      >{{ about }}</a>
+      <a 
+        [routerLink]="['/']"
+        fragment="pillars"
+        (click)="isMenuOpen = false"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+      >{{ pillars }}</a>
+      <a 
+        [routerLink]="['/']"
+        fragment="news"
+        (click)="isMenuOpen = false"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+      >{{ news }}</a>
+      <a 
+        [routerLink]="['/']"
+        fragment="medias"
+        (click)="isMenuOpen = false"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+      >{{ medias }}</a>
+      <a 
+        [routerLink]="['/']"
+        fragment="events"
+        (click)="isMenuOpen = false"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+      >{{ events }}</a>
+      <a 
+        [routerLink]="['/']"
+        fragment="testimonial"
+        (click)="isMenuOpen = false"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+      >{{ feedback }}</a>
+      <a 
+        routerLink="/contact" 
+        (click)="isMenuOpen = false" 
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+      >{{ contact }}</a>
     </div>
   </div>
 </nav>

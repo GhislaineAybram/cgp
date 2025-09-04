@@ -6,16 +6,16 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pillar } from '../../../models/pillar';
 
 @Component({
   selector: 'app-pillars',
   imports: [],
   templateUrl: './pillars.component.html',
-  styleUrl: './pillars.component.scss'
+  styleUrls: ['./pillars.component.scss']
 })
-export class PillarsComponent {
+export class PillarsComponent implements OnInit {
   pillars: Pillar[] = [];
 
   ngOnInit(): void {

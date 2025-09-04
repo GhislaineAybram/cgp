@@ -7,7 +7,7 @@
  */
 
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -44,11 +44,8 @@ export class HeaderComponent implements OnInit {
     this.contact = 'Contact';
   }
 
-  constructor(
-    private router: Router,
-    private zone: NgZone,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  private readonly router = inject(Router);
+  private readonly platformId = inject(PLATFORM_ID);
 
   goTo(fragment: string | null) {
     this.isMenuOpen = false;

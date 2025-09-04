@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
   selector: 'app-admin',
   imports: [],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+  styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
 

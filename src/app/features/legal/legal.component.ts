@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-legal',
   imports: [RouterModule],
   templateUrl: './legal.component.html',
-  styleUrl: './legal.component.scss'
+  styleUrls: ['./legal.component.scss']
 })
 export class LegalComponent implements OnInit {
   private meta = inject(Meta);

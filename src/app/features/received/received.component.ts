@@ -13,7 +13,7 @@ import { Meta, Title } from '@angular/platform-browser';
   selector: 'app-received',
   imports: [],
   templateUrl: './received.component.html',
-  styleUrl: './received.component.scss'
+  styleUrls: ['./received.component.scss']
 })
 export class ReceivedComponent implements OnInit {
   private meta = inject(Meta);

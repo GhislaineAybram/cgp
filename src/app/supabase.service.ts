@@ -1,4 +1,4 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../environments/environment';
@@ -19,7 +19,9 @@ interface SupabaseResponse<T> {
 export class SupabaseService {
   private supabase: SupabaseClient | null = null;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  private platformId = inject(PLATFORM_ID);
+
+  constructor() {
     if (isPlatformBrowser(this.platformId)) {
       this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
     }

@@ -1,4 +1,13 @@
-import { Injectable } from '@angular/core';
+/**
+ * @fileoverview Articles Service - Article content management
+ * @description Service providing data retrieval and management for article content. 
+ * It centralizes all API calls to Supabase, and exposes methods for components
+ * to fetch, cache, and display media items in a consistent way.
+ * 
+ * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
+ */
+
+import { inject, Injectable } from '@angular/core';
 import { Article } from '../../models/article';
 import { SupabaseService } from '../../supabase.service';
 
@@ -7,7 +16,7 @@ import { SupabaseService } from '../../supabase.service';
 })
 export class ArticlesService {
 
-  constructor(private supabase: SupabaseService) {}
+  private readonly supabase = inject(SupabaseService);
 
   async getAllArticles(): Promise<Article[]> {
     const { data, error } = await this.supabase.getAllArticles();

@@ -19,7 +19,7 @@ import { MediasPreviewComponent } from '../medias-preview/medias-preview.compone
   selector: 'app-homepage',
   imports: [AboutComponent, PillarsComponent, TestimonialComponent, EventsComponent, MediasPreviewComponent, NewsPreviewComponent],
   templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss'
+  styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
   private meta = inject(Meta);

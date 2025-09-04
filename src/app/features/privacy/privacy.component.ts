@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-privacy',
   imports: [RouterModule],
   templateUrl: './privacy.component.html',
-  styleUrl: './privacy.component.scss'
+  styleUrls: ['./privacy.component.scss']
 })
 export class PrivacyComponent implements OnInit {
   private meta = inject(Meta);

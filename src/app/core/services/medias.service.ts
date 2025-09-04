@@ -1,4 +1,14 @@
-import { Injectable } from '@angular/core';
+/**
+ * @fileoverview Medias Service - Media content management
+ * @description Service providing data retrieval and management for media content
+ * such as videos and podcasts. 
+ * It centralizes all API calls to Supabase, and exposes methods for components
+ * to fetch, cache, and display media items in a consistent way.
+ * 
+ * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
+ */
+
+import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from '../../supabase.service';
 import { Video } from '../../models/video';
 
@@ -7,7 +17,7 @@ import { Video } from '../../models/video';
 })
 export class MediasService {
 
-  constructor(private supabase: SupabaseService) {}
+  private readonly supabase = inject(SupabaseService);
 
   async getAllVideos(): Promise<Video[]> {
     const { data, error } = await this.supabase.getAllVideos();

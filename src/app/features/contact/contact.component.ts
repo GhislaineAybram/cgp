@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-contact',
   imports: [RouterLink, CommonModule],
   templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+  styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
   private meta = inject(Meta);

@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component, Inject, OnInit, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Feedback } from '../../../models/feedback';
 import { SupabaseService } from '../../../supabase.service';
@@ -23,11 +23,9 @@ export class TestimonialComponent implements OnInit {
   currentIndex = 0;
   isLoading = true;
 
-  constructor(
-    private readonly supabase: SupabaseService,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private cdr: ChangeDetectorRef
-  ) {}
+  private readonly supabase = inject(SupabaseService);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.loadFeedbacks();
