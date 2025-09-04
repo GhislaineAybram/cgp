@@ -2,9 +2,9 @@
  * @fileoverview Admin Component - Content management dashboard
  * @description Component managing the admin panel for the advisor to autonomously
  * add/edit articles, video links and client testimonials after authentication
- * 
+ *
  * @auth required
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -14,8 +14,6 @@ import { Component } from '@angular/core';
   selector: 'app-admin',
   imports: [],
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent {
-
-}
+export class AdminComponent {}

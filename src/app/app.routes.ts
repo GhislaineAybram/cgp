@@ -9,12 +9,12 @@ import { NewsComponent } from './features/news/news.component';
 import { MediasComponent } from './features/medias/medias.component';
 
 export const routes: Routes = [
-    { path: '', component: HomepageComponent},
-    { path: 'news', component: NewsComponent },
-    { path: 'medias', component: MediasComponent },
-    { path: 'legal', component: LegalComponent},
-    { path: 'privacy', component: PrivacyComponent},
-    { path: 'contact', component: ContactComponent},
-    { path: 'received', component: ReceivedComponent},
-    { path: 'admin', component: AdminComponent},
+  { path: '', component: HomepageComponent },
+  { path: 'news', component: NewsComponent },
+  { path: 'medias', component: MediasComponent },
+  { path: 'legal', component: LegalComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'received', component: ReceivedComponent },
+  { path: 'admin', component: AdminComponent },
 ];

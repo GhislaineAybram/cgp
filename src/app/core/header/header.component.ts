@@ -2,7 +2,7 @@
  * @fileoverview Header Component - Main navigation and branding
  * @description Component managing the main navigation bar, logo display,
  * menu items and responsive mobile navigation for the website
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -15,7 +15,7 @@ import { Router, RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   isMenuOpen!: boolean;
@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
     }
 
     setTimeout(() => {
-      this.router.navigate(['/',], { fragment: fragment ?? undefined });
+      this.router.navigate(['/'], { fragment: fragment ?? undefined });
     }, 0);
   }
 }

@@ -2,30 +2,32 @@
  * @fileoverview Legal Component - Legal notices and terms of use
  * @description Component managing the display of legal information,
  * terms of service, disclaimers and regulatory compliance information
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
 import { Component, inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import ownerData from '../../../assets/owner-data.json';
 
 @Component({
   selector: 'app-legal',
   imports: [RouterModule],
   templateUrl: './legal.component.html',
-  styleUrls: ['./legal.component.scss']
+  styleUrls: ['./legal.component.scss'],
 })
 export class LegalComponent implements OnInit {
   private meta = inject(Meta);
   private title = inject(Title);
+  ownerData = ownerData;
 
   ngOnInit() {
     this.title.setTitle('Mentions Légales - Julien Poudras');
-    
-    this.meta.updateTag({ 
-      name: 'description', 
-      content: 'Mentions légales et informations juridiques du Conseiller en Gestion de Patrimoine Julien Poudras.' 
+
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Mentions légales et informations juridiques du Conseiller en Gestion de Patrimoine Julien Poudras.',
     });
   }
 
@@ -36,16 +38,16 @@ export class LegalComponent implements OnInit {
     { id: 'nous-contacter', title: 'Nous contacter' },
     { id: 'propriete-intellectuelle', title: 'Propriété intellectuelle et contrefaçons' },
     { id: 'donnees-personnelles', title: 'Données personnelles' },
-    { id: 'droit-applicable', title: 'Droit applicable et attribution de juridiction' }
+    { id: 'droit-applicable', title: 'Droit applicable et attribution de juridiction' },
   ];
 
   scrollTo(elementId: string): void {
     const element = document.getElementById(elementId);
     if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth', 
+      element.scrollIntoView({
+        behavior: 'smooth',
         block: 'start',
-        inline: 'nearest'
+        inline: 'nearest',
       });
     }
   }

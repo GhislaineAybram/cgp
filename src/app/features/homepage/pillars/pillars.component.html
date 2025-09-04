@@ -1,36 +1,31 @@
 <div class="bg-white-light py-12 sm:py-16">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl lg:text-center">
-      <h2 class="text-3xl font-bold text-center tracking-tight text-pretty color-blue sm:text-4xl lg:text-5xl section-line">
-        Mes services
-      </h2>
+      <h2 class="text-3xl font-bold text-center tracking-tight text-pretty color-blue sm:text-4xl lg:text-5xl section-line">Mes services</h2>
 
       <p class="mt-6 text-base text-gray-700 leading-relaxed sm:text-lg sm:max-w-2xl sm:mx-auto">
         Découvrez mes domaines d'expertise et les solutions que je peux vous apporter :
       </p>
-
     </div>
     <div class="mx-auto mt-12 max-w-2xl lg:max-w-4xl">
-<dl class="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
-  @for (pillar of pillars; track pillar.id) {
-    <div class="bg-blue-very-light rounded-2xl p-6 hover:shadow-md transition-shadow duration-300">
-      <dt class="text-lg font-semibold text-blue-dark italic flex items-center gap-4">
-        <span class="flex-shrink-0 size-12 flex items-center justify-center rounded-lg icons bg-blue text-white">
-          <!-- Icône -->
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="size-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="pillar.icon" />
-          </svg>
-        </span>
-        {{ pillar.name }}
-      </dt>
-      <dd class="mt-2 ml-16 text-sm sm:text-base text-grey-dark leading-snug">
-        {{ pillar.description }}
-      </dd>
-    </div>
-  }
-</dl>
-
+      <dl class="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
+        @for (pillar of pillars; track pillar.id) {
+          <div class="bg-blue-very-light rounded-2xl p-6 hover:shadow-md transition-shadow duration-300">
+            <dt class="text-lg font-semibold text-blue-dark italic flex items-center gap-4">
+              <span class="flex-shrink-0 size-12 flex items-center justify-center rounded-lg icons bg-blue text-white">
+                <!-- Icône -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="size-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="pillar.icon" />
+                </svg>
+              </span>
+              {{ pillar.name }}
+            </dt>
+            <dd class="mt-2 ml-16 text-sm sm:text-base text-grey-dark leading-snug">
+              {{ pillar.description }}
+            </dd>
+          </div>
+        }
+      </dl>
     </div>
   </div>
 </div>
-

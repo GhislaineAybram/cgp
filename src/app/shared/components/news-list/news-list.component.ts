@@ -3,7 +3,7 @@
  * @description This component centralizes the display logic and reusable UI
  * elements for news-related content, used by both the NewsComponent and
  * NewsPreviewComponent to ensure consistency in layout, formatting, and behavior.
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -18,7 +18,7 @@ import { Article } from '../../../models/article';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss']
+  styleUrls: ['./news-list.component.scss'],
 })
 export class NewsListComponent {
   @Input() articles: Article[] = [];
@@ -27,5 +27,4 @@ export class NewsListComponent {
   @Input() buttonLink = '/';
 
   protected articlesService = inject(ArticlesService);
-
 }

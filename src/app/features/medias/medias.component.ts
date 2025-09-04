@@ -2,7 +2,7 @@
  * @fileoverview Medias Component - Partner presentation videos
  * @description Component managing the display of all video content featuring
  * trusted partners and their expertise in wealth management services
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -17,11 +17,9 @@ import { MediasListComponent } from '../../shared/components/medias-list/medias-
   selector: 'app-medias',
   imports: [CommonModule, RouterModule, MediasListComponent],
   templateUrl: './medias.component.html',
-  styleUrls: ['./medias.component.scss']
+  styleUrls: ['./medias.component.scss'],
 })
-
 export class MediasComponent implements OnInit {
-
   medias: Video[] = [];
   isLoading = true;
 
@@ -31,5 +29,4 @@ export class MediasComponent implements OnInit {
     this.medias = await this.mediasService.getAllVideos();
     this.isLoading = false;
   }
-
 }

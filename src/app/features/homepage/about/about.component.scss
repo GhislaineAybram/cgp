@@ -1,33 +1,30 @@
 @use 'variables' as *;
 
 .section-about {
-  background: linear-gradient(135deg, 
-    $color-blue-800 30%, 
-    $color-blue-700 60%,
-    $color-bronze-400 100%
-  );
+  background: linear-gradient(135deg, $color-blue-800 30%, $color-blue-700 60%, $color-bronze-400 100%);
   position: relative;
   overflow: hidden;
-  
+
   h2.section-line.text-blue {
     color: $color-blue-100 !important;
   }
-  
+
   h4.text-blue-dark {
-    color: $color-bronze-200 !important; 
+    color: $color-bronze-200 !important;
     font-weight: 600;
   }
-  
+
   p.color-grey-light,
   li {
-    color: $color-blue-100
+    color: $color-blue-100;
   }
-  
-  li strong, ul li::marker {
+
+  li strong,
+  ul li::marker {
     color: $color-bronze-400;
     font-weight: 600;
   }
-  
+
   img {
     border-radius: 12px;
   }
@@ -40,12 +37,8 @@
       border-radius: 12px;
     }
 
-    background: linear-gradient(135deg, 
-      $color-blue-800 20%, 
-      $color-blue-700 80%,
-      $color-bronze-400 100%
-    );
-    
+    background: linear-gradient(135deg, $color-blue-800 20%, $color-blue-700 80%, $color-bronze-400 100%);
+
     &::before,
     &::after {
       opacity: 0.15;

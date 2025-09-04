@@ -13,9 +13,8 @@ interface SupabaseResponse<T> {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class SupabaseService {
   private supabase: SupabaseClient | null = null;
 
@@ -43,10 +42,7 @@ export class SupabaseService {
     }
 
     try {
-      const { data, error } = await this.supabase
-        .from('testimonial')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const { data, error } = await this.supabase.from('testimonial').select('*').order('created_at', { ascending: false });
 
       return { data, error };
     } catch (error) {
@@ -56,7 +52,6 @@ export class SupabaseService {
   }
 
   async getAllArticles(): Promise<SupabaseResponse<Article>> {
-
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -65,11 +60,8 @@ export class SupabaseService {
     }
 
     try {
-      const { data, error } = await this.supabase
-        .from('article')
-        .select('*')
-        .order('date', { ascending: false });
-      
+      const { data, error } = await this.supabase.from('article').select('*').order('date', { ascending: false });
+
       return { data, error };
     } catch (error) {
       console.error('Erreur in getAllArticles:', error);
@@ -78,7 +70,6 @@ export class SupabaseService {
   }
 
   async getArticlesByLimit(limit: number): Promise<SupabaseResponse<Article>> {
-    
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -87,11 +78,7 @@ export class SupabaseService {
     }
 
     try {
-      const { data, error } = await this.supabase
-        .from('article')
-        .select('*')
-        .order('date', { ascending: false })
-        .limit(limit);
+      const { data, error } = await this.supabase.from('article').select('*').order('date', { ascending: false }).limit(limit);
 
       return { data, error };
     } catch (error) {
@@ -101,7 +88,6 @@ export class SupabaseService {
   }
 
   async getAllVideos(): Promise<SupabaseResponse<Video>> {
-
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -110,11 +96,8 @@ export class SupabaseService {
     }
 
     try {
-      const { data, error } = await this.supabase
-        .from('video')
-        .select('*')
-        .order('date', { ascending: false });
-      
+      const { data, error } = await this.supabase.from('video').select('*').order('date', { ascending: false });
+
       return { data, error };
     } catch (error) {
       console.error('Erreur in getAllVideos:', error);
@@ -123,7 +106,6 @@ export class SupabaseService {
   }
 
   async getVideosByLimit(limit: number): Promise<SupabaseResponse<Video>> {
-    
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -132,11 +114,7 @@ export class SupabaseService {
     }
 
     try {
-      const { data, error } = await this.supabase
-        .from('video')
-        .select('*')
-        .order('date', { ascending: false })
-        .limit(limit);
+      const { data, error } = await this.supabase.from('video').select('*').order('date', { ascending: false }).limit(limit);
 
       return { data, error };
     } catch (error) {
@@ -146,7 +124,6 @@ export class SupabaseService {
   }
 
   async getAllEvenings(): Promise<SupabaseResponse<Evening>> {
-
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -157,17 +134,12 @@ export class SupabaseService {
     try {
       const today = new Date().toISOString().split('T')[0];
 
-      const { data, error } = await this.supabase
-        .from('evening')
-        .select('*')
-        .gte('date', today)
-        .order('date', { ascending: true });
-      
+      const { data, error } = await this.supabase.from('evening').select('*').gte('date', today).order('date', { ascending: true });
+
       return { data, error };
     } catch (error) {
       console.error('Erreur in getAllEvenings:', error);
       return { data: [], error: error as Error };
     }
   }
-
 }

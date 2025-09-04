@@ -2,7 +2,7 @@
  * @fileoverview News Component - News and legal updates
  * @description Component managing the display of all articles about legal changes,
  * tax updates and financial news that may impact client finances
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -17,9 +17,8 @@ import { NewsListComponent } from '../../shared/components/news-list/news-list.c
   selector: 'app-news',
   imports: [CommonModule, RouterModule, NewsListComponent],
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+  styleUrls: ['./news.component.scss'],
 })
-
 export class NewsComponent implements OnInit {
   articles: Article[] = [];
   isLoading = true;

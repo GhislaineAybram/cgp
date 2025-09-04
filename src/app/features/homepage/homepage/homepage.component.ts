@@ -2,7 +2,7 @@
  * @fileoverview Homepage Component - Main landing page
  * @description Component managing the homepage layout with all main sections:
  * about, services pillars, news, partner videos, events and client testimonials
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -19,7 +19,7 @@ import { MediasPreviewComponent } from '../medias-preview/medias-preview.compone
   selector: 'app-homepage',
   imports: [AboutComponent, PillarsComponent, TestimonialComponent, EventsComponent, MediasPreviewComponent, NewsPreviewComponent],
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent implements OnInit {
   private meta = inject(Meta);
@@ -27,10 +27,11 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Conseiller en Gestion de Patrimoine - Julien Poudras');
-    
-    this.meta.updateTag({ 
-      name: 'description', 
-      content: 'Expert en gestion de patrimoine, je vous accompagne dans vos investissements, optimisation fiscale et stratégies patrimoniales. Actualités, conseils personnalisés et suivi clientèle.' 
+
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Expert en gestion de patrimoine, je vous accompagne dans vos investissements, optimisation fiscale et stratégies patrimoniales. Actualités, conseils personnalisés et suivi clientèle.',
     });
   }
 }

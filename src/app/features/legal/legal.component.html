@@ -3,156 +3,113 @@
     <div class="flex flex-col md:flex-row w-full gap-0 min-h-screen">
       <!-- Colonne de navigation - Fond bleu -->
       <div class="w-full md:max-w-[340px] bg-blue-medium p-6 md:p-8">
-        <h1 class="font-bold text-xl leading-7 color-white font-bold pb-8 pt-6 text-center md:text-left">
-          Mentions légales
-        </h1>
+        <h1 class="font-bold text-xl leading-7 color-white font-bold pb-8 pt-6 text-center md:text-left">Mentions légales</h1>
 
         <ul class="tab-nav flex flex-col items-center md:items-start lg:gap-6 gap-4 sticky top-8">
           @for (summaryItem of summaryItems; track summaryItem.id) {
-          <li class="w-full">
-            <button
-              type="button"
-              (click)="scrollTo(summaryItem.id)"
-              class="font-medium text-base leading-6 summary-link bg-transparent border-none cursor-pointer w-full py-2 px-0 transition-colors duration-200 text-center md:text-left"
-            >{{ summaryItem.title }}</button>
-          </li>
+            <li class="w-full">
+              <button
+                type="button"
+                (click)="scrollTo(summaryItem.id)"
+                class="font-medium text-base leading-6 summary-link bg-transparent border-none cursor-pointer w-full py-2 px-0 transition-colors duration-200 text-center md:text-left">
+                {{ summaryItem.title }}
+              </button>
+            </li>
           }
         </ul>
       </div>
-      
+
       <!-- Corps de texte - Fond blanc -->
       <div class="flex-1 bg-white p-6 md:p-8 lg:p-12">
         <div class="max-w-4xl">
-          <h1 class="font-bold lg:text-4xl text-3xl mb-5 color-blue section-line">
-            Mentions légales
-          </h1>
-          
+          <h1 class="font-bold lg:text-4xl text-3xl mb-5 color-blue section-line">Mentions légales</h1>
+
           <div class="flex items-center gap-3 lg:mb-10 mb-8">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M12.0054 8V12.5322C12.0054 12.8286 12.1369 13.1098 12.3645 13.2998L15 15.5M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"
                 style="stroke: var(--color-blue-medium)"
                 stroke-width="2"
                 stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+                stroke-linejoin="round" />
             </svg>
-            <p class="font-medium text-base leading-8 color-blue">
-              Dernière mise à jour : 12 Juin 2025
-            </p>
+            <p class="font-medium text-base leading-8 color-blue">Dernière mise à jour : 12 Juin 2025</p>
           </div>
-          
+
           <p class="font-normal text-base leading-6 color-grey-dark lg:mb-10 mb-8">
             Conformément aux dispositions de la
-            <a
-              href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000801164"
-              class="visible-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              >loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie
-              numérique</a
+            <a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000801164" class="visible-link" target="_blank" rel="noopener noreferrer"
+              >loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique</a
             >
-            , il est précisé aux utilisateurs du site l'identité des différents
-            intervenants dans le cadre de sa réalisation et de son suivi.
+            , il est précisé aux utilisateurs du site l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
           </p>
 
           <div class="space-y-12">
             <!-- Section 1 -->
             <div class="pb-2">
-              <h2
-                id="edition-site"
-                class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue"
-              >
-                1. Edition du site
-              </h2>
+              <h2 id="edition-site" class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue">1. Edition du site</h2>
               <div class="space-y-3">
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Le présent site, accessible à l'URL https://www.poudras-conseil-patrimoine.fr (le « Site »), est édité par :
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Julien POUDRAS</strong><br>
-                  Conseiller en Gestion de Patrimoine<br>
-                  Adresse professionnelle communiquée sur demande<br>
-                  92190 MEUDON
+                  <strong>{{ ownerData.firstname }} {{ ownerData.lastname }}</strong
+                  ><br />
+                  Conseiller en Gestion de Patrimoine<br />
+                  Adresse professionnelle communiquée sur demande<br />
+                  {{ ownerData.address }}
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Directeur de la publication :</strong> Julien POUDRAS
+                  <strong>Directeur de la publication :</strong> {{ ownerData.firstname }} {{ ownerData.lastname }}
                 </p>
               </div>
             </div>
 
             <!-- Section 2 -->
             <div class="pb-2">
-              <h2
-                id="informations-professionnelles"
-                class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue"
-              >
+              <h2 id="informations-professionnelles" class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue">
                 2. Informations professionnelles
               </h2>
               <div class="space-y-3">
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   <strong>Statut :</strong> Mandataire de Stellium Investissement, Stellium Courtage, Stellium Immobilier
                 </p>
+                <p class="font-normal text-base leading-6 color-grey-dark"><strong>Numéro RSAC :</strong> 908 219 108 (Nanterre)</p>
+                <p class="font-normal text-base leading-6 color-grey-dark"><strong>Numéro ORIAS :</strong> 22001454</p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Numéro RSAC :</strong> 908 219 108 (Nanterre)
+                  <strong>Activités :</strong> Mandataire d'intermédiaire en assurances, Intermédiaire en opérations de banque et de services de
+                  paiement
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Numéro ORIAS :</strong> 22001454
-                </p>
-                <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Activités :</strong> Mandataire d'intermédiaire en assurances, Intermédiaire en opérations de banque et de services de paiement
-                </p>
-                <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Autorité de contrôle :</strong> ACPR (Autorité de Contrôle Prudentiel et de Résolution)<br>
+                  <strong>Autorité de contrôle :</strong> ACPR (Autorité de Contrôle Prudentiel et de Résolution)<br />
                   4 Place de Budapest - 75436 PARIS Cedex 09
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Assurance Responsabilité Civile Professionnelle :</strong> ZURICH INSURANCE PLC<br>
+                  <strong>Assurance Responsabilité Civile Professionnelle :</strong> ZURICH INSURANCE PLC<br />
                   112, avenue de Wagram 75017 PARIS
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Attestation d'habilitation :</strong> CCI de Toulouse<br>
+                  <strong>Attestation d'habilitation :</strong> CCI de Toulouse<br />
                   Numéro unique d'immatriculation : 384 850 095
                 </p>
-                <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Membre de :</strong> ANACOFI (association agréée par l'AMF)
-                </p>
+                <p class="font-normal text-base leading-6 color-grey-dark"><strong>Membre de :</strong> ANACOFI (association agréée par l'AMF)</p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Vérification des informations sur :
-                  <a
-                    href="https://orias.fr/"
-                    class="visible-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >www.orias.fr</a
-                  >
+                  <a href="https://orias.fr/" class="visible-link" target="_blank" rel="noopener noreferrer">www.orias.fr</a>
                 </p>
               </div>
             </div>
 
             <!-- Section 3 -->
             <div class="pb-2">
-              <h2
-                id="hebergement-site"
-                class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue"
-              >
-                3. Hébergement du site
-              </h2>
+              <h2 id="hebergement-site" class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue">3. Hébergement du site</h2>
               <div class="space-y-3">
+                <p class="font-normal text-base leading-6 color-grey-dark">Le Site est hébergé par la société :</p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  Le Site est hébergé par la société :
-                </p>
-                <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Vercel Inc.</strong><br>
-                  440 N Barranca Avenue #4133<br>
-                  Covina, CA 91723<br>
-                  United States<br>
+                  <strong>Vercel Inc.</strong><br />
+                  440 N Barranca Avenue #4133<br />
+                  Covina, CA 91723<br />
+                  United States<br />
                   +1 559-288-7060
                 </p>
               </div>
@@ -160,51 +117,40 @@
 
             <!-- Section 4 -->
             <div class="pb-2">
-              <h2
-                id="nous-contacter"
-                class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue"
-              >
-                4. Nous contacter
-              </h2>
+              <h2 id="nous-contacter" class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue">4. Nous contacter</h2>
               <div class="space-y-3">
-                <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Contact :</strong> Sur rendez-vous uniquement
-                </p>
+                <p class="font-normal text-base leading-6 color-grey-dark"><strong>Contact :</strong> Sur rendez-vous uniquement</p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   <strong>Par email : </strong>
-                  <a href="mailto:julien.poudras@outlook.fr" class="visible-link"
-                    >julien.poudras@outlook.fr</a
-                  >
+                  <a href="mailto:{{ ownerData.email }}" class="visible-link">{{ ownerData.email }}</a>
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Par courrier :</strong> Adresse communiquée sur demande - 92190 MEUDON
+                  <strong>Par courrier :</strong> Adresse communiquée sur demande - {{ ownerData.address }}
                 </p>
               </div>
             </div>
 
             <!-- Section 5 -->
             <div class="pb-2">
-              <h2
-                id="propriete-intellectuelle"
-                class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue"
-              >
+              <h2 id="propriete-intellectuelle" class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue">
                 5. Propriété intellectuelle et contrefaçons
               </h2>
               <div class="space-y-3">
+                <p class="font-normal text-base leading-6 color-grey-dark"><strong>Développement du site :</strong> {{ ownerData.webmaster }}</p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Développement du site :</strong> Ghislaine AYBRAM
+                  <strong>Propriétaire du contenu :</strong> {{ ownerData.firstname }} {{ ownerData.lastname }}
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  <strong>Propriétaire du contenu :</strong> Julien POUDRAS
+                  {{ ownerData.firstname }} {{ ownerData.lastname }} est propriétaire des droits de propriété intellectuelle sur le contenu du site
+                  (textes, données, informations métier). {{ ownerData.webmaster }} détient les droits sur le développement technique du site.
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  Julien POUDRAS est propriétaire des droits de propriété intellectuelle sur le contenu du site (textes, données, informations métier). Ghislaine AYBRAM détient les droits sur le développement technique du site.
+                  Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le
+                  moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable des ayants droit respectifs.
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable des ayants droit respectifs.
-                </p>
-                <p class="font-normal text-base leading-6 color-grey-dark">
-                  Toute exploitation non autorisée du site ou de l'un quelconque des éléments qu'il contient sera considérée comme constitutive d'une contrefaçon et poursuivie conformément aux dispositions des articles
+                  Toute exploitation non autorisée du site ou de l'un quelconque des éléments qu'il contient sera considérée comme constitutive d'une
+                  contrefaçon et poursuivie conformément aux dispositions des articles
                   <a
                     href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032655082"
                     class="visible-link"
@@ -218,12 +164,7 @@
 
             <!-- Section 6 -->
             <div class="pb-2">
-              <h2
-                id="donnees-personnelles"
-                class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue"
-              >
-                6. Données personnelles
-              </h2>
+              <h2 id="donnees-personnelles" class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue">6. Données personnelles</h2>
               <div class="space-y-3">
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Conformément au
@@ -233,33 +174,33 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     >Règlement Général sur la Protection des Données 2016/679 du 27 avril 2016 («RGPD»)</a
-                  >, l'utilisateur du Site dispose d'un droit d'accès, de rectification, d'effacement, de portabilité et de limitation du traitement des informations collectées.
+                  >, l'utilisateur du Site dispose d'un droit d'accès, de rectification, d'effacement, de portabilité et de limitation du traitement
+                  des informations collectées.
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Pour exercer ces droits ou pour toute question relative au traitement de vos données personnelles, contactez-nous à :
-                  <a href="mailto:julien.poudras@outlook.fr" class="visible-link"
-                    >julien.poudras@outlook.fr</a
-                  >
+                  <a href="mailto:{{ ownerData.email }}" class="visible-link">{{ ownerData.email }}</a>
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
-                  Pour plus d'informations sur la façon dont nous traitons vos données (type de données, finalité, destinataire...), consultez notre Politique de confidentialité.
+                  Pour plus d'informations sur la façon dont nous traitons vos données (type de données, finalité, destinataire...), consultez notre
+                  Politique de confidentialité.
                 </p>
               </div>
             </div>
 
             <!-- Section 7 -->
             <div>
-              <h2
-                id="droit-applicable"
-                class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue"
-              >
+              <h2 id="droit-applicable" class="font-manrope font-bold text-xl lg:text-2xl mb-4 color-blue">
                 7. Droit applicable et attribution de juridiction
               </h2>
               <p class="font-normal text-base leading-6 color-grey-dark">
-                Tout litige en relation avec l'utilisation du Site est soumis au droit français. En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive de juridiction aux tribunaux compétents de NANTERRE.
+                Tout litige en relation avec l'utilisation du Site est soumis au droit français. En dehors des cas où la loi ne le permet pas, il est
+                fait attribution exclusive de juridiction aux tribunaux compétents de NANTERRE.
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</section>

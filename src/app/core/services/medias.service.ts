@@ -1,10 +1,10 @@
 /**
  * @fileoverview Medias Service - Media content management
  * @description Service providing data retrieval and management for media content
- * such as videos and podcasts. 
+ * such as videos and podcasts.
  * It centralizes all API calls to Supabase, and exposes methods for components
  * to fetch, cache, and display media items in a consistent way.
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -13,10 +13,9 @@ import { SupabaseService } from '../../supabase.service';
 import { Video } from '../../models/video';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MediasService {
-
   private readonly supabase = inject(SupabaseService);
 
   async getAllVideos(): Promise<Video[]> {
@@ -68,6 +67,4 @@ export class MediasService {
     // Fallback
     return 'assets/default-video-thumbnail.png';
   }
-
 }
-

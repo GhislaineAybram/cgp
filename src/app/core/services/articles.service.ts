@@ -1,9 +1,9 @@
 /**
  * @fileoverview Articles Service - Article content management
- * @description Service providing data retrieval and management for article content. 
+ * @description Service providing data retrieval and management for article content.
  * It centralizes all API calls to Supabase, and exposes methods for components
  * to fetch, cache, and display media items in a consistent way.
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -12,10 +12,9 @@ import { Article } from '../../models/article';
 import { SupabaseService } from '../../supabase.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ArticlesService {
-
   private readonly supabase = inject(SupabaseService);
 
   async getAllArticles(): Promise<Article[]> {

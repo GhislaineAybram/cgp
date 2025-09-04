@@ -1,30 +1,38 @@
 <div class="relative isolate z-0 px-6 py-12 sm:py-16 lg:px-8">
-  <div
-    class="absolute pointer-events-none inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-20"
-    aria-hidden="true"
-  >
-    <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" 
-    class="relative left-1/2 -z-10 aspect-1155/678 w-144.5 max-w-none -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#004AAD] to-[#E0EDFF] opacity-30 sm:left-[calc(50%-40rem)] sm:w-288.75"></div>
+  <div class="absolute pointer-events-none inset-x-0 top-0 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-20" aria-hidden="true">
+    <div
+      style="
+        clip-path: polygon(
+          74.1% 44.1%,
+          100% 61.6%,
+          97.5% 26.9%,
+          85.5% 0.1%,
+          80.7% 2%,
+          72.5% 32.5%,
+          60.2% 62.4%,
+          52.4% 68.1%,
+          47.5% 58.3%,
+          45.2% 34.5%,
+          27.5% 76.7%,
+          0.1% 64.9%,
+          17.9% 100%,
+          27.6% 76.8%,
+          76.1% 97.7%,
+          74.1% 44.1%
+        );
+      "
+      class="relative left-1/2 -z-10 aspect-1155/678 w-144.5 max-w-none -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#004AAD] to-[#E0EDFF] opacity-30 sm:left-[calc(50%-40rem)] sm:w-288.75"></div>
   </div>
   <div class="mx-auto max-w-2xl text-center">
-    <h2
-      class="text-4xl font-semibold tracking-tight text-balance sm:text-5xl color-blue"
-    >
-      Demande de contact
-    </h2>
+    <h2 class="text-4xl font-semibold tracking-tight text-balance sm:text-5xl color-blue">Demande de contact</h2>
     <p class="mt-4 text-lg/8 color-grey-dark">
-      Je vous propose une première prise de contact de 15 min environ afin de vous
-      expliquer comment je peux vous accompagner.
+      Je vous propose une première prise de contact de 15 min environ afin de vous expliquer comment je peux vous accompagner.
     </p>
   </div>
-  <form action="https://formsubmit.co/julien.poudras@outlook.fr" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
+  <form [action]="ownerData.formsubmit" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
     <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
       <div>
-        <label
-          for="first-name"
-          class="block text-sm/6 font-semibold"
-          >Prénom <span class="text-red-600">*</span></label
-        >
+        <label for="first-name" class="block text-sm/6 font-semibold">Prénom <span class="text-red-600">*</span></label>
         <div class="mt-2.5">
           <input
             type="text"
@@ -33,16 +41,11 @@
             autocomplete="given-name"
             placeholder="Jean"
             required
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"
-          />
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]" />
         </div>
       </div>
       <div>
-        <label
-          for="last-name"
-          class="block text-sm/6 font-semibold"
-          >Nom <span class="text-red-600">*</span></label
-        >
+        <label for="last-name" class="block text-sm/6 font-semibold">Nom <span class="text-red-600">*</span></label>
         <div class="mt-2.5">
           <input
             type="text"
@@ -51,14 +54,11 @@
             autocomplete="family-name"
             placeholder="Dupont"
             required
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"
-          />
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]" />
         </div>
       </div>
       <div>
-        <label for="email" class="block text-sm/6 font-semibold"
-          >Email <span class="text-red-600">*</span></label
-        >
+        <label for="email" class="block text-sm/6 font-semibold">Email <span class="text-red-600">*</span></label>
         <div class="mt-2.5">
           <input
             type="email"
@@ -68,20 +68,14 @@
             placeholder="jean.dupont@email.com"
             required
             class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"
-            (input)="onEmailInput($event)"
-          />
+            (input)="onEmailInput($event)" />
         </div>
       </div>
       <div>
-        <label
-          for="phone-number"
-          class="block text-sm/6 font-semibold"
-          >Numéro de téléphone <span class="text-red-600">*</span></label
-        >
+        <label for="phone-number" class="block text-sm/6 font-semibold">Numéro de téléphone <span class="text-red-600">*</span></label>
         <div class="mt-2.5">
           <div
-            class="flex rounded-md bg-white-light outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[color:var(--color-blue-medium)]"
-          >
+            class="flex rounded-md bg-white-light outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[color:var(--color-blue-medium)]">
             <input
               type="tel"
               name="tel"
@@ -89,29 +83,23 @@
               autocomplete="tel"
               class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"
               placeholder="06 12 34 56 78 90"
-              required
-            />
+              required />
           </div>
         </div>
       </div>
       <div class="sm:col-span-2">
-        <label for="availability" class="block text-sm/6 font-semibold"
-          >Disponibilités</label
-        >
+        <label for="availability" class="block text-sm/6 font-semibold">Disponibilités</label>
         <div class="mt-2.5">
           <textarea
             name="availability"
             id="availability"
             rows="2"
             placeholder="Sur quels créneaux préférez-vous être recontacté(e) ?"
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"
-          ></textarea>
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"></textarea>
         </div>
       </div>
       <div class="sm:col-span-2">
-        <label for="message" class="block text-sm/6 font-semibold"
-          >Message <span class="text-red-600">*</span></label
-        >
+        <label for="message" class="block text-sm/6 font-semibold">Message <span class="text-red-600">*</span></label>
         <div class="mt-2.5">
           <textarea
             name="message"
@@ -119,29 +107,22 @@
             rows="4"
             placeholder="Votre message ici..."
             required
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"
-          ></textarea>
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"></textarea>
         </div>
       </div>
       <div class="flex gap-x-4 sm:col-span-2 items-baseline">
         <input type="checkbox" id="consent" name="consent" required class="mr-2" style="accent-color: var(--accent-color-blue)" />
         <label for="consent" class="text-sm/6 color-grey-dark">
-          En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour vous recontacter, 
-          conformément à notre
+          En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour vous recontacter, conformément à notre
           <a routerLink="/privacy" class="visible-link">politique de protection des données</a>.
         </label>
       </div>
     </div>
     <div class="mt-10">
-      <input *ngIf="receivedUrl" type="hidden" name="_next" [value]="receivedUrl">
+      <input *ngIf="receivedUrl" type="hidden" name="_next" [value]="receivedUrl" />
       <input type="hidden" name="_replyto" [value]="emailValue" />
-      <input type="hidden" name="_template" value="box">
-      <button
-        type="submit"
-        class="w-full px-3.5 py-2.5 text-center text-sm font-semibold button-action"
-      >
-        Envoyer ma demande
-      </button>
+      <input type="hidden" name="_template" value="box" />
+      <button type="submit" class="w-full px-3.5 py-2.5 text-center text-sm font-semibold button-action">Envoyer ma demande</button>
     </div>
   </form>
 </div>

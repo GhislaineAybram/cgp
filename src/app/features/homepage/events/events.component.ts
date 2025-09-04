@@ -2,7 +2,7 @@
  * @fileoverview Events Component - Thematic events and conferences
  * @description Component managing the display of upcoming thematic evenings
  * and conferences organized by the Financial Advisor
- * 
+ *
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
@@ -15,10 +15,9 @@ import { SupabaseService } from '../../../supabase.service';
   selector: 'app-events',
   imports: [CommonModule],
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss']
+  styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent implements OnInit {
-
   evenings: Evening[] = [];
   isLoading = true;
 
@@ -45,5 +44,4 @@ export class EventsComponent implements OnInit {
       this.isLoading = false;
     }
   }
-
 }

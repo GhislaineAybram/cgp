@@ -14,8 +14,8 @@ bootstrapApplication(AppComponent, {
       routes,
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled', // ⬆️ remonte en haut
-        anchorScrolling: 'enabled' // active les ancres
+        anchorScrolling: 'enabled', // active les ancres
       })
-    )
-  ]
+    ),
+  ],
 });

@@ -1,6 +1,6 @@
 export interface Pillar {
-    id: string;
-    name: string;
-    description: string;
-    icon: string;
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
 }
