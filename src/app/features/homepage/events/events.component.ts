@@ -9,7 +9,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Evening } from '../../../models/evening';
 import { CommonModule } from '@angular/common';
-import { SupabaseService } from '../../../supabase.service';
+import { EventsService } from '../../../core/services/events.service';
 
 @Component({
   selector: 'app-events',
@@ -21,27 +21,10 @@ export class EventsComponent implements OnInit {
   evenings: Evening[] = [];
   isLoading = true;
 
-  private readonly supabase = inject(SupabaseService);
+  protected eventsService = inject(EventsService);
 
-  ngOnInit(): void {
-    this.loadAllEvenings();
-  }
-
-  async loadAllEvenings(): Promise<void> {
-    try {
-      this.isLoading = true;
-      const { data, error } = await this.supabase.getAllEvenings();
-      if (error) {
-        console.error('Error loading evenings:', error);
-        this.evenings = [];
-      } else {
-        this.evenings = data as Evening[];
-      }
-    } catch (error) {
-      console.error('Unexpected error loading evenings:', error);
-      this.evenings = [];
-    } finally {
-      this.isLoading = false;
-    }
+  async ngOnInit() {
+    this.evenings = await this.eventsService.getAllFutureEvenings();
+    this.isLoading = false;
   }
 }

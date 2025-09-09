@@ -8,6 +8,10 @@
   --color-blue-medium: #{$color-blue-700};
   --color-blue-light: #{$color-blue-200};
   --color-blue-very-light: #{$color-blue-100};
+  --color-warning-dark: #{$color-warning-dark};
+  --color-error-dark: #{$color-error-dark};
+  --color-success-dark: #{$color-success-dark};
+  --color-grey-dark: #{$color-grey-800};
 }
 
 // ========================================
@@ -101,6 +105,45 @@ body {
 }
 .bg-grey-dark {
   background-color: $color-grey-800;
+}
+
+.bg-color-warning-dark {
+  background-color: $color-warning-dark;
+}
+.bg-color-warning-light {
+  background-color: $color-warning-light;
+}
+.color-warning-light {
+  color: $color-warning-light;
+}
+.color-warning-dark {
+  color: $color-warning-dark;
+}
+
+.bg-color-error-dark {
+  background-color: $color-error-dark;
+}
+.bg-color-error-light {
+  background-color: $color-error-light;
+}
+.color-error-light {
+  color: $color-error-light;
+}
+.color-error-dark {
+  color: $color-error-dark;
+}
+
+.bg-color-success-dark {
+  background-color: $color-success-dark;
+}
+.bg-color-success-light {
+  background-color: $color-success-light;
+}
+.color-success-light {
+  color: $color-success-light;
+}
+.color-success-dark {
+  color: $color-success-dark;
 }
 
 // title decoration

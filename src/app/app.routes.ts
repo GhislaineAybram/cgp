@@ -7,6 +7,10 @@ import { AdminComponent } from './features/admin/admin.component';
 import { ReceivedComponent } from './features/received/received.component';
 import { NewsComponent } from './features/news/news.component';
 import { MediasComponent } from './features/medias/medias.component';
+import { AdminArticlesComponent } from './features/admin/admin-articles/admin-articles.component';
+import { AdminMediasComponent } from './features/admin/admin-medias/admin-medias.component';
+import { AdminEventsComponent } from './features/admin/admin-events/admin-events.component';
+import { AdminFeedbackComponent } from './features/admin/admin-feedback/admin-feedback.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -16,5 +20,14 @@ export const routes: Routes = [
   { path: 'privacy', component: PrivacyComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'received', component: ReceivedComponent },
-  { path: 'admin', component: AdminComponent },
+  {
+    path: 'admin',
+    children: [
+      { path: '', component: AdminComponent },
+      { path: 'articles', component: AdminArticlesComponent },
+      { path: 'medias', component: AdminMediasComponent },
+      { path: 'events', component: AdminEventsComponent },
+      { path: 'feedback', component: AdminFeedbackComponent },
+    ],
+  },
 ];

@@ -1,0 +1,37 @@
+/**
+ * @fileoverview Feedback Service - Feedback content management
+ * @description Service providing data retrieval and management for feedback content.
+ * It centralizes all API calls to Supabase, and exposes methods for components
+ * to fetch, cache, and display media items in a consistent way.
+ *
+ * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
+ */
+
+import { inject, Injectable } from '@angular/core';
+import { SupabaseService } from '../../supabase.service';
+import { Feedback } from '../../models/feedback';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class FeedbackService {
+  private readonly supabase = inject(SupabaseService);
+
+  async loadFeedbackCount() {
+    const { data, error } = await this.supabase.getFeedbackCount();
+    if (error) {
+      console.error('Error fetching feedback count:', error);
+      return 0;
+    }
+    return data as number;
+  }
+
+  async getAllFeedbacks(): Promise<Feedback[]> {
+    const { data, error } = await this.supabase.getFeedbacks();
+    if (error) {
+      console.error('Error fetching feedbacks:', error);
+      return [];
+    }
+    return data as Feedback[];
+  }
+}

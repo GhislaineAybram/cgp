@@ -34,4 +34,13 @@ export class ArticlesService {
     }
     return data as Article[];
   }
+
+  async loadArticlesCount() {
+    const { data, error } = await this.supabase.getArticlesCount();
+    if (error) {
+      console.error('Error fetching articles count:', error);
+      return 0;
+    }
+    return data as number;
+  }
 }

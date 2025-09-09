@@ -6,10 +6,10 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { Component, OnInit, PLATFORM_ID, ChangeDetectorRef, inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Feedback } from '../../../models/feedback';
-import { SupabaseService } from '../../../supabase.service';
+import { FeedbackService } from '../../../core/services/feedback.service';
 
 @Component({
   selector: 'app-testimonial',
@@ -23,40 +23,11 @@ export class TestimonialComponent implements OnInit {
   currentIndex = 0;
   isLoading = true;
 
-  private readonly supabase = inject(SupabaseService);
-  private readonly platformId = inject(PLATFORM_ID);
-  private readonly cdr = inject(ChangeDetectorRef);
+  protected feedbackService = inject(FeedbackService);
 
-  ngOnInit(): void {
-    this.loadFeedbacks();
-  }
-
-  async loadFeedbacks(): Promise<void> {
-    if (!isPlatformBrowser(this.platformId)) {
-      this.isLoading = false;
-      this.cdr.detectChanges();
-      return;
-    }
-
-    try {
-      this.isLoading = true;
-      console.log('Loading feedbacks...');
-
-      const { data, error } = await this.supabase.getFeedbacks();
-      if (error) {
-        console.error('Error loading feedbacks:', error);
-        this.feedbacks = [];
-      } else {
-        this.feedbacks = data || [];
-      }
-    } catch (error) {
-      console.error('Unexpected error loading feedbacks:', error);
-      this.feedbacks = [];
-    } finally {
-      this.isLoading = false;
-      this.cdr.detectChanges();
-      console.log('Final feedbacks:', this.feedbacks);
-    }
+  async ngOnInit() {
+    this.feedbacks = await this.feedbackService.getAllFeedbacks();
+    this.isLoading = false;
   }
 
   get currentFeedback(): Feedback | undefined {

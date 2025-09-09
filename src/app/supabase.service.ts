@@ -8,7 +8,7 @@ import { Video } from './models/video';
 import { Evening } from './models/evening';
 
 interface SupabaseResponse<T> {
-  data: T[] | null;
+  data: T | null;
   error: Error | null;
 }
 
@@ -30,7 +30,7 @@ export class SupabaseService {
     return this.supabase;
   }
 
-  async getFeedbacks(): Promise<SupabaseResponse<Feedback>> {
+  async getFeedbacks(): Promise<SupabaseResponse<Feedback[]>> {
     // Vérifier si nous sommes côté client et si Supabase est initialisé
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
@@ -51,7 +51,25 @@ export class SupabaseService {
     }
   }
 
-  async getAllArticles(): Promise<SupabaseResponse<Article>> {
+  async getFeedbackCount(): Promise<SupabaseResponse<number>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: 0, error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { count, error } = await this.supabase.from('testimonial').select('*', { count: 'exact', head: true });
+
+      return { data: count || 0, error };
+    } catch (error) {
+      console.error('Erreur in getFeedbackCount:', error);
+      return { data: 0, error: error as Error };
+    }
+  }
+
+  async getAllArticles(): Promise<SupabaseResponse<Article[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -69,7 +87,25 @@ export class SupabaseService {
     }
   }
 
-  async getArticlesByLimit(limit: number): Promise<SupabaseResponse<Article>> {
+  async getArticlesCount(): Promise<SupabaseResponse<number>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: 0, error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { count, error } = await this.supabase.from('article').select('*', { count: 'exact', head: true });
+
+      return { data: count || 0, error };
+    } catch (error) {
+      console.error('Erreur in getArticlesCount:', error);
+      return { data: 0, error: error as Error };
+    }
+  }
+
+  async getArticlesByLimit(limit: number): Promise<SupabaseResponse<Article[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -87,7 +123,7 @@ export class SupabaseService {
     }
   }
 
-  async getAllVideos(): Promise<SupabaseResponse<Video>> {
+  async getAllVideos(): Promise<SupabaseResponse<Video[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -105,7 +141,25 @@ export class SupabaseService {
     }
   }
 
-  async getVideosByLimit(limit: number): Promise<SupabaseResponse<Video>> {
+  async getVideosCount(): Promise<SupabaseResponse<number>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: 0, error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { count, error } = await this.supabase.from('video').select('*', { count: 'exact', head: true });
+
+      return { data: count || 0, error };
+    } catch (error) {
+      console.error('Erreur in getVideosCount:', error);
+      return { data: 0, error: error as Error };
+    }
+  }
+
+  async getVideosByLimit(limit: number): Promise<SupabaseResponse<Video[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -123,7 +177,7 @@ export class SupabaseService {
     }
   }
 
-  async getAllEvenings(): Promise<SupabaseResponse<Evening>> {
+  async getAllFutureEvenings(): Promise<SupabaseResponse<Evening[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
@@ -138,8 +192,44 @@ export class SupabaseService {
 
       return { data, error };
     } catch (error) {
+      console.error('Erreur in getAllFutureEvenings:', error);
+      return { data: [], error: error as Error };
+    }
+  }
+
+  async getAllEvenings(): Promise<SupabaseResponse<Evening[]>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: [], error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase.from('evening').select('*').order('date', { ascending: false });
+
+      return { data, error };
+    } catch (error) {
       console.error('Erreur in getAllEvenings:', error);
       return { data: [], error: error as Error };
+    }
+  }
+
+  async getEveningsCount(): Promise<SupabaseResponse<number>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: 0, error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { count, error } = await this.supabase.from('evening').select('*', { count: 'exact', head: true });
+
+      return { data: count || 0, error };
+    } catch (error) {
+      console.error('Erreur in getEveningsCount:', error);
+      return { data: 0, error: error as Error };
     }
   }
 }

@@ -27,6 +27,15 @@ export class MediasService {
     return data as Video[];
   }
 
+  async loadMediasCount() {
+    const { data, error } = await this.supabase.getVideosCount();
+    if (error) {
+      console.error('Error fetching medias count:', error);
+      return 0;
+    }
+    return data as number;
+  }
+
   async getFirstVideos(limit: number): Promise<Video[]> {
     const { data, error } = await this.supabase.getVideosByLimit(limit);
     if (error) {

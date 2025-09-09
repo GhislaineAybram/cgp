@@ -1,0 +1,19 @@
+<section class="w-full relative overflow-hidden bg-white-light">
+  <div>
+    <div class="flex flex-col md:flex-row w-full gap-0 min-h-screen">
+      <!-- Colonne de navigation - Fond bleu -->
+      <div class="w-full md:max-w-[340px] bg-blue-medium">
+        <app-admin-pannel [activePage]="'articles'"></app-admin-pannel>
+      </div>
+
+      <!-- Corps de texte - Fond bleu ciel -->
+      <div class="flex-1 bg-blue-very-light p-6 md:p-8 lg:p-10">
+        <app-admin-table
+          databaseTableName="Articles"
+          [databaseItemsCount]="articlesCount"
+          [databaseColumns]="articlesColumns"
+          [databaseDatas]="articlesDatas"></app-admin-table>
+      </div>
+    </div>
+  </div>
+</section>
