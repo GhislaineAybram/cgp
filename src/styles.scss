@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'tailwindcss';
 @use 'assets/styles/variables' as *;
+// Montserrat import
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+// Lato import 
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 :root {
   --accent-color-blue: #{$color-blue-700};
