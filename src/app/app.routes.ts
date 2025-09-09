@@ -11,6 +11,7 @@ import { AdminArticlesComponent } from './features/admin/admin-articles/admin-ar
 import { AdminMediasComponent } from './features/admin/admin-medias/admin-medias.component';
 import { AdminEventsComponent } from './features/admin/admin-events/admin-events.component';
 import { AdminFeedbackComponent } from './features/admin/admin-feedback/admin-feedback.component';
+import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -30,4 +31,5 @@ export const routes: Routes = [
       { path: 'feedback', component: AdminFeedbackComponent },
     ],
   },
+  { path: '**', component: PageNotFoundComponent },
 ];
