@@ -7,21 +7,58 @@
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
-<url>
-  <loc>https://www.poudras-conseil-patrimoine.fr/</loc>
-  <lastmod>2025-09-12T20:23:29+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://www.poudras-conseil-patrimoine.fr/contact</loc>
-  <lastmod>2025-09-12T20:23:30+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.poudras-conseil-patrimoine.fr/privacy</loc>
-  <lastmod>2025-09-12T20:23:30+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
+  <!-- Page d'accueil -->
+  <url>
+    <loc>https://www.poudras-conseil-patrimoine.fr/</loc>
+    <lastmod>2025-09-12T20:23:29+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+  </url>
+  
+  <!-- Pages principales -->
+  <url>
+    <loc>https://www.poudras-conseil-patrimoine.fr/news</loc>
+    <lastmod>2025-09-12T20:23:30+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.poudras-conseil-patrimoine.fr/medias</loc>
+    <lastmod>2025-09-12T20:23:30+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.poudras-conseil-patrimoine.fr/contact</loc>
+    <lastmod>2025-09-12T20:23:30+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  
+  <!-- Pages légales -->
+  <url>
+    <loc>https://www.poudras-conseil-patrimoine.fr/legal</loc>
+    <lastmod>2025-09-12T20:23:30+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.poudras-conseil-patrimoine.fr/privacy</loc>
+    <lastmod>2025-09-12T20:23:30+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.30</priority>
+  </url>
+  
+  <!-- Page de confirmation -->
+  <url>
+    <loc>https://www.poudras-conseil-patrimoine.fr/received</loc>
+    <lastmod>2025-09-12T20:23:30+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.20</priority>
+  </url>
 
 
 </urlset>
