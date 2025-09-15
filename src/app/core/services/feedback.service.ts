@@ -18,20 +18,24 @@ export class FeedbackService {
   private readonly supabase = inject(SupabaseService);
 
   async loadFeedbackCount() {
+    let result = 0;
     const { data, error } = await this.supabase.getFeedbackCount();
     if (error) {
       console.error('Error fetching feedback count:', error);
-      return 0;
+    } else {
+      result = data ?? 0;
     }
-    return data as number;
+    return result;
   }
 
   async getAllFeedbacks(): Promise<Feedback[]> {
+    let result: Feedback[] = [];
     const { data, error } = await this.supabase.getFeedbacks();
     if (error) {
       console.error('Error fetching feedbacks:', error);
-      return [];
+    } else {
+      result = data ?? [];
     }
-    return data as Feedback[];
+    return result;
   }
 }

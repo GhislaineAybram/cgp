@@ -37,10 +37,11 @@ export class ContactComponent implements OnInit {
   emailValue = '';
 
   get receivedUrl(): string {
+    let result = '';
     if (isPlatformBrowser(this.platformId)) {
-      return `${window.location.origin}/received`;
+      result = `${window.location.origin}/received`;
     }
-    return '';
+    return result;
   }
 
   onEmailInput(event: Event) {

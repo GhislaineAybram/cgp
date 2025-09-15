@@ -15,12 +15,12 @@ export class AdminArticlesComponent implements OnInit {
   articlesCount = 0;
   articlesDatas: Article[] = [];
   articlesColumns: TableColumn<Article>[] = [
-    { key: 'date' as keyof Article, label: 'Date' },
-    { key: 'title' as keyof Article, label: 'Titre' },
-    { key: 'text' as keyof Article, label: 'Texte' },
-    { key: 'theme' as keyof Article, label: 'Thème' },
-    { key: 'source' as keyof Article, label: 'Source' },
-    { key: 'link' as keyof Article, label: 'Lien' },
+    { key: 'date' as keyof Article, label: 'Date', type: 'date' },
+    { key: 'title' as keyof Article, label: 'Titre', type: 'text', weight: 2 },
+    { key: 'text' as keyof Article, label: 'Texte', type: 'text', weight: 3 },
+    { key: 'theme' as keyof Article, label: 'Thème', type: 'text' },
+    { key: 'source' as keyof Article, label: 'Source', type: 'text' },
+    { key: 'link' as keyof Article, label: 'Lien', type: 'text' },
   ];
 
   protected articlesService = inject(ArticlesService);

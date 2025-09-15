@@ -56,7 +56,6 @@
                       {{ currentFeedback?.author }}
                     </div>
                     <div class="flex text-yellow-500 text-xl items-center justify-center">
-                      <!-- Syntaxe @for corrigée -->
                       @for (star of starsArray; track $index) {
                         <span [class]="star ? 'text-yellow-500' : 'text-gray-300'">★</span>
                       }
@@ -65,7 +64,7 @@
                 </figure>
               </div>
 
-              <!-- Dots Navigation (optionnel) -->
+              <!-- Dots Navigation -->
               <div class="flex justify-center mt-6 space-x-2">
                 @for (feedback of feedbacks; track feedback.id; let i = $index) {
                   <button

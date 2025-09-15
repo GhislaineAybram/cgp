@@ -14,8 +14,8 @@ export class AdminEventsComponent implements OnInit {
   eventsCount = 0;
   eventsDatas: Evening[] = [];
   eventsColumns: TableColumn<Evening>[] = [
-    { key: 'date' as keyof Evening, label: 'Date', type: 'text' },
-    { key: 'title' as keyof Evening, label: 'Titre', type: 'text' },
+    { key: 'date' as keyof Evening, label: 'Date', type: 'date' },
+    { key: 'title' as keyof Evening, label: 'Titre', type: 'text', weight: 3 },
     { key: 'location' as keyof Evening, label: 'Lieu', type: 'text' },
     { key: 'hour' as keyof Evening, label: 'Heure', type: 'hour' },
     { key: 'picture' as keyof Evening, label: 'Photo', type: 'image' },

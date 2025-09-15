@@ -18,29 +18,35 @@ export class EventsService {
   private readonly supabase = inject(SupabaseService);
 
   async loadEveningsCount() {
+    let result = 0;
     const { data, error } = await this.supabase.getEveningsCount();
     if (error) {
       console.error('Error fetching events count:', error);
-      return 0;
+    } else {
+      result = data ?? 0;
     }
-    return data as number;
+    return result;
   }
 
   async getAllFutureEvenings(): Promise<Evening[]> {
+    let result: Evening[] = [];
     const { data, error } = await this.supabase.getAllFutureEvenings();
     if (error) {
       console.error('Error fetching future evenings:', error);
-      return [];
+    } else {
+      result = data ?? [];
     }
-    return data as Evening[];
+    return result;
   }
 
   async getAllEvenings(): Promise<Evening[]> {
+    let result: Evening[] = [];
     const { data, error } = await this.supabase.getAllEvenings();
     if (error) {
       console.error('Error fetching evenings:', error);
-      return [];
+    } else {
+      result = data ?? [];
     }
-    return data as Evening[];
+    return result;
   }
 }

@@ -18,29 +18,35 @@ export class ArticlesService {
   private readonly supabase = inject(SupabaseService);
 
   async getAllArticles(): Promise<Article[]> {
+    let result: Article[] = [];
     const { data, error } = await this.supabase.getAllArticles();
     if (error) {
       console.error('Error fetching articles:', error);
-      return [];
+    } else {
+      result = data ?? [];
     }
-    return data as Article[];
+    return result;
   }
 
   async getFirstArticles(limit: number): Promise<Article[]> {
+    let result: Article[] = [];
     const { data, error } = await this.supabase.getArticlesByLimit(limit);
     if (error) {
       console.error('Error fetching first articles:', error);
-      return [];
+    } else {
+      result = data ?? [];
     }
-    return data as Article[];
+    return result;
   }
 
   async loadArticlesCount() {
+    let result = 0;
     const { data, error } = await this.supabase.getArticlesCount();
     if (error) {
       console.error('Error fetching articles count:', error);
-      return 0;
+    } else {
+      result = data ?? 0;
     }
-    return data as number;
+    return result;
   }
 }

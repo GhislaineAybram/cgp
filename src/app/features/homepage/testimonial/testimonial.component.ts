@@ -42,13 +42,19 @@ export class TestimonialComponent implements OnInit {
   }
 
   previousSlide(): void {
-    if (this.feedbacks.length === 0) return;
-    this.currentIndex = this.currentIndex === 0 ? this.feedbacks.length - 1 : this.currentIndex - 1;
+    let newIndex = this.currentIndex;
+    if (this.feedbacks.length > 0) {
+      newIndex = this.currentIndex === 0 ? this.feedbacks.length - 1 : this.currentIndex - 1;
+    }
+    this.currentIndex = newIndex;
   }
 
   nextSlide(): void {
-    if (this.feedbacks.length === 0) return;
-    this.currentIndex = this.currentIndex === this.feedbacks.length - 1 ? 0 : this.currentIndex + 1;
+    let newIndex = this.currentIndex;
+    if (this.feedbacks.length > 0) {
+      newIndex = this.currentIndex === this.feedbacks.length - 1 ? 0 : this.currentIndex + 1;
+    }
+    this.currentIndex = newIndex;
   }
 
   goToSlide(index: number): void {

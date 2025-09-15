@@ -19,61 +19,66 @@ export class MediasService {
   private readonly supabase = inject(SupabaseService);
 
   async getAllVideos(): Promise<Video[]> {
+    let result: Video[] = [];
     const { data, error } = await this.supabase.getAllVideos();
     if (error) {
       console.error('Error fetching videos:', error);
-      return [];
+    } else {
+      result = data ?? [];
     }
-    return data as Video[];
+    return result;
   }
 
   async loadMediasCount() {
+    let result = 0;
     const { data, error } = await this.supabase.getVideosCount();
     if (error) {
       console.error('Error fetching medias count:', error);
-      return 0;
+    } else {
+      result = data ?? 0;
     }
-    return data as number;
+    return result;
   }
 
   async getFirstVideos(limit: number): Promise<Video[]> {
+    let result: Video[] = [];
     const { data, error } = await this.supabase.getVideosByLimit(limit);
     if (error) {
       console.error('Error fetching first videos:', error);
-      return [];
+    } else {
+      result = data ?? [];
     }
-    return data as Video[];
+    return result;
   }
 
   getMediaThumbnail(link: string): string {
-    if (!link) return '';
+    let result = 'assets/default-video-thumbnail.png';
 
     // YouTube (youtu.be or youtube.com)
     const youtubeMatch = link.match(/(?:youtu\.be\/|youtube\.com.*[?&]v=)([^&]+)/);
     if (youtubeMatch) {
-      return `https://img.youtube.com/vi/${youtubeMatch[1]}/hqdefault.jpg`;
+      result = `https://img.youtube.com/vi/${youtubeMatch[1]}/hqdefault.jpg`;
     }
 
     // Vimeo
     const vimeoMatch = link.match(/vimeo\.com\/(\d+)/);
     if (vimeoMatch) {
-      return `https://vumbnail.com/${vimeoMatch[1]}.jpg`;
+      result = `https://vumbnail.com/${vimeoMatch[1]}.jpg`;
     }
 
     // Dailymotion classique
     const dailymotionMatch = link.match(/dailymotion\.com\/video\/([a-zA-Z0-9]+)/);
     if (dailymotionMatch) {
-      return `https://www.dailymotion.com/thumbnail/video/${dailymotionMatch[1]}`;
+      result = `https://www.dailymotion.com/thumbnail/video/${dailymotionMatch[1]}`;
     }
 
     // Dailymotion embedded (geo.dailymotion.com/player.html?video=ID)
     const dailymotionEmbedMatch = link.match(/geo\.dailymotion\.com\/player\.html\?video=([a-zA-Z0-9]+)/);
     if (dailymotionEmbedMatch) {
-      return `https://www.dailymotion.com/thumbnail/video/${dailymotionEmbedMatch[1]}`;
+      result = `https://www.dailymotion.com/thumbnail/video/${dailymotionEmbedMatch[1]}`;
     }
 
     // BFMTV (pas de miniature officielle, on utilise un placeholder)
-    // Fallback
-    return 'assets/default-video-thumbnail.png';
+    return result;
   }
 }
