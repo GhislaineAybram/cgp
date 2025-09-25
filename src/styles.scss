@@ -225,7 +225,7 @@ body {
 
 // info button
 .button-info {
-  font-size: 1rem;
+  font-size: 0.875rem;
   align-items: center;
   background-color: $color-white;
   border: 1.5px solid $color-blue-700;
@@ -260,7 +260,6 @@ body {
 // VISIBLE LINKS
 // ========================================
 .visible-link {
-  color: $color-blue-700;
   text-decoration: underline;
   text-decoration-color: $color-blue-700;
   text-decoration-thickness: 1px;
@@ -273,6 +272,30 @@ body {
   color: $color-blue-800;
   text-decoration-color: $color-blue-800;
   transform: translateY(-1px);
+}
+
+.visible-edit-button {
+  cursor: pointer;
+  color: $color-blue-700;
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
+}
+.visible-edit-button:hover {
+  color: $color-blue-800;
+  transform: translateY(-2px) scale(1.05);
+}
+
+.visible-delete-button {
+  cursor: pointer;
+  color: $color-error-dark;
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
+}
+.visible-delete-button:hover {
+  color: $color-grey-800;
+  transform: translateY(-2px) scale(1.05);
 }
 
 .summary-link {

@@ -1,12 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-
-export interface TableColumn<T extends object> {
-  key: keyof T;
-  label: string;
-  type?: 'text' | 'date' | 'hour' | 'number' | 'image';
-  weight?: number;
-}
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Table, TableColumn } from '../../../models/table';
 
 @Component({
   selector: 'app-admin-table',
@@ -18,11 +12,12 @@ export interface TableColumn<T extends object> {
 export class AdminTableComponent<T extends object> {
   @Input() databaseTableName = 'Table name';
   @Input() databaseItemsCount = 0;
-  @Input() databaseColumns: TableColumn<T>[] = [];
-  @Input() databaseDatas: T[] = [];
+  @Input() databaseTable: Table<T> = { columns: [], rows: [] };
+
+  @Output() editClicked = new EventEmitter<T>();
 
   get gridTemplateColumns(): string {
-    return [...this.databaseColumns.map(col => `${col.weight ?? 1}fr`), '1fr'].join(' ');
+    return [...this.databaseTable.columns.map((col: TableColumn<T>) => `${col.weight ?? 1}fr`), '1fr'].join(' ');
   }
 
   formatValue(value: unknown, type: string): string {
@@ -45,5 +40,9 @@ export class AdminTableComponent<T extends object> {
         break;
     }
     return result;
+  }
+
+  edit(row: T) {
+    this.editClicked.emit(row);
   }
 }

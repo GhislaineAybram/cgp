@@ -11,8 +11,16 @@
         <app-admin-table
           databaseTableName="Retours clients"
           [databaseItemsCount]="feedbacksCount"
-          [databaseColumns]="feedbacksColumns"
-          [databaseDatas]="feedbacksDatas"></app-admin-table>
+          [databaseTable]="feedbacksTable"
+          (editClicked)="onEdit($event)">
+        </app-admin-table>
+        <app-admin-edition
+          [isVisible]="isModalOpen"
+          [selectedItem]="selectedFeedback"
+          (closeModal)="closeModal()"
+          editionTitle="Editer le retour client"
+          [databaseTable]="feedbacksTable">
+        </app-admin-edition>
       </div>
     </div>
   </div>

@@ -11,8 +11,16 @@
         <app-admin-table
           databaseTableName="Évènements"
           [databaseItemsCount]="eventsCount"
-          [databaseColumns]="eventsColumns"
-          [databaseDatas]="eventsDatas"></app-admin-table>
+          [databaseTable]="eventsTable"
+          (editClicked)="onEdit($event)">
+        </app-admin-table>
+        <app-admin-edition
+          [isVisible]="isModalOpen"
+          [selectedItem]="selectedEvent"
+          (closeModal)="closeModal()"
+          editionTitle="Editer l'événement"
+          [databaseTable]="eventsTable">
+        </app-admin-edition>
       </div>
     </div>
   </div>

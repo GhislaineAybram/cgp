@@ -8,11 +8,15 @@
 
       <!-- Corps de texte - Fond bleu ciel -->
       <div class="flex-1 bg-blue-very-light p-6 md:p-8 lg:p-10">
-        <app-admin-table
-          databaseTableName="Vidéos"
-          [databaseItemsCount]="videosCount"
-          [databaseColumns]="videosColumns"
-          [databaseDatas]="videosDatas"></app-admin-table>
+        <app-admin-table databaseTableName="Vidéos" [databaseItemsCount]="videosCount" [databaseTable]="videosTable" (editClicked)="onEdit($event)">
+        </app-admin-table>
+        <app-admin-edition
+          [isVisible]="isModalOpen"
+          [selectedItem]="selectedVideo"
+          (closeModal)="closeModal()"
+          editionTitle="Editer la vidéo"
+          [databaseTable]="videosTable">
+        </app-admin-edition>
       </div>
     </div>
   </div>
