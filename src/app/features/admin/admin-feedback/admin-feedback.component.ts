@@ -8,6 +8,7 @@ import { AdminEditionComponent } from '../admin-edition/admin-edition.component'
 
 @Component({
   selector: 'app-admin-feedback',
+  standalone: true,
   imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent],
   templateUrl: './admin-feedback.component.html',
   styleUrl: './admin-feedback.component.scss',

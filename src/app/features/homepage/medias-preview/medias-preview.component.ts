@@ -15,6 +15,7 @@ import { MediasListComponent } from '../../../shared/components/medias-list/medi
 
 @Component({
   selector: 'app-medias-preview',
+  standalone: true,
   imports: [CommonModule, RouterModule, MediasListComponent],
   templateUrl: './medias-preview.component.html',
   styleUrls: ['./medias-preview.component.scss'],

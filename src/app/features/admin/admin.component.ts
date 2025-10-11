@@ -17,6 +17,7 @@ import { FeedbackService } from '../../core/services/feedback.service';
 
 @Component({
   selector: 'app-admin',
+  standalone: true,
   imports: [AdminPannelComponent],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],

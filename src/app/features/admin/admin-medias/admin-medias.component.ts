@@ -8,6 +8,7 @@ import { AdminEditionComponent } from '../admin-edition/admin-edition.component'
 
 @Component({
   selector: 'app-admin-medias',
+  standalone: true,
   imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent],
   templateUrl: './admin-medias.component.html',
   styleUrls: ['./admin-medias.component.scss'],

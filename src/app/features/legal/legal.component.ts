@@ -13,6 +13,7 @@ import ownerData from '../../../assets/owner-data.json';
 
 @Component({
   selector: 'app-legal',
+  standalone: true,
   imports: [RouterModule],
   templateUrl: './legal.component.html',
   styleUrls: ['./legal.component.scss'],

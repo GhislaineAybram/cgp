@@ -13,7 +13,7 @@ import { FeedbackService } from '../../../core/services/feedback.service';
 
 @Component({
   selector: 'app-testimonial',
-  standalone: true, // Si vous utilisez Angular 14+ avec des composants standalone
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './testimonial.component.html',
   styleUrls: ['./testimonial.component.scss'],

@@ -12,6 +12,7 @@ import ownerData from '../../../assets/owner-data.json';
 
 @Component({
   selector: 'app-footer',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],

@@ -17,6 +17,7 @@ import { MediasPreviewComponent } from '../medias-preview/medias-preview.compone
 
 @Component({
   selector: 'app-homepage',
+  standalone: true,
   imports: [AboutComponent, PillarsComponent, TestimonialComponent, EventsComponent, MediasPreviewComponent, NewsPreviewComponent],
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],

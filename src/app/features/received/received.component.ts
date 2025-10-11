@@ -11,6 +11,7 @@ import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-received',
+  standalone: true,
   imports: [],
   templateUrl: './received.component.html',
   styleUrls: ['./received.component.scss'],

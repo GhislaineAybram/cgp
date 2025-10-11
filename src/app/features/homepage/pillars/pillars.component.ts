@@ -11,6 +11,7 @@ import { Pillar } from '../../../models/pillar';
 
 @Component({
   selector: 'app-pillars',
+  standalone: true,
   imports: [],
   templateUrl: './pillars.component.html',
   styleUrls: ['./pillars.component.scss'],

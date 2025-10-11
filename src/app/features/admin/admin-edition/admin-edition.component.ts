@@ -3,6 +3,7 @@ import { Table } from '../../../models/table';
 
 @Component({
   selector: 'app-admin-edition',
+  standalone: true,
   imports: [],
   templateUrl: './admin-edition.component.html',
   styleUrl: './admin-edition.component.scss',

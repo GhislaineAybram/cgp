@@ -13,6 +13,7 @@ import { EventsService } from '../../../core/services/events.service';
 
 @Component({
   selector: 'app-events',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss'],

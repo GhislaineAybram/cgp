@@ -9,6 +9,7 @@ import { Table } from '../../../models/table';
 
 @Component({
   selector: 'app-admin-articles',
+  standalone: true,
   imports: [CommonModule, AdminPannelComponent, AdminTableComponent, AdminEditionComponent],
   templateUrl: './admin-articles.component.html',
   styleUrls: ['./admin-articles.component.scss'],

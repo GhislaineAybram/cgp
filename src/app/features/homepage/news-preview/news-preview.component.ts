@@ -15,6 +15,7 @@ import { NewsListComponent } from '../../../shared/components/news-list/news-lis
 
 @Component({
   selector: 'app-news-preview',
+  standalone: true,
   imports: [CommonModule, RouterModule, NewsListComponent],
   templateUrl: './news-preview.component.html',
   styleUrls: ['./news-preview.component.scss'],

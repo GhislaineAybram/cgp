@@ -14,6 +14,7 @@ import ownerData from '../../../assets/owner-data.json';
 
 @Component({
   selector: 'app-contact',
+  standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],

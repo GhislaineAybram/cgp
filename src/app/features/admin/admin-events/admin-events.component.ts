@@ -8,6 +8,7 @@ import { AdminEditionComponent } from '../admin-edition/admin-edition.component'
 
 @Component({
   selector: 'app-admin-events',
+  standalone: true,
   imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent],
   templateUrl: './admin-events.component.html',
   styleUrls: ['./admin-events.component.scss'],
