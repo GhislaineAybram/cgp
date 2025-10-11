@@ -11,7 +11,7 @@ import { TestimonialComponent } from '../testimonial/testimonial.component';
 import { EventsComponent } from '../events/events.component';
 import { PillarsComponent } from '../pillars/pillars.component';
 import { AboutComponent } from '../about/about.component';
-import { Meta, Title } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
 import { NewsPreviewComponent } from '../news-preview/news-preview.component';
 import { MediasPreviewComponent } from '../medias-preview/medias-preview.component';
 
@@ -23,15 +23,12 @@ import { MediasPreviewComponent } from '../medias-preview/medias-preview.compone
 })
 export class HomepageComponent implements OnInit {
   private meta = inject(Meta);
-  private title = inject(Title);
 
   ngOnInit() {
-    this.title.setTitle('Conseiller en Gestion de Patrimoine - Julien Poudras');
-
     this.meta.updateTag({
       name: 'description',
       content:
-        'Expert en gestion de patrimoine, je vous accompagne dans vos investissements, optimisation fiscale et stratégies patrimoniales. Actualités, conseils personnalisés et suivi clientèle.',
+        'Expert en gestion de patrimoine indépendant à Meudon (92), je vous accompagne dans vos investissements, optimisation fiscale et stratégies patrimoniales. Actualités, conseils personnalisés et suivi clientèle.',
     });
   }
 }

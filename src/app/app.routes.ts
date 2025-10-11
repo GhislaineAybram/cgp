@@ -14,22 +14,22 @@ import { AdminFeedbackComponent } from './features/admin/admin-feedback/admin-fe
 import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
-  { path: '', component: HomepageComponent },
-  { path: 'news', component: NewsComponent },
-  { path: 'medias', component: MediasComponent },
-  { path: 'legal', component: LegalComponent },
-  { path: 'privacy', component: PrivacyComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'received', component: ReceivedComponent },
+  { path: '', component: HomepageComponent, title: 'Julien Poudras | CGP Indépendant Meudon (92) - Conseil en Gestion de Patrimoine' },
+  { path: 'news', component: NewsComponent, title: 'Actualités Fiscales & Patrimoniales - Julien Poudras CGP' },
+  { path: 'medias', component: MediasComponent, title: 'Vidéos & Ressources - Partenaires & Expertise Patrimoniale' },
+  { path: 'legal', component: LegalComponent, title: 'Mentions Légales - Julien Poudras CGP' },
+  { path: 'privacy', component: PrivacyComponent, title: 'Politique de Confidentialité - Protection des Données' },
+  { path: 'contact', component: ContactComponent, title: 'Contactez votre Conseiller en Gestion de Patrimoine Julien Poudras' },
+  { path: 'received', component: ReceivedComponent, title: 'Message reçu - Julien Poudras CGP vous recontacte' },
   {
     path: 'admin',
     children: [
-      { path: '', component: AdminComponent },
-      { path: 'articles', component: AdminArticlesComponent },
-      { path: 'medias', component: AdminMediasComponent },
-      { path: 'events', component: AdminEventsComponent },
-      { path: 'feedback', component: AdminFeedbackComponent },
+      { path: '', component: AdminComponent, title: 'Administration' },
+      { path: 'articles', component: AdminArticlesComponent, title: 'Gestion des articles' },
+      { path: 'medias', component: AdminMediasComponent, title: 'Gestion des médias' },
+      { path: 'events', component: AdminEventsComponent, title: 'Gestion des événements' },
+      { path: 'feedback', component: AdminFeedbackComponent, title: 'Gestion des témoignages clients' },
     ],
   },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', component: PageNotFoundComponent, title: 'Page non trouvée - Julien Poudras CGP' },
 ];

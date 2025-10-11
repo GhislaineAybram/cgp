@@ -7,7 +7,7 @@
  */
 
 import { Component, inject, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-received',
@@ -17,11 +17,8 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class ReceivedComponent implements OnInit {
   private meta = inject(Meta);
-  private title = inject(Title);
 
   ngOnInit() {
-    this.title.setTitle('Formulaire envoyé - Conseiller en Gestion de Patrimoine');
-
     this.meta.updateTag({
       name: 'description',
       content: 'Votre demande de contact a été transmise avec succès. Je vous recontacterai rapidement pour discuter de vos projets patrimoniaux.',

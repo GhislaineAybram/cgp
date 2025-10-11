@@ -8,7 +8,7 @@
 
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import ownerData from '../../../assets/owner-data.json';
 
@@ -20,12 +20,9 @@ import ownerData from '../../../assets/owner-data.json';
 })
 export class ContactComponent implements OnInit {
   private meta = inject(Meta);
-  private title = inject(Title);
   ownerData = ownerData;
 
   ngOnInit() {
-    this.title.setTitle('Formulaire de contact - Conseiller en Gestion de Patrimoine');
-
     this.meta.updateTag({
       name: 'description',
       content:

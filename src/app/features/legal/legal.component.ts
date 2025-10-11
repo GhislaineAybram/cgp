@@ -7,7 +7,7 @@
  */
 
 import { Component, inject, OnInit } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import ownerData from '../../../assets/owner-data.json';
 
@@ -19,12 +19,9 @@ import ownerData from '../../../assets/owner-data.json';
 })
 export class LegalComponent implements OnInit {
   private meta = inject(Meta);
-  private title = inject(Title);
   ownerData = ownerData;
 
   ngOnInit() {
-    this.title.setTitle('Mentions Légales - Julien Poudras');
-
     this.meta.updateTag({
       name: 'description',
       content: 'Mentions légales et informations juridiques du Conseiller en Gestion de Patrimoine Julien Poudras.',
