@@ -2,27 +2,30 @@
   <div class="">
     <div class="flex flex-col md:flex-row w-full gap-0 min-h-screen">
       <!-- Colonne de navigation - Fond bleu -->
-      <div class="w-full md:max-w-[340px] bg-blue-medium p-6 md:p-8">
-        <h1 class="font-bold text-xl leading-7 color-white font-bold pb-8 pt-6 text-center md:text-left">Politique de confidentialité</h1>
+      <aside class="w-full md:max-w-[340px] bg-blue-medium p-6 md:p-8" aria-label="Sommaire de la page">
+        <nav>
+          <h2 class="font-bold uppercase text-xl leading-7 color-white font-bold pb-8 pt-6 text-center md:text-left">Politique de confidentialité</h2>
 
-        <ul class="tab-nav flex flex-col items-center md:items-start lg:gap-6 gap-4 sticky top-8">
-          @for (summaryItem of summaryItems; track summaryItem.id) {
-            <li class="w-full">
-              <button
-                type="button"
-                (click)="scrollTo(summaryItem.id)"
-                class="font-medium text-base leading-6 summary-link bg-transparent border-none cursor-pointer w-full py-2 px-0 transition-colors duration-200 text-center md:text-left">
-                {{ summaryItem.title }}
-              </button>
-            </li>
-          }
-        </ul>
-      </div>
+          <ul class="tab-nav flex flex-col items-center md:items-start lg:gap-6 gap-4 sticky top-8">
+            @for (summaryItem of summaryItems; track summaryItem.id) {
+              <li class="w-full">
+                <button
+                  type="button"
+                  (click)="scrollTo(summaryItem.id)"
+                  [attr.aria-label]="'Aller à la section ' + summaryItem.title"
+                  class="font-medium text-base leading-6 summary-link bg-transparent border-none cursor-pointer w-full py-2 px-0 transition-colors duration-200 text-center md:text-left hover:text-white focus:text-white focus:outline focus:outline-2 focus:outline-white">
+                  {{ summaryItem.title }}
+                </button>
+              </li>
+            }
+          </ul>
+        </nav>
+      </aside>
 
       <!-- Corps de texte - Fond blanc -->
       <div class="flex-1 bg-white p-6 md:p-8 lg:p-12">
         <div class="max-w-4xl">
-          <h1 class="font-manrope font-bold lg:text-4xl text-3xl mb-5 color-blue section-line">Politique de confidentialité</h1>
+          <h1 class="font-manrope uppercase font-bold lg:text-4xl text-3xl mb-5 color-blue section-line">Politique de confidentialité</h1>
 
           <div class="flex items-center gap-3 lg:mb-10 mb-8">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +120,7 @@
               </h2>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 3.1 : Données collectées</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 3.1 : Données collectées</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Les données personnelles collectées dans le cadre de notre activité sont les suivantes :
                 </p>
@@ -130,7 +133,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold" class="color-blue-dark font-bold">Article 3.2 : Finalités du traitement</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 3.2 : Finalités du traitement</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   La collecte et le traitement de ces données répondent aux finalités suivantes :
                 </p>
@@ -142,7 +145,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 3.3 : Mode de collecte des données</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 3.3 : Mode de collecte des données</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Ces données sont collectées lorsque l’utilisateur effectue l’une des opérations suivantes sur la plateforme :
                 </p>
@@ -152,7 +155,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 3.4 : Conservation des données</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 3.4 : Conservation des données</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Les données sont conservées par le responsable du traitement dans des conditions raisonnables de sécurité, pour une durée de :
                 </p>
@@ -170,7 +173,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 3.5 : Hébergement des données</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 3.5 : Hébergement des données</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Les données personnelles transmises via le formulaire de contact ne sont pas stockées sur le site. Elles sont directement transmises
                   par email au responsable de traitement via le service tiers
@@ -193,7 +196,7 @@
               </h2>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 4.1 : Le responsable du traitement des données</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 4.1 : Le responsable du traitement des données</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Les données à caractère personnel transmises via le formulaire de contact sont traitées par
                   <strong>{{ ownerData.firstname }} {{ ownerData.lastname }}</strong
@@ -213,7 +216,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 4.2 : Obligations du responsable du traitement des données</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 4.2 : Obligations du responsable du traitement des données</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">Le responsable du traitement s'engage à :</p>
                 <ul class="list-disc list-inside mb-4 color-grey-dark">
                   <li>Protéger les données à caractère personnel collectées</li>
@@ -250,7 +253,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 5.1 : Droit d’accès, de rectification et droit à l’effacement des données</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 5.1 : Droit d’accès, de rectification et droit à l’effacement des données</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">L'utilisateur peut demander :</p>
                 <ul class="list-disc list-inside mb-4 color-grey-dark">
                   <li>L'accès à ses données personnelles</li>
@@ -260,14 +263,14 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 5.2 : Droit à la portabilité des données</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 5.2 : Droit à la portabilité des données</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   L'utilisateur a le droit de demander la portabilité de ses données personnelles vers un autre responsable de traitement.
                 </p>
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 5.3 : Droit à la limitation et à l’opposition du traitement des données</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 5.3 : Droit à la limitation et à l’opposition du traitement des données</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   L'utilisateur a le droit de demander la limitation ou de s'opposer au traitement de ses données, sauf motifs légitimes et impérieux
                   du responsable du traitement.
@@ -275,7 +278,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">
+                <h3 class="uppercase color-blue-dark font-bold">
                   Article 5.4 : Droit de ne pas faire l’objet d’une décision fondée exclusivement sur un procédé automatisé
                 </h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
@@ -285,7 +288,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 5.5 : Droit de déterminer le sort des données après la mort</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 5.5 : Droit de déterminer le sort des données après la mort</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   L'utilisateur peut organiser le devenir de ses données collectées et traitées en cas de décès, conformément à la loi n°2016-1321 du
                   7 octobre 2016.
@@ -293,7 +296,7 @@
               </div>
 
               <div class="space-y-3 pt-4 mt-4">
-                <h3 class="color-blue-dark font-bold">Article 5.6 : Droit de saisir l’autorité de contrôle compétente</h3>
+                <h3 class="uppercase color-blue-dark font-bold">Article 5.6 : Droit de saisir l’autorité de contrôle compétente</h3>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   En cas de non-réponse ou de réponse insatisfaisante, l'utilisateur peut saisir la CNIL (Commission Nationale de l'Informatique et
                   des Libertés,
