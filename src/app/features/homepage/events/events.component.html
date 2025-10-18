@@ -10,9 +10,9 @@
     </div>
 
     @if (isLoading) {
-      <p class="text-center py-8 text-gray-500">Chargement des événements en cours...</p>
+      <p class="text-center py-8">Chargement des événements en cours...</p>
     } @else if (evenings.length === 0) {
-      <p class="text-center py-8 text-gray-500 text-lg">Aucun événement à venir pour le moment. Restez connecté !</p>
+      <p class="text-center py-8 text-lg">Aucun événement à venir pour le moment. Restez connecté !</p>
     } @else {
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         @for (evening of evenings; track evening.id) {

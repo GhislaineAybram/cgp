@@ -10,10 +10,10 @@
       <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
         <!-- Loading State -->
         @if (isLoading) {
-          <p class="text-center py-8 text-gray-500">Chargement des témoignages...</p>
+          <p class="text-center py-8">Chargement des témoignages...</p>
           <!-- No Feedbacks State -->
         } @else if (feedbacks.length === 0) {
-          <p class="text-center py-8 text-gray-500">Aucun témoignage disponible</p>
+          <p class="text-center py-8">Aucun témoignage disponible</p>
         } @else {
           <!-- Testimonials Section -->
           <section class="relative isolate overflow-hidden bg-white-light px-6 py-12 sm:py-16 lg:px-8">

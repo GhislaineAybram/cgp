@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.poudras-conseil-patrimoine.fr/sitemap.xml
