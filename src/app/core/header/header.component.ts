@@ -6,14 +6,14 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, NgOptimizedImage],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
@@ -32,8 +32,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isMenuOpen = false;
-    this.logo = 'assets/logo-mini-light-mode.png';
-    this.alt = 'logo site';
     this.homepage = 'Accueil';
     this.about = 'A propos';
     this.pillars = 'Mes services';
