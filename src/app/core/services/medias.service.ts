@@ -57,7 +57,7 @@ export class MediasService {
     // YouTube (youtu.be or youtube.com)
     const youtubeMatch = link.match(/(?:youtu\.be\/|youtube\.com.*[?&]v=)([^&]+)/);
     if (youtubeMatch) {
-      result = `https://img.youtube.com/vi/${youtubeMatch[1]}/hqdefault.jpg`;
+      result = `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`;
     }
 
     // Vimeo

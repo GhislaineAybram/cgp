@@ -33,11 +33,19 @@
                   [href]="article.link"
                   class="color-blue visible-link text-slate-800 font-semibold text-sm flex items-center underline decoration-current"
                   target="_blank"
+                  [attr.aria-label]="'Page site externe - nouvel onglet - Lire l\'article complet ' + (article.title || 'article')"
                   rel="noopener noreferrer">
                   <span>
                     Lire l'article complet sur <i>{{ article.source }}</i>
                   </span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    focusable="false"
+                    class="ml-2 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
                 </a>

@@ -10,13 +10,13 @@
 import { Component, inject, Input } from '@angular/core';
 import { Video } from '../../../models/video';
 import { MediasService } from '../../../core/services/medias.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-medias-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgOptimizedImage],
   templateUrl: './medias-list.component.html',
   styleUrls: ['./medias-list.component.scss'],
 })
