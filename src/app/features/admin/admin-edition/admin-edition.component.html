@@ -36,6 +36,24 @@
                   [value]="getValue(col.key)"
                   class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
                 </textarea>
+              } @else if (col.type === 'hour') {
+                <input
+                  type="time"
+                  [value]="getValue(col.key)"
+                  class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" />
+              } @else if (col.type === 'date' || col.key === 'created_at') {
+                <input
+                  type="date"
+                  [value]="getValue(col.key)"
+                  class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" />
+              } @else if (col.type === 'number') {
+                <input
+                  type="number"
+                  [value]="getValue(col.key)"
+                  min="0"
+                  max="5"
+                  step="1"
+                  class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" />
               } @else {
                 <input
                   type="text"

@@ -31,7 +31,7 @@ export class AdminEditionComponent<T extends object> {
       return '';
     }
     const stringKey = String(key);
-    const value = (this.selectedItem as Record<string, unknown>)[stringKey];
+    const value = (this.selectedItem as Record<string, T[keyof T]>)[stringKey];
     if (value === null || value === undefined) {
       return '';
     }

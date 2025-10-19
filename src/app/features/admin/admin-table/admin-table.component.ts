@@ -20,7 +20,7 @@ export class AdminTableComponent<T extends object> {
     return [...this.databaseTable.columns.map((col: TableColumn<T>) => `${col.weight ?? 1}fr`), '1fr'].join(' ');
   }
 
-  formatValue(value: unknown, type: string): string {
+  formatValue(value: T[keyof T], type: string): string {
     if (value === null || value === undefined) return '';
 
     let result: string;
@@ -31,6 +31,11 @@ export class AdminTableComponent<T extends object> {
         break;
 
       case 'date': {
+        const date = new Date(value as string | number | Date);
+        result = isNaN(date.getTime()) ? String(value) : date.toLocaleDateString('fr-FR');
+        break;
+      }
+      case 'created_at': {
         const date = new Date(value as string | number | Date);
         result = isNaN(date.getTime()) ? String(value) : date.toLocaleDateString('fr-FR');
         break;

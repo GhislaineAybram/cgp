@@ -16,11 +16,10 @@
     class="grid gap-x-1 text-sm text-gray-700 uppercase bg-grey-very-light dark:bg-gray-700 dark:text-gray-400"
     [style.gridTemplateColumns]="gridTemplateColumns">
     @for (col of databaseTable.columns; track $index) {
-      <div class="px-2 py-3 font-semibold">
+      <div class="px-2 py-2 font-semibold">
         {{ col.label }}
       </div>
     }
-    <div class="px-2 py-3"></div>
   </div>
 
   <!-- Lignes -->
@@ -29,25 +28,27 @@
       class="grid gap-x-1 text-xs border-b bg-white dark:bg-gray-800 dark:border-gray-700 border-gray-200"
       [style.gridTemplateColumns]="gridTemplateColumns">
       @for (col of databaseTable.columns; track $index) {
-        <div class="flex items-center px-2 py-3 h-[3rem] overflow-hidden text-ellipsis line-clamp-2">
+        <div class="px-2 py-2 flex items-start h-[3rem] overflow-hidden">
           @switch (col.type) {
             @case ('image') {
               <img [src]="row[col.key]" alt="image evenement" class="w-10 h-8 rounded object-cover" />
             }
             @case ('number') {
               <span class="flex items-center gap-1">
-                {{ formatValue(row[col.key], col.type) }}
-                <span class="text-yellow-500 text-lg">★</span>
+                <span>{{ formatValue(row[col.key], col.type) }}</span>
+                <span class="text-yellow-500 text-lg leading-none">★</span>
               </span>
             }
             @default {
-              {{ formatValue(row[col.key], col.type ?? 'text') }}
+              <span class="line-clamp-2 leading-snug">
+                {{ formatValue(row[col.key], col.type ?? 'text') }}
+              </span>
             }
           }
         </div>
       }
       <!-- Modal toggle -->
-      <div class="flex justify-center items-center px-2 py-3 space-x-3">
+      <div class="flex justify-center items-center px-2 py-2 space-x-3">
         <button type="button" (click)="edit(row)" class="font-medium visible-edit-button" title="Modifier les informations">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
             <path
