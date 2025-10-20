@@ -29,9 +29,10 @@
         <form class="space-y-4" action="#">
           @for (col of databaseTable.columns; track $index) {
             <div>
-              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ col.label }}</label>
+              <label [for]="col.key" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ col.label }}</label>
               @if (col.weight && col.weight >= 3) {
                 <textarea
+                  [id]="col.key"
                   rows="4"
                   [value]="getValue(col.key)"
                   class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white">
@@ -39,24 +40,32 @@
               } @else if (col.type === 'hour') {
                 <input
                   type="time"
+                  [id]="col.key"
                   [value]="getValue(col.key)"
                   class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" />
               } @else if (col.type === 'date' || col.key === 'created_at') {
                 <input
                   type="date"
+                  [id]="col.key"
                   [value]="getValue(col.key)"
                   class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" />
               } @else if (col.type === 'number') {
                 <input
                   type="number"
+                  [id]="col.key"
                   [value]="getValue(col.key)"
                   min="0"
                   max="5"
                   step="1"
+                  (input)="markInvalid(col.key, $any($event.target).value)"
                   class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" />
+                @if (invalidValues[col.key]) {
+                  <p class="mt-1 text-sm color-error-dark">Valeur invalide - la valeur doit être comprise entre 0 et 5</p>
+                }
               } @else {
                 <input
                   type="text"
+                  [id]="col.key"
                   [value]="getValue(col.key)"
                   class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" />
               }

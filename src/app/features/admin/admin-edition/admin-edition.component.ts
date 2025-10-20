@@ -48,4 +48,9 @@ export class AdminEditionComponent<T extends object> {
     console.log('Sauvegarder les modifications');
     this.close();
   }
+
+  invalidValues: Partial<Record<keyof T, boolean>> = {};
+  markInvalid(colKey: keyof T, value: number) {
+    this.invalidValues[colKey] = value < 0 || value > 5 || isNaN(value);
+  }
 }
