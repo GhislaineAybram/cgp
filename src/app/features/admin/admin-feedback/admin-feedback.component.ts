@@ -18,7 +18,7 @@ export class AdminFeedbackComponent implements OnInit {
   feedbacksDatas: Feedback[] = [];
   feedbacksTable: Table<Feedback> = {
     columns: [
-      { key: 'created_at' as keyof Feedback, label: 'Date', type: 'date' },
+      { key: 'date' as keyof Feedback, label: 'Date', type: 'date' },
       { key: 'feedback' as keyof Feedback, label: 'Feedback', type: 'text', weight: 4 },
       { key: 'author' as keyof Feedback, label: 'Auteur', type: 'text' },
       { key: 'rating' as keyof Feedback, label: 'Note', type: 'number' },

@@ -81,4 +81,12 @@ export class MediasService {
     // BFMTV (pas de miniature officielle, on utilise un placeholder)
     return result;
   }
+
+  async updateVideo(id: string, updates: Partial<Video>): Promise<{ data: Video | null; error: Error | null }> {
+    const { data, error } = await this.supabase.updateVideo(id, updates);
+    if (error) {
+      console.error('Error updating video:', error);
+    }
+    return { data, error };
+  }
 }

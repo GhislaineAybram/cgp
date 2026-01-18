@@ -35,11 +35,6 @@ export class AdminTableComponent<T extends object> {
         result = isNaN(date.getTime()) ? String(value) : date.toLocaleDateString('fr-FR');
         break;
       }
-      case 'created_at': {
-        const date = new Date(value as string | number | Date);
-        result = isNaN(date.getTime()) ? String(value) : date.toLocaleDateString('fr-FR');
-        break;
-      }
       default:
         result = String(value);
         break;

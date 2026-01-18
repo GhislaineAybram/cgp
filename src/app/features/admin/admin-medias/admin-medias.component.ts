@@ -32,8 +32,11 @@ export class AdminMediasComponent implements OnInit {
   protected mediasService = inject(MediasService);
 
   async ngOnInit() {
-    this.videosTable.rows = await this.mediasService.getAllVideos();
+    await this.loadVideos();
+  }
 
+  async loadVideos() {
+    this.videosTable.rows = await this.mediasService.getAllVideos();
     this.videosCount = await this.mediasService.loadMediasCount();
   }
 
@@ -44,5 +47,30 @@ export class AdminMediasComponent implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  async onSave(updatedVideo: Video) {
+    if (!updatedVideo.id) {
+      console.error('Impossible de sauvegarder : ID manquant');
+      return;
+    }
+
+    const { data, error } = await this.mediasService.updateVideo(
+      updatedVideo.id,
+      updatedVideo
+    );
+
+    if (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      // TODO: Afficher un message d'erreur à l'utilisateur
+      alert('Erreur lors de la sauvegarde');
+    } else {
+      console.log('Vidéo sauvegardée avec succès:', data);
+      // TODO: Afficher un message de succès
+      alert('Vidéo sauvegardée avec succès');
+      
+      // Recharger les données
+      await this.loadVideos();
+    }
   }
 }

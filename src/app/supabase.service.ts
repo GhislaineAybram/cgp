@@ -42,7 +42,7 @@ export class SupabaseService {
     }
 
     try {
-      const { data, error } = await this.supabase.from('testimonial').select('*').order('created_at', { ascending: false });
+      const { data, error } = await this.supabase.from('testimonial').select('*').order('date', { ascending: false });
 
       return { data, error };
     } catch (error) {
@@ -138,6 +138,23 @@ export class SupabaseService {
     } catch (error) {
       console.error('Erreur in getAllVideos:', error);
       return { data: [], error: error as Error };
+    }
+  }
+
+  async updateVideo(id: string, updates: Partial<Video>): Promise<SupabaseResponse<Video>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: null, error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+    try {
+      const { data, error } = await this.supabase.from('video').update(updates).eq('id', id).select().single();
+
+      return { data, error };
+    } catch (error) {
+      console.error('Erreur dans updateVideo:', error);
+      return { data: null, error: error as Error };
     }
   }
 

@@ -2,8 +2,12 @@
   id="static-modal"
   data-modal-backdrop="static"
   tabindex="-1"
-  [attr.aria-hidden]="!isVisible"
+  [attr.aria-modal]="isVisible ? 'true' : null"
+  [attr.role]="isVisible ? 'dialog' : null"
   [style.display]="isVisible ? 'flex' : 'none'"
+  [attr.inert]="!isVisible ? '' : null"
+  (click)="closeOnBackdrop($event)"
+  (keydown.escape)="close()"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
   <div class="relative p-4 w-full max-w-2xl max-h-full">
     <!-- Modal content -->
@@ -43,7 +47,7 @@
                   [id]="col.key"
                   [value]="getValue(col.key)"
                   class="block w-full p-2.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:text-white" />
-              } @else if (col.type === 'date' || col.key === 'created_at') {
+              } @else if (col.type === 'date') {
                 <input
                   type="date"
                   [id]="col.key"
@@ -82,7 +86,11 @@
           class="w-full px-3.5 py-2.5 text-center text-sm font-semibold button-info">
           Annuler
         </button>
-        <button data-modal-hide="static-modal" type="button" class="w-full px-3.5 py-2.5 text-center text-sm font-semibold button-action">
+        <button
+          data-modal-hide="static-modal"
+          type="button"
+          (click)="saveChanges()"
+          class="w-full px-3.5 py-2.5 text-center text-sm font-semibold button-action">
           Sauvegarder
         </button>
       </div>
