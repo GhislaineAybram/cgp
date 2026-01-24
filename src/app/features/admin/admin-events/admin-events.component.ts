@@ -5,11 +5,13 @@ import { Evening } from '../../../models/evening';
 import { EventsService } from '../../../core/services/events.service';
 import { Table } from '../../../models/table';
 import { AdminEditionComponent } from '../admin-edition/admin-edition.component';
+import { ModalSuccessComponent } from '../../../shared/components/modal-success/modal-success.component';
+import { ModalErrorComponent } from '../../../shared/components/modal-error/modal-error.component';
 
 @Component({
   selector: 'app-admin-events',
   standalone: true,
-  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent],
+  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent],
   templateUrl: './admin-events.component.html',
   styleUrls: ['./admin-events.component.scss'],
 })
@@ -29,21 +31,43 @@ export class AdminEventsComponent implements OnInit {
 
   isModalOpen = false;
   selectedEvent: Evening | null = null;
+  showSuccessModal = false;
+  showErrorModal = false;
 
   protected eventsService = inject(EventsService);
 
   async ngOnInit() {
-    this.eventsTable.rows = await this.eventsService.getAllEvenings();
+    await this.loadEvenings();
+  }
 
+  async loadEvenings() {
+    this.eventsTable.rows = await this.eventsService.getAllEvenings();
     this.eventsCount = await this.eventsService.loadEveningsCount();
   }
 
-  onEdit(item: Evening) {
-    this.selectedEvent = item;
+  onEdit(evening: Evening) {
+    this.selectedEvent = { ...evening };
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  async onSave(updatedEvening: Evening) {
+    if (!updatedEvening.id) {
+      console.error('Impossible de sauvegarder : ID manquant');
+      return;
+    }
+
+    const { error } = await this.eventsService.updateEvening(updatedEvening.id, updatedEvening);
+
+    if (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadEvenings();
+    }
   }
 }

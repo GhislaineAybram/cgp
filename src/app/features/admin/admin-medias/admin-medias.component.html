@@ -15,8 +15,11 @@
           [selectedItem]="selectedVideo"
           (closeModal)="closeModal()"
           editionTitle="Editer la vidéo"
-          [databaseTable]="videosTable">
+          [databaseTable]="videosTable"
+          (saveItem)="onSave($event)">
         </app-admin-edition>
+        <app-modal-success [(isVisible)]="showSuccessModal"></app-modal-success>
+        <app-modal-error [(isVisible)]="showErrorModal"></app-modal-error>
       </div>
     </div>
   </div>

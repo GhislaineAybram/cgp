@@ -38,4 +38,12 @@ export class FeedbackService {
     }
     return result;
   }
+
+  async updateFeedback(id: string, updates: Partial<Feedback>): Promise<{ data: Feedback | null; error: Error | null }> {
+    const { data, error } = await this.supabase.updateFeedback(id, updates);
+    if (error) {
+      console.error('Error updating feedback:', error);
+    }
+    return { data, error };
+  }
 }

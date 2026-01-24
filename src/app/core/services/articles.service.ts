@@ -49,4 +49,12 @@ export class ArticlesService {
     }
     return result;
   }
+
+  async updateArticle(id: string, updates: Partial<Article>): Promise<{ data: Article | null; error: Error | null }> {
+    const { data, error } = await this.supabase.updateArticle(id, updates);
+    if (error) {
+      console.error('Error updating article:', error);
+    }
+    return { data, error };
+  }
 }

@@ -49,4 +49,12 @@ export class EventsService {
     }
     return result;
   }
+
+  async updateEvening(id: string, updates: Partial<Evening>): Promise<{ data: Evening | null; error: Error | null }> {
+    const { data, error } = await this.supabase.updateEvening(id, updates);
+    if (error) {
+      console.error('Error updating evening:', error);
+    }
+    return { data, error };
+  }
 }

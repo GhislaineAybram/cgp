@@ -1,14 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Table } from '../../../models/table';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-edition',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './admin-edition.component.html',
   styleUrl: './admin-edition.component.scss',
 })
-export class AdminEditionComponent<T extends object> {
+export class AdminEditionComponent<T extends object> implements OnChanges {
   @Input() isVisible = false;
   @Input() selectedItem: T | null = null;
   @Input() editionTitle = `Editer l'objet`;
@@ -16,8 +17,22 @@ export class AdminEditionComponent<T extends object> {
 
   @Output() closeModal = new EventEmitter<void>();
   @Output() saveItem = new EventEmitter<T>();
-  
+
+  workingCopy: T | null = null;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['selectedItem'] && this.selectedItem) {
+      this.workingCopy = this.deepCopy(this.selectedItem);
+    }
+  }
+
+  deepCopy(obj: T): T {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
   close() {
+    this.workingCopy = null;
+    this.invalidValues = {};
     this.closeModal.emit();
   }
 
@@ -28,11 +43,11 @@ export class AdminEditionComponent<T extends object> {
   }
 
   getValue(key: string | number | symbol): string {
-    if (!this.selectedItem) {
+    if (!this.workingCopy) {
       return '';
     }
     const stringKey = String(key);
-    const value = (this.selectedItem as Record<string, T[keyof T]>)[stringKey];
+    const value = (this.workingCopy as Record<string, T[keyof T]>)[stringKey];
     if (value === null || value === undefined) {
       return '';
     }
@@ -46,38 +61,36 @@ export class AdminEditionComponent<T extends object> {
   }
 
   saveChanges() {
-    // Vérifier s'il y a des valeurs invalides
     if (Object.values(this.invalidValues).some(v => v)) {
       console.error('Des valeurs sont invalides');
       return;
     }
 
-    if (!this.selectedItem) {
+    if (!this.workingCopy) {
       return;
     }
 
-    // Récupérer toutes les valeurs des inputs
-    const updatedItem = { ...this.selectedItem };
-    
+    const updatedItem = { ...this.workingCopy };
+
     this.databaseTable.columns.forEach(col => {
       const input = document.getElementById(String(col.key)) as HTMLInputElement | HTMLTextAreaElement;
       if (input) {
         const key = col.key as keyof T;
         let value: string | number | Date = input.value;
 
-        // Conversion selon le type
         if (col.type === 'number') {
           value = parseFloat(input.value);
         } else if (col.type === 'date' && input.value) {
-          value = input.value; // Garder le format YYYY-MM-DD en string
+          value = input.value;
         }
 
-        // Utilisation d'une assertion de type pour affecter la valeur
         (updatedItem as Record<keyof T, T[keyof T]>)[key] = value as T[keyof T];
       }
     });
 
     this.saveItem.emit(updatedItem);
+    this.workingCopy = null;
+    this.invalidValues = {};
     this.close();
   }
 
@@ -90,5 +103,4 @@ export class AdminEditionComponent<T extends object> {
   get hasInvalidValues(): boolean {
     return Object.values(this.invalidValues).some(v => v);
   }
-
 }

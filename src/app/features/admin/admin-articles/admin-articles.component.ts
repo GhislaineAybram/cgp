@@ -6,11 +6,13 @@ import { AdminTableComponent } from '../admin-table/admin-table.component';
 import { Article } from '../../../models/article';
 import { AdminEditionComponent } from '../admin-edition/admin-edition.component';
 import { Table } from '../../../models/table';
+import { ModalSuccessComponent } from '../../../shared/components/modal-success/modal-success.component';
+import { ModalErrorComponent } from '../../../shared/components/modal-error/modal-error.component';
 
 @Component({
   selector: 'app-admin-articles',
   standalone: true,
-  imports: [CommonModule, AdminPannelComponent, AdminTableComponent, AdminEditionComponent],
+  imports: [CommonModule, AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent],
   templateUrl: './admin-articles.component.html',
   styleUrls: ['./admin-articles.component.scss'],
 })
@@ -31,21 +33,43 @@ export class AdminArticlesComponent implements OnInit {
 
   isModalOpen = false;
   selectedArticle: Article | null = null;
+  showSuccessModal = false;
+  showErrorModal = false;
 
   protected articlesService = inject(ArticlesService);
 
   async ngOnInit() {
-    this.articlesTable.rows = await this.articlesService.getAllArticles();
+    await this.loadArticles();
+  }
 
+  async loadArticles() {
+    this.articlesTable.rows = await this.articlesService.getAllArticles();
     this.articlesCount = await this.articlesService.loadArticlesCount();
   }
 
-  onEdit(item: Article) {
-    this.selectedArticle = item;
+  onEdit(article: Article) {
+    this.selectedArticle = { ...article };
     this.isModalOpen = true;
   }
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  async onSave(updatedArticle: Article) {
+    if (!updatedArticle.id) {
+      console.error('Impossible de sauvegarder : ID manquant');
+      return;
+    }
+
+    const { error } = await this.articlesService.updateArticle(updatedArticle.id, updatedArticle);
+
+    if (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadArticles();
+    }
   }
 }

@@ -69,6 +69,23 @@ export class SupabaseService {
     }
   }
 
+  async updateFeedback(id: string, updates: Partial<Feedback>): Promise<SupabaseResponse<Feedback>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: null, error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+    try {
+      const { data, error } = await this.supabase.from('testimonial').update(updates).eq('id', id).select().single();
+
+      return { data, error };
+    } catch (error) {
+      console.error('Erreur dans updateFeedback:', error);
+      return { data: null, error: error as Error };
+    }
+  }
+
   async getAllArticles(): Promise<SupabaseResponse<Article[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
@@ -120,6 +137,23 @@ export class SupabaseService {
     } catch (error) {
       console.error('Error in getArticlesByLimit:', error);
       return { data: [], error: error as Error };
+    }
+  }
+
+  async updateArticle(id: string, updates: Partial<Article>): Promise<SupabaseResponse<Article>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: null, error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+    try {
+      const { data, error } = await this.supabase.from('article').update(updates).eq('id', id).select().single();
+
+      return { data, error };
+    } catch (error) {
+      console.error('Erreur dans updateArticle:', error);
+      return { data: null, error: error as Error };
     }
   }
 
@@ -247,6 +281,23 @@ export class SupabaseService {
     } catch (error) {
       console.error('Erreur in getEveningsCount:', error);
       return { data: 0, error: error as Error };
+    }
+  }
+
+    async updateEvening(id: string, updates: Partial<Evening>): Promise<SupabaseResponse<Evening>> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: null, error: null };
+    }
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+    try {
+      const { data, error } = await this.supabase.from('evening').update(updates).eq('id', id).select().single();
+
+      return { data, error };
+    } catch (error) {
+      console.error('Erreur dans updateEvening:', error);
+      return { data: null, error: error as Error };
     }
   }
 }

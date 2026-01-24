@@ -19,8 +19,11 @@
           [selectedItem]="selectedArticle"
           (closeModal)="closeModal()"
           editionTitle="Editer l'article"
-          [databaseTable]="articlesTable">
+          [databaseTable]="articlesTable"
+          (saveItem)="onSave($event)">
         </app-admin-edition>
+        <app-modal-success [(isVisible)]="showSuccessModal"></app-modal-success>
+        <app-modal-error [(isVisible)]="showErrorModal"></app-modal-error>
       </div>
     </div>
   </div>

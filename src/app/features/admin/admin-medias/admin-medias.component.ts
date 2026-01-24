@@ -5,11 +5,13 @@ import { AdminTableComponent } from '../admin-table/admin-table.component';
 import { MediasService } from '../../../core/services/medias.service';
 import { Table } from '../../../models/table';
 import { AdminEditionComponent } from '../admin-edition/admin-edition.component';
+import { ModalSuccessComponent } from '../../../shared/components/modal-success/modal-success.component';
+import { ModalErrorComponent } from '../../../shared/components/modal-error/modal-error.component';
 
 @Component({
   selector: 'app-admin-medias',
   standalone: true,
-  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent],
+  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent],
   templateUrl: './admin-medias.component.html',
   styleUrls: ['./admin-medias.component.scss'],
 })
@@ -28,6 +30,8 @@ export class AdminMediasComponent implements OnInit {
 
   isModalOpen = false;
   selectedVideo: Video | null = null;
+  showSuccessModal = false;
+  showErrorModal = false;
 
   protected mediasService = inject(MediasService);
 
@@ -40,8 +44,8 @@ export class AdminMediasComponent implements OnInit {
     this.videosCount = await this.mediasService.loadMediasCount();
   }
 
-  onEdit(item: Video) {
-    this.selectedVideo = item;
+  onEdit(video: Video) {
+    this.selectedVideo = { ...video };
     this.isModalOpen = true;
   }
 
@@ -55,21 +59,13 @@ export class AdminMediasComponent implements OnInit {
       return;
     }
 
-    const { data, error } = await this.mediasService.updateVideo(
-      updatedVideo.id,
-      updatedVideo
-    );
+    const { error } = await this.mediasService.updateVideo(updatedVideo.id, updatedVideo);
 
     if (error) {
       console.error('Erreur lors de la sauvegarde:', error);
-      // TODO: Afficher un message d'erreur à l'utilisateur
-      alert('Erreur lors de la sauvegarde');
+      this.showErrorModal = true;
     } else {
-      console.log('Vidéo sauvegardée avec succès:', data);
-      // TODO: Afficher un message de succès
-      alert('Vidéo sauvegardée avec succès');
-      
-      // Recharger les données
+      this.showSuccessModal = true;
       await this.loadVideos();
     }
   }
