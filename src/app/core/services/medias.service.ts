@@ -10,7 +10,7 @@
 
 import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from '../../supabase.service';
-import { Video } from '../../models/video';
+import { Video, VideoNew } from '../../models/video';
 
 @Injectable({
   providedIn: 'root',
@@ -88,5 +88,13 @@ export class MediasService {
       console.error('Error updating video:', error);
     }
     return { data, error };
+  }
+
+  async createVideo(newVideo: VideoNew): Promise<{ data: Video | null; error: Error | null }> {
+    const result = await this.supabase.newVideo(newVideo);
+    if (result.error) {
+      console.error('Error creating video:', result.error);
+    }
+    return result;
   }
 }

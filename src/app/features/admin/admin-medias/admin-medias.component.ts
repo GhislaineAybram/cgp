@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Video } from '../../../models/video';
+import { Video, VideoNew } from '../../../models/video';
 import { AdminPannelComponent } from '../admin-pannel/admin-pannel.component';
 import { AdminTableComponent } from '../admin-table/admin-table.component';
 import { MediasService } from '../../../core/services/medias.service';
@@ -32,6 +32,7 @@ export class AdminMediasComponent implements OnInit {
   selectedVideo: Video | null = null;
   showSuccessModal = false;
   showErrorModal = false;
+  modalMode: 'edit' | 'create' = 'edit';
 
   protected mediasService = inject(MediasService);
 
@@ -46,6 +47,13 @@ export class AdminMediasComponent implements OnInit {
 
   onEdit(video: Video) {
     this.selectedVideo = { ...video };
+    this.modalMode = 'edit';
+    this.isModalOpen = true;
+  }
+
+  onCreation() {
+    this.selectedVideo = null;
+    this.modalMode = 'create';
     this.isModalOpen = true;
   }
 
@@ -53,9 +61,10 @@ export class AdminMediasComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  async onSave(updatedVideo: Video) {
+  async onUpdate(updatedVideo: Video) {
     if (!updatedVideo.id) {
       console.error('Impossible de sauvegarder : ID manquant');
+      this.showErrorModal = true;
       return;
     }
 
@@ -68,5 +77,21 @@ export class AdminMediasComponent implements OnInit {
       this.showSuccessModal = true;
       await this.loadVideos();
     }
+
+    this.closeModal();
+  }
+
+  async onCreate(newVideo: Partial<Video>) {
+    const { error } = await this.mediasService.createVideo(newVideo as VideoNew);
+
+    if (error) {
+      console.error('Erreur lors de la création:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadVideos();
+    }
+
+    this.closeModal();
   }
 }

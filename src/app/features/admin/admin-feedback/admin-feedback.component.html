@@ -12,15 +12,19 @@
           databaseTableName="Retours clients"
           [databaseItemsCount]="feedbacksCount"
           [databaseTable]="feedbacksTable"
-          (editClicked)="onEdit($event)">
+          (editClicked)="onEdit($event)"
+          (createClicked)="onCreation()">
         </app-admin-table>
         <app-admin-edition
           [isVisible]="isModalOpen"
           [selectedItem]="selectedFeedback"
-          (closeModal)="closeModal()"
-          editionTitle="Editer le retour client"
+          [mode]="modalMode"
+          editionTitle="Éditer le retour client"
+          creationTitle="Créer un retour client"
           [databaseTable]="feedbacksTable"
-          (saveItem)="onSave($event)">
+          (closeModal)="closeModal()"
+          (updateItem)="onUpdate($event)"
+          (createItem)="onCreate($event)">
         </app-admin-edition>
         <app-modal-success [(isVisible)]="showSuccessModal"></app-modal-success>
         <app-modal-error [(isVisible)]="showErrorModal"></app-modal-error>

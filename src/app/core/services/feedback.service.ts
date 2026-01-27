@@ -9,7 +9,7 @@
 
 import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from '../../supabase.service';
-import { Feedback } from '../../models/feedback';
+import { Feedback, FeedbackNew } from '../../models/feedback';
 
 @Injectable({
   providedIn: 'root',
@@ -45,5 +45,13 @@ export class FeedbackService {
       console.error('Error updating feedback:', error);
     }
     return { data, error };
+  }
+
+  async createFeedback(newFeedback: FeedbackNew): Promise<{ data: Feedback | null; error: Error | null }> {
+    const result = await this.supabase.newFeedback(newFeedback);
+    if (result.error) {
+      console.error('Error creating feedback:', result.error);
+    }
+    return result;
   }
 }

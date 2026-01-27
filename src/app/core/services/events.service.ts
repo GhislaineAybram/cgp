@@ -9,7 +9,7 @@
 
 import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from '../../supabase.service';
-import { Evening } from '../../models/evening';
+import { Evening, EveningNew } from '../../models/evening';
 
 @Injectable({
   providedIn: 'root',
@@ -56,5 +56,13 @@ export class EventsService {
       console.error('Error updating evening:', error);
     }
     return { data, error };
+  }
+
+  async createEvening(newEvening: EveningNew): Promise<{ data: Evening | null; error: Error | null }> {
+    const result = await this.supabase.newEvening(newEvening);
+    if (result.error) {
+      console.error('Error creating evening:', result.error);
+    }
+    return result;
   }
 }

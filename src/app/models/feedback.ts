@@ -4,3 +4,9 @@ export interface Feedback {
   author: string;
   rating: number;
 }
+
+export interface FeedbackNew {
+  feedback: string;
+  author: string;
+  rating: number;
+}

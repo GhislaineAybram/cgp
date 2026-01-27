@@ -8,7 +8,7 @@
  */
 
 import { inject, Injectable } from '@angular/core';
-import { Article } from '../../models/article';
+import { Article, ArticleNew } from '../../models/article';
 import { SupabaseService } from '../../supabase.service';
 
 @Injectable({
@@ -56,5 +56,13 @@ export class ArticlesService {
       console.error('Error updating article:', error);
     }
     return { data, error };
+  }
+
+  async createArticle(newArticle: ArticleNew): Promise<{ data: Article | null; error: Error | null }> {
+    const result = await this.supabase.newArticle(newArticle);
+    if (result.error) {
+      console.error('Error creating article:', result.error);
+    }
+    return result;
   }
 }

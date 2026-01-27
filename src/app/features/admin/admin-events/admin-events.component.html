@@ -12,16 +12,20 @@
           databaseTableName="Évènements"
           [databaseItemsCount]="eventsCount"
           [databaseTable]="eventsTable"
-          (editClicked)="onEdit($event)">
+          (editClicked)="onEdit($event)"
+          (createClicked)="onCreation()">
         </app-admin-table>
-        <app-admin-edition
-          [isVisible]="isModalOpen"
-          [selectedItem]="selectedEvent"
-          (closeModal)="closeModal()"
-          editionTitle="Editer l'événement"
-          [databaseTable]="eventsTable"
-          (saveItem)="onSave($event)">
-        </app-admin-edition>
+      <app-admin-edition
+        [isVisible]="isModalOpen"
+        [selectedItem]="selectedEvening"
+        [mode]="modalMode"
+        editionTitle="Éditer l'événement"
+        creationTitle="Créer un nouvel événement"
+        [databaseTable]="eventsTable"
+        (closeModal)="closeModal()"
+        (updateItem)="onUpdate($event)"
+        (createItem)="onCreate($event)">
+      </app-admin-edition>
         <app-modal-success [(isVisible)]="showSuccessModal"></app-modal-success>
         <app-modal-error [(isVisible)]="showErrorModal"></app-modal-error>
       </div>

@@ -2,10 +2,10 @@ import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../environments/environment';
-import { Article } from './models/article';
-import { Feedback } from './models/feedback';
-import { Video } from './models/video';
-import { Evening } from './models/evening';
+import { Article, ArticleNew } from './models/article';
+import { Feedback, FeedbackNew } from './models/feedback';
+import { Video, VideoNew } from './models/video';
+import { Evening, EveningNew } from './models/evening';
 
 interface SupabaseResponse<T> {
   data: T | null;
@@ -86,6 +86,33 @@ export class SupabaseService {
     }
   }
 
+  async newFeedback(newFeedback: FeedbackNew): Promise<{ data: Feedback | null; error: Error | null }> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: null, error: new Error('Not in browser context') };
+    }
+
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase.from('testimonial').insert([newFeedback]).select('*').single();
+
+      if (error) {
+        console.error('Supabase error creating feedback:', error.message);
+        return { data: null, error: new Error(error.message) };
+      }
+
+      return { data: data as Feedback, error: null };
+    } catch (error) {
+      console.error('Unexpected error creating feedback:', error);
+      return {
+        data: null,
+        error: error instanceof Error ? error : new Error('Unknown error'),
+      };
+    }
+  }
+
   async getAllArticles(): Promise<SupabaseResponse<Article[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
@@ -154,6 +181,33 @@ export class SupabaseService {
     } catch (error) {
       console.error('Erreur dans updateArticle:', error);
       return { data: null, error: error as Error };
+    }
+  }
+
+  async newArticle(newArticle: ArticleNew): Promise<{ data: Article | null; error: Error | null }> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: null, error: new Error('Not in browser context') };
+    }
+
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase.from('article').insert([newArticle]).select('*').single();
+
+      if (error) {
+        console.error('Supabase error creating article:', error.message);
+        return { data: null, error: new Error(error.message) };
+      }
+
+      return { data: data as Article, error: null };
+    } catch (error) {
+      console.error('Unexpected error creating article:', error);
+      return {
+        data: null,
+        error: error instanceof Error ? error : new Error('Unknown error'),
+      };
     }
   }
 
@@ -228,6 +282,33 @@ export class SupabaseService {
     }
   }
 
+  async newVideo(newVideo: VideoNew): Promise<{ data: Video | null; error: Error | null }> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: null, error: new Error('Not in browser context') };
+    }
+
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase.from('video').insert([newVideo]).select('*').single();
+
+      if (error) {
+        console.error('Supabase error creating video:', error.message);
+        return { data: null, error: new Error(error.message) };
+      }
+
+      return { data: data as Video, error: null };
+    } catch (error) {
+      console.error('Unexpected error creating video:', error);
+      return {
+        data: null,
+        error: error instanceof Error ? error : new Error('Unknown error'),
+      };
+    }
+  }
+
   async getAllFutureEvenings(): Promise<SupabaseResponse<Evening[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
@@ -284,7 +365,7 @@ export class SupabaseService {
     }
   }
 
-    async updateEvening(id: string, updates: Partial<Evening>): Promise<SupabaseResponse<Evening>> {
+  async updateEvening(id: string, updates: Partial<Evening>): Promise<SupabaseResponse<Evening>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: null, error: null };
     }
@@ -298,6 +379,33 @@ export class SupabaseService {
     } catch (error) {
       console.error('Erreur dans updateEvening:', error);
       return { data: null, error: error as Error };
+    }
+  }
+
+  async newEvening(newEvening: EveningNew): Promise<{ data: Evening | null; error: Error | null }> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { data: null, error: new Error('Not in browser context') };
+    }
+
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    try {
+      const { data, error } = await this.supabase.from('evening').insert([newEvening]).select('*').single();
+
+      if (error) {
+        console.error('Supabase error creating evening:', error.message);
+        return { data: null, error: new Error(error.message) };
+      }
+
+      return { data: data as Evening, error: null };
+    } catch (error) {
+      console.error('Unexpected error creating evening:', error);
+      return {
+        data: null,
+        error: error instanceof Error ? error : new Error('Unknown error'),
+      };
     }
   }
 }

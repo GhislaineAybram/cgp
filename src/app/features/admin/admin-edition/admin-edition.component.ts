@@ -12,22 +12,53 @@ import { CommonModule } from '@angular/common';
 export class AdminEditionComponent<T extends object> implements OnChanges {
   @Input() isVisible = false;
   @Input() selectedItem: T | null = null;
-  @Input() editionTitle = `Editer l'objet`;
+  @Input() editionTitle = `Éditer l'objet`;
+  @Input() creationTitle = `Créer un nouvel objet`;
   @Input() databaseTable: Table<T> = { columns: [], rows: [] };
+  @Input() mode: 'edit' | 'create' = 'edit';
 
   @Output() closeModal = new EventEmitter<void>();
-  @Output() saveItem = new EventEmitter<T>();
+  @Output() updateItem = new EventEmitter<T>();
+  @Output() createItem = new EventEmitter<Partial<T>>();
 
-  workingCopy: T | null = null;
+  workingCopy: T | Partial<T> | null = null;
+  invalidValues: Partial<Record<keyof T, boolean>> = {};
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedItem'] && this.selectedItem) {
-      this.workingCopy = this.deepCopy(this.selectedItem);
+    if (changes['selectedItem'] || changes['mode']) {
+      if (this.mode === 'edit' && this.selectedItem) {
+        this.workingCopy = this.deepCopy(this.selectedItem);
+      } else if (this.mode === 'create') {
+        this.workingCopy = this.createEmptyItem();
+      }
     }
   }
 
   deepCopy(obj: T): T {
     return JSON.parse(JSON.stringify(obj));
+  }
+
+  createEmptyItem(): Partial<T> {
+    const emptyItem: Partial<T> = {};
+    this.databaseTable.columns.forEach(col => {
+      if (String(col.key) === 'id') return;
+      
+      const key = col.key as keyof T;
+      if (col.type === 'number') {
+        (emptyItem as Record<keyof T, T[keyof T]>)[key] = 0 as T[keyof T];
+      } else if (col.type === 'date') {
+        (emptyItem as Record<keyof T, T[keyof T]>)[key] = '' as T[keyof T];
+      } else if (col.type === 'hour') {
+        (emptyItem as Record<keyof T, T[keyof T]>)[key] = '' as T[keyof T];
+      } else {
+        (emptyItem as Record<keyof T, T[keyof T]>)[key] = '' as T[keyof T];
+      }
+    });
+    return emptyItem;
+  }
+
+  get modalTitle(): string {
+    return this.mode === 'create' ? this.creationTitle : this.editionTitle;
   }
 
   close() {
@@ -88,13 +119,16 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
       }
     });
 
-    this.saveItem.emit(updatedItem);
+    if (this.mode === 'create') {
+      this.createItem.emit(updatedItem as Partial<T>);
+    } else {
+      this.updateItem.emit(updatedItem as T);
+    }
+    
     this.workingCopy = null;
     this.invalidValues = {};
     this.close();
   }
-
-  invalidValues: Partial<Record<keyof T, boolean>> = {};
 
   markInvalid(colKey: keyof T, value: number) {
     this.invalidValues[colKey] = value < 0 || value > 5 || isNaN(value);

@@ -15,6 +15,7 @@ export class AdminTableComponent<T extends object> {
   @Input() databaseTable: Table<T> = { columns: [], rows: [] };
 
   @Output() editClicked = new EventEmitter<T>();
+  @Output() createClicked = new EventEmitter<void>();
 
   get gridTemplateColumns(): string {
     return [...this.databaseTable.columns.map((col: TableColumn<T>) => `${col.weight ?? 1}fr`), '1fr'].join(' ');
@@ -44,5 +45,9 @@ export class AdminTableComponent<T extends object> {
 
   edit(row: T) {
     this.editClicked.emit(row);
+  }
+
+  create() {
+    this.createClicked.emit();
   }
 }

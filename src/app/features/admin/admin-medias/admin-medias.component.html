@@ -8,15 +8,23 @@
 
       <!-- Corps de texte - Fond bleu ciel -->
       <div class="flex-1 bg-blue-very-light p-6 md:p-8 lg:p-10">
-        <app-admin-table databaseTableName="Vidéos" [databaseItemsCount]="videosCount" [databaseTable]="videosTable" (editClicked)="onEdit($event)">
+        <app-admin-table
+          databaseTableName="Vidéos"
+          [databaseItemsCount]="videosCount"
+          [databaseTable]="videosTable"
+          (editClicked)="onEdit($event)"
+          (createClicked)="onCreation()">
         </app-admin-table>
         <app-admin-edition
           [isVisible]="isModalOpen"
           [selectedItem]="selectedVideo"
-          (closeModal)="closeModal()"
-          editionTitle="Editer la vidéo"
+          [mode]="modalMode"
+          editionTitle="Éditer la vidéo"
+          creationTitle="Créer une nouvelle vidéo"
           [databaseTable]="videosTable"
-          (saveItem)="onSave($event)">
+          (closeModal)="closeModal()"
+          (updateItem)="onUpdate($event)"
+          (createItem)="onCreate($event)">
         </app-admin-edition>
         <app-modal-success [(isVisible)]="showSuccessModal"></app-modal-success>
         <app-modal-error [(isVisible)]="showErrorModal"></app-modal-error>

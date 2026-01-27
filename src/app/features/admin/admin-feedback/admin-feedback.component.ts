@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AdminPannelComponent } from '../admin-pannel/admin-pannel.component';
 import { AdminTableComponent } from '../admin-table/admin-table.component';
-import { Feedback } from '../../../models/feedback';
+import { Feedback, FeedbackNew } from '../../../models/feedback';
 import { FeedbackService } from '../../../core/services/feedback.service';
 import { Table } from '../../../models/table';
 import { AdminEditionComponent } from '../admin-edition/admin-edition.component';
@@ -32,6 +32,7 @@ export class AdminFeedbackComponent implements OnInit {
   selectedFeedback: Feedback | null = null;
   showSuccessModal = false;
   showErrorModal = false;
+  modalMode: 'edit' | 'create' = 'edit';
 
   protected feedbackService = inject(FeedbackService);
 
@@ -46,6 +47,13 @@ export class AdminFeedbackComponent implements OnInit {
 
   onEdit(feedback: Feedback) {
     this.selectedFeedback = { ...feedback };
+    this.modalMode = 'edit';
+    this.isModalOpen = true;
+  }
+
+  onCreation() {
+    this.selectedFeedback = null;
+    this.modalMode = 'create';
     this.isModalOpen = true;
   }
 
@@ -53,9 +61,10 @@ export class AdminFeedbackComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  async onSave(updatedFeedback: Feedback) {
+  async onUpdate(updatedFeedback: Feedback) {
     if (!updatedFeedback.id) {
       console.error('Impossible de sauvegarder : ID manquant');
+      this.showErrorModal = true;
       return;
     }
 
@@ -68,5 +77,21 @@ export class AdminFeedbackComponent implements OnInit {
       this.showSuccessModal = true;
       await this.loadFeedbacks();
     }
+
+    this.closeModal();
   }
+
+  async onCreate(newFeedback: Partial<Feedback>) {
+    const { error } = await this.feedbackService.createFeedback(newFeedback as FeedbackNew);
+
+    if (error) {
+      console.error('Erreur lors de la création:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadFeedbacks();
+    }
+
+    this.closeModal();
+  } 
 }

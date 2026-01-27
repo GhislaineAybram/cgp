@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AdminPannelComponent } from '../admin-pannel/admin-pannel.component';
 import { AdminTableComponent } from '../admin-table/admin-table.component';
-import { Evening } from '../../../models/evening';
+import { Evening, EveningNew } from '../../../models/evening';
 import { EventsService } from '../../../core/services/events.service';
 import { Table } from '../../../models/table';
 import { AdminEditionComponent } from '../admin-edition/admin-edition.component';
@@ -30,9 +30,10 @@ export class AdminEventsComponent implements OnInit {
   };
 
   isModalOpen = false;
-  selectedEvent: Evening | null = null;
+  selectedEvening: Evening | null = null;
   showSuccessModal = false;
   showErrorModal = false;
+  modalMode: 'edit' | 'create' = 'edit';
 
   protected eventsService = inject(EventsService);
 
@@ -46,7 +47,14 @@ export class AdminEventsComponent implements OnInit {
   }
 
   onEdit(evening: Evening) {
-    this.selectedEvent = { ...evening };
+    this.selectedEvening = { ...evening };
+    this.modalMode = 'edit';
+    this.isModalOpen = true;
+  }
+
+  onCreation() {
+    this.selectedEvening = null;
+    this.modalMode = 'create';
     this.isModalOpen = true;
   }
 
@@ -54,20 +62,37 @@ export class AdminEventsComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  async onSave(updatedEvening: Evening) {
+  async onUpdate(updatedEvening: Evening) {
     if (!updatedEvening.id) {
       console.error('Impossible de sauvegarder : ID manquant');
+      this.showErrorModal = true;
       return;
     }
 
     const { error } = await this.eventsService.updateEvening(updatedEvening.id, updatedEvening);
 
     if (error) {
-      console.error('Erreur lors de la sauvegarde:', error);
+      console.error('Erreur lors de la mise à jour:', error);
       this.showErrorModal = true;
     } else {
       this.showSuccessModal = true;
       await this.loadEvenings();
     }
+
+    this.closeModal();
+  }
+
+  async onCreate(newEvening: Partial<Evening>) {
+    const { error } = await this.eventsService.createEvening(newEvening as EveningNew);
+
+    if (error) {
+      console.error('Erreur lors de la création:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadEvenings();
+    }
+
+    this.closeModal();
   }
 }
