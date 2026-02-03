@@ -6,18 +6,21 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
+import { CommonModule, isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, NgOptimizedImage],
+  imports: [CommonModule, RouterLink, NgOptimizedImage],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  protected authService = inject(AuthService);
+  
   isMenuOpen!: boolean;
   logo!: string;
   alt!: string;
@@ -29,7 +32,7 @@ export class HeaderComponent implements OnInit {
   medias!: string;
   events!: string;
   contact!: string;
-
+  
   ngOnInit(): void {
     this.isMenuOpen = false;
     this.homepage = 'Accueil';
@@ -55,5 +58,9 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(['/'], { fragment: fragment ?? undefined });
     }, 0);
+  }
+
+  logout() {
+    this.authService.signOut();
   }
 }
