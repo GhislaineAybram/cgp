@@ -7,11 +7,12 @@ import { Table } from '../../../models/table';
 import { AdminEditionComponent } from '../admin-edition/admin-edition.component';
 import { ModalSuccessComponent } from '../../../shared/components/modal-success/modal-success.component';
 import { ModalErrorComponent } from '../../../shared/components/modal-error/modal-error.component';
+import { ModalConfirmationComponent } from '../../../shared/components/modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-admin-events',
   standalone: true,
-  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent],
+  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmationComponent],
   templateUrl: './admin-events.component.html',
   styleUrls: ['./admin-events.component.scss'],
 })
@@ -33,6 +34,8 @@ export class AdminEventsComponent implements OnInit {
   selectedEvening: Evening | null = null;
   showSuccessModal = false;
   showErrorModal = false;
+  showConfirmationModal = false;
+  eventToDelete: Evening | null = null;
   modalMode: 'edit' | 'create' = 'edit';
 
   protected eventsService = inject(EventsService);
@@ -94,5 +97,26 @@ export class AdminEventsComponent implements OnInit {
     }
 
     this.closeModal();
+  }
+
+  onDelete(event: Evening) {
+    this.eventToDelete = event;
+    this.showConfirmationModal = true;
+  }
+
+  async confirmDelete() {
+    if (!this.eventToDelete) return;
+
+    const { error } = await this.eventsService.deleteEvening(this.eventToDelete.id);
+
+    if (error) {
+      console.error('Erreur lors de la suppression:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadEvenings();
+    }
+
+    this.eventToDelete = null;
   }
 }

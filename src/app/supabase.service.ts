@@ -31,12 +31,10 @@ export class SupabaseService {
   }
 
   async getFeedbacks(): Promise<SupabaseResponse<Feedback[]>> {
-    // Vérifier si nous sommes côté client et si Supabase est initialisé
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
     }
 
-    // Attendre que Supabase soit initialisé si nécessaire
     if (!this.supabase) {
       this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
     }
@@ -109,6 +107,36 @@ export class SupabaseService {
       return {
         data: null,
         error: error instanceof Error ? error : new Error('Unknown error'),
+      };
+    }
+  }
+
+  async deleteFeedback(id: string): Promise<{ error: Error | null }> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { error: new Error('Not in browser context') };
+    }
+    
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+    
+    try {
+      const { error } = await this.supabase
+        .from('testimonial')
+        .delete()
+        .eq('id', id);
+      
+      if (error) {
+        console.error('Supabase error deleting feedback:', error.message);
+        return { error: new Error(error.message) };
+      }
+      
+      return { error: null };
+      
+    } catch (error) {
+      console.error('Unexpected error deleting feedback:', error);
+      return { 
+        error: error instanceof Error ? error : new Error('Unknown error') 
       };
     }
   }
@@ -211,6 +239,36 @@ export class SupabaseService {
     }
   }
 
+  async deleteArticle(id: string): Promise<{ error: Error | null }> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { error: new Error('Not in browser context') };
+    }
+    
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+    
+    try {
+      const { error } = await this.supabase
+        .from('article')
+        .delete()
+        .eq('id', id);
+      
+      if (error) {
+        console.error('Supabase error deleting article:', error.message);
+        return { error: new Error(error.message) };
+      }
+      
+      return { error: null };
+      
+    } catch (error) {
+      console.error('Unexpected error deleting article:', error);
+      return { 
+        error: error instanceof Error ? error : new Error('Unknown error') 
+      };
+    }
+  }
+
   async getAllVideos(): Promise<SupabaseResponse<Video[]>> {
     if (!isPlatformBrowser(this.platformId)) {
       return { data: [], error: null };
@@ -305,6 +363,36 @@ export class SupabaseService {
       return {
         data: null,
         error: error instanceof Error ? error : new Error('Unknown error'),
+      };
+    }
+  }
+
+  async deleteVideo(id: string): Promise<{ error: Error | null }> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { error: new Error('Not in browser context') };
+    }
+    
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+    
+    try {
+      const { error } = await this.supabase
+        .from('video')
+        .delete()
+        .eq('id', id);
+      
+      if (error) {
+        console.error('Supabase error deleting video:', error.message);
+        return { error: new Error(error.message) };
+      }
+      
+      return { error: null };
+      
+    } catch (error) {
+      console.error('Unexpected error deleting video:', error);
+      return { 
+        error: error instanceof Error ? error : new Error('Unknown error') 
       };
     }
   }
@@ -405,6 +493,36 @@ export class SupabaseService {
       return {
         data: null,
         error: error instanceof Error ? error : new Error('Unknown error'),
+      };
+    }
+  }
+
+  async deleteEvening(id: string): Promise<{ error: Error | null }> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return { error: new Error('Not in browser context') };
+    }
+    
+    if (!this.supabase) {
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+    
+    try {
+      const { error } = await this.supabase
+        .from('evening')
+        .delete()
+        .eq('id', id);
+      
+      if (error) {
+        console.error('Supabase error deleting evening:', error.message);
+        return { error: new Error(error.message) };
+      }
+      
+      return { error: null };
+      
+    } catch (error) {
+      console.error('Unexpected error deleting evening:', error);
+      return { 
+        error: error instanceof Error ? error : new Error('Unknown error') 
       };
     }
   }

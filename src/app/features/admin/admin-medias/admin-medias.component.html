@@ -13,7 +13,8 @@
           [databaseItemsCount]="videosCount"
           [databaseTable]="videosTable"
           (editClicked)="onEdit($event)"
-          (createClicked)="onCreation()">
+          (createClicked)="onCreation()"
+          (deleteClicked)="onDelete($event)">
         </app-admin-table>
         <app-admin-edition
           [isVisible]="isModalOpen"
@@ -28,6 +29,7 @@
         </app-admin-edition>
         <app-modal-success [(isVisible)]="showSuccessModal"></app-modal-success>
         <app-modal-error [(isVisible)]="showErrorModal"></app-modal-error>
+        <app-modal-confirmation [(isVisible)]="showConfirmationModal" (confirmed)="confirmDelete()"> </app-modal-confirmation>
       </div>
     </div>
   </div>

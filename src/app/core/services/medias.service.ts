@@ -97,4 +97,12 @@ export class MediasService {
     }
     return result;
   }
+
+  async deleteVideo(id: string): Promise<{ error: Error | null }> {
+    const result = await this.supabase.deleteVideo(id);
+    if (result.error) {
+      console.error('Error deleting video:', result.error);
+    }
+    return result;
+  }
 }

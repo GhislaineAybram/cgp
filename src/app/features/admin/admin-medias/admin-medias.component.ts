@@ -7,11 +7,12 @@ import { Table } from '../../../models/table';
 import { AdminEditionComponent } from '../admin-edition/admin-edition.component';
 import { ModalSuccessComponent } from '../../../shared/components/modal-success/modal-success.component';
 import { ModalErrorComponent } from '../../../shared/components/modal-error/modal-error.component';
+import { ModalConfirmationComponent } from '../../../shared/components/modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-admin-medias',
   standalone: true,
-  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent],
+  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmationComponent],
   templateUrl: './admin-medias.component.html',
   styleUrls: ['./admin-medias.component.scss'],
 })
@@ -32,6 +33,8 @@ export class AdminMediasComponent implements OnInit {
   selectedVideo: Video | null = null;
   showSuccessModal = false;
   showErrorModal = false;
+  showConfirmationModal = false;
+  videoToDelete: Video | null = null;
   modalMode: 'edit' | 'create' = 'edit';
 
   protected mediasService = inject(MediasService);
@@ -93,5 +96,26 @@ export class AdminMediasComponent implements OnInit {
     }
 
     this.closeModal();
+  }
+
+  onDelete(video: Video) {
+    this.videoToDelete = video;
+    this.showConfirmationModal = true;
+  }
+
+  async confirmDelete() {
+    if (!this.videoToDelete) return;
+
+    const { error } = await this.mediasService.deleteVideo(this.videoToDelete.id);
+
+    if (error) {
+      console.error('Erreur lors de la suppression:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadVideos();
+    }
+
+    this.videoToDelete = null;
   }
 }

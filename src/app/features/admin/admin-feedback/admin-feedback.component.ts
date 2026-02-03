@@ -7,11 +7,12 @@ import { Table } from '../../../models/table';
 import { AdminEditionComponent } from '../admin-edition/admin-edition.component';
 import { ModalSuccessComponent } from '../../../shared/components/modal-success/modal-success.component';
 import { ModalErrorComponent } from '../../../shared/components/modal-error/modal-error.component';
+import { ModalConfirmationComponent } from '../../../shared/components/modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-admin-feedback',
   standalone: true,
-  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent],
+  imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmationComponent],
   templateUrl: './admin-feedback.component.html',
   styleUrl: './admin-feedback.component.scss',
 })
@@ -32,6 +33,8 @@ export class AdminFeedbackComponent implements OnInit {
   selectedFeedback: Feedback | null = null;
   showSuccessModal = false;
   showErrorModal = false;
+  showConfirmationModal = false;
+  feedbackToDelete: Feedback | null = null;
   modalMode: 'edit' | 'create' = 'edit';
 
   protected feedbackService = inject(FeedbackService);
@@ -93,5 +96,26 @@ export class AdminFeedbackComponent implements OnInit {
     }
 
     this.closeModal();
-  } 
+  }
+
+  onDelete(feedback: Feedback) {
+    this.feedbackToDelete = feedback;
+    this.showConfirmationModal = true;
+  }
+
+  async confirmDelete() {
+    if (!this.feedbackToDelete) return;
+
+    const { error } = await this.feedbackService.deleteFeedback(this.feedbackToDelete.id);
+
+    if (error) {
+      console.error('Erreur lors de la suppression:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadFeedbacks();
+    }
+
+    this.feedbackToDelete = null;
+  }
 }

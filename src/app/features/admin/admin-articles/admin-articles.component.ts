@@ -8,11 +8,20 @@ import { AdminEditionComponent } from '../admin-edition/admin-edition.component'
 import { Table } from '../../../models/table';
 import { ModalSuccessComponent } from '../../../shared/components/modal-success/modal-success.component';
 import { ModalErrorComponent } from '../../../shared/components/modal-error/modal-error.component';
+import { ModalConfirmationComponent } from '../../../shared/components/modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-admin-articles',
   standalone: true,
-  imports: [CommonModule, AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent],
+  imports: [
+    CommonModule,
+    AdminPannelComponent,
+    AdminTableComponent,
+    AdminEditionComponent,
+    ModalSuccessComponent,
+    ModalErrorComponent,
+    ModalConfirmationComponent,
+  ],
   templateUrl: './admin-articles.component.html',
   styleUrls: ['./admin-articles.component.scss'],
 })
@@ -35,6 +44,8 @@ export class AdminArticlesComponent implements OnInit {
   selectedArticle: Article | null = null;
   showSuccessModal = false;
   showErrorModal = false;
+  showConfirmationModal = false;
+  articleToDelete: Article | null = null;
   modalMode: 'edit' | 'create' = 'edit';
 
   protected articlesService = inject(ArticlesService);
@@ -96,5 +107,26 @@ export class AdminArticlesComponent implements OnInit {
     }
 
     this.closeModal();
+  }
+
+  onDelete(article: Article) {
+    this.articleToDelete = article;
+    this.showConfirmationModal = true;
+  }
+
+  async confirmDelete() {
+    if (!this.articleToDelete) return;
+
+    const { error } = await this.articlesService.deleteArticle(this.articleToDelete.id);
+
+    if (error) {
+      console.error('Erreur lors de la suppression:', error);
+      this.showErrorModal = true;
+    } else {
+      this.showSuccessModal = true;
+      await this.loadArticles();
+    }
+
+    this.articleToDelete = null;
   }
 }

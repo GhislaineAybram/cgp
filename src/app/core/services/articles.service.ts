@@ -65,4 +65,12 @@ export class ArticlesService {
     }
     return result;
   }
+
+  async deleteArticle(id: string): Promise<{ error: Error | null }> {
+    const result = await this.supabase.deleteArticle(id);
+    if (result.error) {
+      console.error('Error deleting article:', result.error);
+    }
+    return result;
+  }
 }

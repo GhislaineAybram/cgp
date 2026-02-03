@@ -54,4 +54,12 @@ export class FeedbackService {
     }
     return result;
   }
+
+  async deleteFeedback(id: string): Promise<{ error: Error | null }> {
+    const result = await this.supabase.deleteFeedback(id);
+    if (result.error) {
+      console.error('Error deleting feedback:', result.error);
+    }
+    return result;
+  }
 }

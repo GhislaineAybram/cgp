@@ -65,4 +65,12 @@ export class EventsService {
     }
     return result;
   }
+
+  async deleteEvening(id: string): Promise<{ error: Error | null }> {
+    const result = await this.supabase.deleteEvening(id);
+    if (result.error) {
+      console.error('Error deleting evening:', result.error);
+    }
+    return result;
+  }
 }
