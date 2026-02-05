@@ -17,7 +17,6 @@ interface SupabaseResponse<T> {
 })
 export class SupabaseService {
   private supabase: SupabaseClient | null = null;
-
   private platformId = inject(PLATFORM_ID);
 
   constructor() {
@@ -30,17 +29,26 @@ export class SupabaseService {
     return this.supabase;
   }
 
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
+
+  private getClient(): SupabaseClient {
+    if (!this.supabase) {
+      this.supabase = createClient(
+        environment.supabaseUrl,
+        environment.supabaseKey
+      );
+    }
+    return this.supabase;
+  }
+
   async getFeedbacks(): Promise<SupabaseResponse<Feedback[]>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: [], error: null };
     }
-
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('testimonial').select('*').order('date', { ascending: false });
+      const { data, error } = await this.getClient().from('testimonial').select('*').order('date', { ascending: false });
 
       return { data, error };
     } catch (error) {
@@ -50,15 +58,11 @@ export class SupabaseService {
   }
 
   async getFeedbackCount(): Promise<SupabaseResponse<number>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: 0, error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { count, error } = await this.supabase.from('testimonial').select('*', { count: 'exact', head: true });
+      const { count, error } = await this.getClient().from('testimonial').select('*', { count: 'exact', head: true });
 
       return { data: count || 0, error };
     } catch (error) {
@@ -68,14 +72,11 @@ export class SupabaseService {
   }
 
   async updateFeedback(id: string, updates: Partial<Feedback>): Promise<SupabaseResponse<Feedback>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: null, error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
     try {
-      const { data, error } = await this.supabase.from('testimonial').update(updates).eq('id', id).select().single();
+      const { data, error } = await this.getClient().from('testimonial').update(updates).eq('id', id).select().single();
 
       return { data, error };
     } catch (error) {
@@ -85,16 +86,11 @@ export class SupabaseService {
   }
 
   async newFeedback(newFeedback: FeedbackNew): Promise<{ data: Feedback | null; error: Error | null }> {
-    if (!isPlatformBrowser(this.platformId)) {
-      return { data: null, error: new Error('Not in browser context') };
+    if (!this.isBrowser()) {
+      return { data: null, error: null };
     }
-
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('testimonial').insert([newFeedback]).select('*').single();
+      const { data, error } = await this.getClient().from('testimonial').insert([newFeedback]).select('*').single();
 
       if (error) {
         console.error('Supabase error creating feedback:', error.message);
@@ -112,16 +108,11 @@ export class SupabaseService {
   }
 
   async deleteFeedback(id: string): Promise<{ error: Error | null }> {
-    if (!isPlatformBrowser(this.platformId)) {
-      return { error: new Error('Not in browser context') };
+    if (!this.isBrowser()) {
+      return { error: null };
     }
-    
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-    
     try {
-      const { error } = await this.supabase
+      const { error } = await this.getClient()
         .from('testimonial')
         .delete()
         .eq('id', id);
@@ -142,15 +133,11 @@ export class SupabaseService {
   }
 
   async getAllArticles(): Promise<SupabaseResponse<Article[]>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: [], error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('article').select('*').order('date', { ascending: false });
+      const { data, error } = await this.getClient().from('article').select('*').order('date', { ascending: false });
 
       return { data, error };
     } catch (error) {
@@ -160,15 +147,11 @@ export class SupabaseService {
   }
 
   async getArticlesCount(): Promise<SupabaseResponse<number>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: 0, error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { count, error } = await this.supabase.from('article').select('*', { count: 'exact', head: true });
+      const { count, error } = await this.getClient().from('article').select('*', { count: 'exact', head: true });
 
       return { data: count || 0, error };
     } catch (error) {
@@ -178,15 +161,11 @@ export class SupabaseService {
   }
 
   async getArticlesByLimit(limit: number): Promise<SupabaseResponse<Article[]>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: [], error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('article').select('*').order('date', { ascending: false }).limit(limit);
+      const { data, error } = await this.getClient().from('article').select('*').order('date', { ascending: false }).limit(limit);
 
       return { data, error };
     } catch (error) {
@@ -196,14 +175,11 @@ export class SupabaseService {
   }
 
   async updateArticle(id: string, updates: Partial<Article>): Promise<SupabaseResponse<Article>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: null, error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
     try {
-      const { data, error } = await this.supabase.from('article').update(updates).eq('id', id).select().single();
+      const { data, error } = await this.getClient().from('article').update(updates).eq('id', id).select().single();
 
       return { data, error };
     } catch (error) {
@@ -213,16 +189,11 @@ export class SupabaseService {
   }
 
   async newArticle(newArticle: ArticleNew): Promise<{ data: Article | null; error: Error | null }> {
-    if (!isPlatformBrowser(this.platformId)) {
-      return { data: null, error: new Error('Not in browser context') };
+    if (!this.isBrowser()) {
+      return { data: null, error: null };
     }
-
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('article').insert([newArticle]).select('*').single();
+      const { data, error } = await this.getClient().from('article').insert([newArticle]).select('*').single();
 
       if (error) {
         console.error('Supabase error creating article:', error.message);
@@ -240,16 +211,11 @@ export class SupabaseService {
   }
 
   async deleteArticle(id: string): Promise<{ error: Error | null }> {
-    if (!isPlatformBrowser(this.platformId)) {
-      return { error: new Error('Not in browser context') };
+    if (!this.isBrowser()) {
+      return { error: null };
     }
-    
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-    
     try {
-      const { error } = await this.supabase
+      const { error } = await this.getClient()
         .from('article')
         .delete()
         .eq('id', id);
@@ -270,15 +236,11 @@ export class SupabaseService {
   }
 
   async getAllVideos(): Promise<SupabaseResponse<Video[]>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: [], error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('video').select('*').order('date', { ascending: false });
+      const { data, error } = await this.getClient().from('video').select('*').order('date', { ascending: false });
 
       return { data, error };
     } catch (error) {
@@ -288,14 +250,11 @@ export class SupabaseService {
   }
 
   async updateVideo(id: string, updates: Partial<Video>): Promise<SupabaseResponse<Video>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: null, error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
     try {
-      const { data, error } = await this.supabase.from('video').update(updates).eq('id', id).select().single();
+      const { data, error } = await this.getClient().from('video').update(updates).eq('id', id).select().single();
 
       return { data, error };
     } catch (error) {
@@ -305,15 +264,11 @@ export class SupabaseService {
   }
 
   async getVideosCount(): Promise<SupabaseResponse<number>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: 0, error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { count, error } = await this.supabase.from('video').select('*', { count: 'exact', head: true });
+      const { count, error } = await this.getClient().from('video').select('*', { count: 'exact', head: true });
 
       return { data: count || 0, error };
     } catch (error) {
@@ -323,15 +278,11 @@ export class SupabaseService {
   }
 
   async getVideosByLimit(limit: number): Promise<SupabaseResponse<Video[]>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: [], error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('video').select('*').order('date', { ascending: false }).limit(limit);
+      const { data, error } = await this.getClient().from('video').select('*').order('date', { ascending: false }).limit(limit);
 
       return { data, error };
     } catch (error) {
@@ -341,16 +292,11 @@ export class SupabaseService {
   }
 
   async newVideo(newVideo: VideoNew): Promise<{ data: Video | null; error: Error | null }> {
-    if (!isPlatformBrowser(this.platformId)) {
-      return { data: null, error: new Error('Not in browser context') };
+    if (!this.isBrowser()) {
+      return { data: null, error: null };
     }
-
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('video').insert([newVideo]).select('*').single();
+      const { data, error } = await this.getClient().from('video').insert([newVideo]).select('*').single();
 
       if (error) {
         console.error('Supabase error creating video:', error.message);
@@ -368,16 +314,11 @@ export class SupabaseService {
   }
 
   async deleteVideo(id: string): Promise<{ error: Error | null }> {
-    if (!isPlatformBrowser(this.platformId)) {
-      return { error: new Error('Not in browser context') };
+    if (!this.isBrowser()) {
+      return { error: null };
     }
-    
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-    
     try {
-      const { error } = await this.supabase
+      const { error } = await this.getClient()
         .from('video')
         .delete()
         .eq('id', id);
@@ -398,17 +339,13 @@ export class SupabaseService {
   }
 
   async getAllFutureEvenings(): Promise<SupabaseResponse<Evening[]>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: [], error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
       const today = new Date().toISOString().split('T')[0];
 
-      const { data, error } = await this.supabase.from('evening').select('*').gte('date', today).order('date', { ascending: true });
+      const { data, error } = await this.getClient().from('evening').select('*').gte('date', today).order('date', { ascending: true });
 
       return { data, error };
     } catch (error) {
@@ -418,15 +355,11 @@ export class SupabaseService {
   }
 
   async getAllEvenings(): Promise<SupabaseResponse<Evening[]>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: [], error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('evening').select('*').order('date', { ascending: false });
+      const { data, error } = await this.getClient().from('evening').select('*').order('date', { ascending: false });
 
       return { data, error };
     } catch (error) {
@@ -436,15 +369,11 @@ export class SupabaseService {
   }
 
   async getEveningsCount(): Promise<SupabaseResponse<number>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: 0, error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { count, error } = await this.supabase.from('evening').select('*', { count: 'exact', head: true });
+      const { count, error } = await this.getClient().from('evening').select('*', { count: 'exact', head: true });
 
       return { data: count || 0, error };
     } catch (error) {
@@ -454,14 +383,11 @@ export class SupabaseService {
   }
 
   async updateEvening(id: string, updates: Partial<Evening>): Promise<SupabaseResponse<Evening>> {
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser()) {
       return { data: null, error: null };
     }
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
     try {
-      const { data, error } = await this.supabase.from('evening').update(updates).eq('id', id).select().single();
+      const { data, error } = await this.getClient().from('evening').update(updates).eq('id', id).select().single();
 
       return { data, error };
     } catch (error) {
@@ -471,16 +397,11 @@ export class SupabaseService {
   }
 
   async newEvening(newEvening: EveningNew): Promise<{ data: Evening | null; error: Error | null }> {
-    if (!isPlatformBrowser(this.platformId)) {
-      return { data: null, error: new Error('Not in browser context') };
+    if (!this.isBrowser()) {
+      return { data: null, error: null };
     }
-
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-
     try {
-      const { data, error } = await this.supabase.from('evening').insert([newEvening]).select('*').single();
+      const { data, error } = await this.getClient().from('evening').insert([newEvening]).select('*').single();
 
       if (error) {
         console.error('Supabase error creating evening:', error.message);
@@ -498,16 +419,11 @@ export class SupabaseService {
   }
 
   async deleteEvening(id: string): Promise<{ error: Error | null }> {
-    if (!isPlatformBrowser(this.platformId)) {
-      return { error: new Error('Not in browser context') };
+    if (!this.isBrowser()) {
+      return { error: null };
     }
-    
-    if (!this.supabase) {
-      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    }
-    
     try {
-      const { error } = await this.supabase
+      const { error } = await this.getClient()
         .from('evening')
         .delete()
         .eq('id', id);
