@@ -20,16 +20,21 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
   @Output() closeModal = new EventEmitter<void>();
   @Output() updateItem = new EventEmitter<T>();
   @Output() createItem = new EventEmitter<Partial<T>>();
+  @Output() updateItemWithFiles = new EventEmitter<{ item: T; files: Map<keyof T, File> }>();
+  @Output() createItemWithFiles = new EventEmitter<{ item: Partial<T>; files: Map<keyof T, File> }>();
 
   workingCopy: T | Partial<T> | null = null;
   invalidValues: Partial<Record<keyof T, boolean>> = {};
+  selectedFiles = new Map<keyof T, File>();
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedItem'] || changes['mode']) {
-      if (this.mode === 'edit' && this.selectedItem) {
-        this.workingCopy = this.deepCopy(this.selectedItem);
-      } else if (this.mode === 'create') {
-        this.workingCopy = this.createEmptyItem();
+    if (changes['selectedItem'] || changes['mode'] || changes['isVisible']) {
+      if (this.isVisible) {
+        if (this.mode === 'edit' && this.selectedItem) {
+          this.workingCopy = this.deepCopy(this.selectedItem);
+        } else if (this.mode === 'create') {
+          this.workingCopy = this.createEmptyItem();
+        }
       }
     }
   }
@@ -47,7 +52,9 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
       if (col.type === 'number') {
         (emptyItem as Record<keyof T, T[keyof T]>)[key] = 0 as T[keyof T];
       } else if (col.type === 'date') {
-        (emptyItem as Record<keyof T, T[keyof T]>)[key] = '' as T[keyof T];
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        (emptyItem as Record<keyof T, T[keyof T]>)[key] = formattedDate as T[keyof T];
       } else if (col.type === 'hour') {
         (emptyItem as Record<keyof T, T[keyof T]>)[key] = '' as T[keyof T];
       } else {
@@ -64,6 +71,7 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
   close() {
     this.workingCopy = null;
     this.invalidValues = {};
+    this.selectedFiles.clear();
     this.closeModal.emit();
   }
 
@@ -120,13 +128,22 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
     });
 
     if (this.mode === 'create') {
-      this.createItem.emit(updatedItem as Partial<T>);
+      if (this.selectedFiles.size > 0) {
+        this.createItemWithFiles.emit({ item: updatedItem as Partial<T>, files: this.selectedFiles });
+      } else {
+        this.createItem.emit(updatedItem as Partial<T>);
+      }
     } else {
-      this.updateItem.emit(updatedItem as T);
+      if (this.selectedFiles.size > 0) {
+        this.updateItemWithFiles.emit({ item: updatedItem as T, files: this.selectedFiles });
+      } else {
+        this.updateItem.emit(updatedItem as T);
+      }
     }
     
     this.workingCopy = null;
     this.invalidValues = {};
+    this.selectedFiles.clear();
     this.close();
   }
 
@@ -136,5 +153,20 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
 
   get hasInvalidValues(): boolean {
     return Object.values(this.invalidValues).some(v => v);
+  }
+
+  onFileSelected(event: Event, colKey: keyof T) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.selectedFiles.set(colKey, input.files[0]);
+      
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (this.workingCopy && e.target?.result) {
+          (this.workingCopy as Record<keyof T, T[keyof T]>)[colKey] = e.target.result as T[keyof T];
+        }
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
   }
 }

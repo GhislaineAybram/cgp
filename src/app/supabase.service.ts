@@ -35,10 +35,7 @@ export class SupabaseService {
 
   private getClient(): SupabaseClient {
     if (!this.supabase) {
-      this.supabase = createClient(
-        environment.supabaseUrl,
-        environment.supabaseKey
-      );
+      this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
     }
     return this.supabase;
   }
@@ -112,22 +109,18 @@ export class SupabaseService {
       return { error: null };
     }
     try {
-      const { error } = await this.getClient()
-        .from('testimonial')
-        .delete()
-        .eq('id', id);
-      
+      const { error } = await this.getClient().from('testimonial').delete().eq('id', id);
+
       if (error) {
         console.error('Supabase error deleting feedback:', error.message);
         return { error: new Error(error.message) };
       }
-      
+
       return { error: null };
-      
     } catch (error) {
       console.error('Unexpected error deleting feedback:', error);
-      return { 
-        error: error instanceof Error ? error : new Error('Unknown error') 
+      return {
+        error: error instanceof Error ? error : new Error('Unknown error'),
       };
     }
   }
@@ -215,22 +208,18 @@ export class SupabaseService {
       return { error: null };
     }
     try {
-      const { error } = await this.getClient()
-        .from('article')
-        .delete()
-        .eq('id', id);
-      
+      const { error } = await this.getClient().from('article').delete().eq('id', id);
+
       if (error) {
         console.error('Supabase error deleting article:', error.message);
         return { error: new Error(error.message) };
       }
-      
+
       return { error: null };
-      
     } catch (error) {
       console.error('Unexpected error deleting article:', error);
-      return { 
-        error: error instanceof Error ? error : new Error('Unknown error') 
+      return {
+        error: error instanceof Error ? error : new Error('Unknown error'),
       };
     }
   }
@@ -318,22 +307,18 @@ export class SupabaseService {
       return { error: null };
     }
     try {
-      const { error } = await this.getClient()
-        .from('video')
-        .delete()
-        .eq('id', id);
-      
+      const { error } = await this.getClient().from('video').delete().eq('id', id);
+
       if (error) {
         console.error('Supabase error deleting video:', error.message);
         return { error: new Error(error.message) };
       }
-      
+
       return { error: null };
-      
     } catch (error) {
       console.error('Unexpected error deleting video:', error);
-      return { 
-        error: error instanceof Error ? error : new Error('Unknown error') 
+      return {
+        error: error instanceof Error ? error : new Error('Unknown error'),
       };
     }
   }
@@ -396,18 +381,49 @@ export class SupabaseService {
     }
   }
 
+  async uploadEveningPicture(file: File): Promise<{ data: string | null; error: Error | null }> {
+    if (!this.isBrowser()) {
+      return { data: null, error: null };
+    }
+    try {
+      const originalName = file.name
+        .toLowerCase()
+        .replace(/\s+/g, '_')
+        .replace(/[^a-z0-9._-]/g, '');
+
+      const fileExt = originalName.split('.').pop();
+      const baseName = originalName.replace(`.${fileExt}`, '');
+      const fileName = `${baseName}_${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await this.getClient().storage.from('evenings pictures').upload(fileName, file);
+
+      if (uploadError) {
+        console.error('Supabase error uploading picture:', uploadError.message);
+        return { data: null, error: new Error(uploadError.message) };
+      }
+
+      const { data } = this.getClient().storage.from('evenings pictures').getPublicUrl(fileName);
+
+      return { data: data.publicUrl, error: null };
+    } catch (error) {
+      console.error('Unexpected error uploading picture:', error);
+      return {
+        data: null,
+        error: error instanceof Error ? error : new Error('Unknown error'),
+      };
+    }
+  }
+
   async newEvening(newEvening: EveningNew): Promise<{ data: Evening | null; error: Error | null }> {
     if (!this.isBrowser()) {
       return { data: null, error: null };
     }
     try {
       const { data, error } = await this.getClient().from('evening').insert([newEvening]).select('*').single();
-
       if (error) {
         console.error('Supabase error creating evening:', error.message);
         return { data: null, error: new Error(error.message) };
       }
-
       return { data: data as Evening, error: null };
     } catch (error) {
       console.error('Unexpected error creating evening:', error);
@@ -423,22 +439,18 @@ export class SupabaseService {
       return { error: null };
     }
     try {
-      const { error } = await this.getClient()
-        .from('evening')
-        .delete()
-        .eq('id', id);
-      
+      const { error } = await this.getClient().from('evening').delete().eq('id', id);
+
       if (error) {
         console.error('Supabase error deleting evening:', error.message);
         return { error: new Error(error.message) };
       }
-      
+
       return { error: null };
-      
     } catch (error) {
       console.error('Unexpected error deleting evening:', error);
-      return { 
-        error: error instanceof Error ? error : new Error('Unknown error') 
+      return {
+        error: error instanceof Error ? error : new Error('Unknown error'),
       };
     }
   }

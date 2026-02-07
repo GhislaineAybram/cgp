@@ -58,6 +58,14 @@ export class EventsService {
     return { data, error };
   }
 
+  async uploadEveningPicture(file: File): Promise<{ data: string | null; error: Error | null }> {
+    const { data, error } = await this.supabase.uploadEveningPicture(file);
+    if (error) {
+      console.error('Error uploading picture', error);
+    }
+    return { data, error };
+  }
+
   async createEvening(newEvening: EveningNew): Promise<{ data: Evening | null; error: Error | null }> {
     const result = await this.supabase.newEvening(newEvening);
     if (result.error) {

@@ -65,7 +65,28 @@ export class AdminEventsComponent implements OnInit {
     this.isModalOpen = false;
   }
 
-  async onUpdate(updatedEvening: Evening) {
+  async onUpdate(data: { item: Evening; files: Map<keyof Evening, File> }) {
+    let pictureUrl = data.item.picture;
+
+    // Upload de la nouvelle image si présente
+    const pictureFile = data.files.get('picture' as keyof Evening);
+    if (pictureFile) {
+      const { data: uploadData, error: uploadError } = await this.eventsService.uploadEveningPicture(pictureFile);
+
+      if (uploadError) {
+        console.error("Erreur lors de l'upload de l'image:", uploadError);
+        this.showErrorModal = true;
+        return;
+      }
+
+      pictureUrl = uploadData || pictureUrl;
+    }
+
+    const updatedEvening = {
+      ...data.item,
+      picture: pictureUrl,
+    };
+
     if (!updatedEvening.id) {
       console.error('Impossible de sauvegarder : ID manquant');
       this.showErrorModal = true;
@@ -85,8 +106,31 @@ export class AdminEventsComponent implements OnInit {
     this.closeModal();
   }
 
-  async onCreate(newEvening: Partial<Evening>) {
-    const { error } = await this.eventsService.createEvening(newEvening as EveningNew);
+  async onCreate(data: { item: Partial<Evening>; files: Map<keyof Evening, File> }) {
+    let pictureUrl = '';
+
+    const pictureFile = data.files.get('picture' as keyof Evening);
+    if (pictureFile) {
+      const { data: uploadData, error: uploadError } = await this.eventsService.uploadEveningPicture(pictureFile);
+
+      if (uploadError) {
+        console.error("Erreur lors de l'upload de l'image:", uploadError);
+        this.showErrorModal = true;
+        return;
+      }
+
+      pictureUrl = uploadData || '';
+    }
+
+    const newEvening: EveningNew = {
+      title: (data.item.title as string) || '',
+      location: (data.item.location as string) || '',
+      date: (data.item.date as Date) || new Date(),
+      hour: (data.item.hour as string) || '',
+      picture: pictureUrl,
+    };
+
+    const { error } = await this.eventsService.createEvening(newEvening);
 
     if (error) {
       console.error('Erreur lors de la création:', error);
