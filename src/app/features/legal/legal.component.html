@@ -2,9 +2,9 @@
   <div>
     <div class="flex flex-col md:flex-row w-full gap-0 min-h-screen">
       <!-- Colonne de navigation - Fond bleu -->
-      <aside class="w-full md:max-w-[340px] bg-blue-medium p-6 md:p-8" aria-label="Sommaire de la page">
+      <aside class="w-full md:max-w-[340px] bg-column p-6 md:p-8" aria-label="Sommaire de la page">
         <nav>
-          <h2 class="font-bold uppercase text-xl leading-7 color-white font-bold pb-8 pt-6 text-center md:text-left">Mentions légales</h2>
+          <h2 class="font-bold uppercase text-xl leading-7 font-bold pb-8 pt-6 text-center md:text-left">Mentions légales</h2>
 
           <ul class="tab-nav flex flex-col items-center md:items-start lg:gap-6 gap-4 sticky top-8">
             @for (summaryItem of summaryItems; track summaryItem.id) {
@@ -23,7 +23,7 @@
       </aside>
 
       <!-- Corps de texte - Fond blanc -->
-      <div class="flex-1 bg-white p-6 md:p-8 lg:p-12">
+      <div class="flex-1 bg-white-light p-6 md:p-8 lg:p-12">
         <div class="max-w-4xl">
           <h1 class="font-bold uppercase lg:text-4xl text-3xl mb-5 color-blue section-line">Mentions légales</h1>
 
@@ -31,7 +31,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path
                 d="M12.0054 8V12.5322C12.0054 12.8286 12.1369 13.1098 12.3645 13.2998L15 15.5M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22Z"
-                style="stroke: var(--color-blue-medium)"
+                style="stroke: var(--color-blue-700)"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round" />
@@ -43,7 +43,7 @@
             Conformément aux dispositions de la
             <a
               href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000801164"
-              class="color-blue visible-link"
+              class="visible-link"
               target="_blank"
               aria-label="Page site externe - nouvel onglet - Consulter la loi sur le site Legifrance"
               rel="noopener noreferrer"
@@ -105,7 +105,7 @@
                   Vérification des informations sur :
                   <a
                     href="https://orias.fr/"
-                    class="color-blue visible-link"
+                    class="visible-link"
                     target="_blank"
                     aria-label="Page site externe - nouvel onglet - Consulter le site de l'Orias"
                     rel="noopener noreferrer"
@@ -137,7 +137,7 @@
                 <p class="font-normal text-base leading-6 color-grey-dark"><strong>Contact :</strong> Sur rendez-vous uniquement</p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   <strong>Par email : </strong>
-                  <a href="mailto:{{ ownerData.email }}" class="color-blue visible-link">{{ ownerData.email }}</a>
+                  <a href="mailto:{{ ownerData.email }}" class="visible-link">{{ ownerData.email }}</a>
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   <strong>Par courrier :</strong> Adresse communiquée sur demande - {{ ownerData.address }}
@@ -168,7 +168,7 @@
                   contrefaçon et poursuivie conformément aux dispositions des articles
                   <a
                     href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032655082"
-                    class="color-blue visible-link"
+                    class="visible-link"
                     target="_blank"
                     aria-label="Page site externe - nouvel onglet - Consulter la loi sur le site Legifrance"
                     rel="noopener noreferrer"
@@ -186,7 +186,7 @@
                   Conformément au
                   <a
                     href="https://www.legifrance.gouv.fr/codes/section_lc/JORFTEXT000000886460/LEGISCTA000037804929/"
-                    class="color-blue visible-link"
+                    class="visible-link"
                     target="_blank"
                     aria-label="Page site externe - nouvel onglet - Consulter la loi sur le site Legifrance"
                     rel="noopener noreferrer"
@@ -196,7 +196,7 @@
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Pour exercer ces droits ou pour toute question relative au traitement de vos données personnelles, contactez-nous à :
-                  <a href="mailto:{{ ownerData.email }}" class="color-blue visible-link">{{ ownerData.email }}</a>
+                  <a href="mailto:{{ ownerData.email }}" class="visible-link">{{ ownerData.email }}</a>
                 </p>
                 <p class="font-normal text-base leading-6 color-grey-dark">
                   Pour plus d'informations sur la façon dont nous traitons vos données (type de données, finalité, destinataire...), consultez notre

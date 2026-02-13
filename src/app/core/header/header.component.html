@@ -1,5 +1,5 @@
 <a href="#main-content" class="skip-link">Aller au contenu principal</a>
-<nav class="color-blue">
+<nav class="bg-blue-very-light color-blue-dark">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -7,11 +7,10 @@
         <button
           type="button"
           (click)="isMenuOpen = !isMenuOpen"
-          class="relative inline-flex items-center justify-center rounded-md p-2 color-blue hover-bg-blue-very-light focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          class="relative inline-flex items-center justify-center rounded-md p-2 color-blue hover-bg-blue-light focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
           aria-controls="mobile-menu"
-          aria-expanded="false">
-          <span class="absolute -inset-0.5"></span>
-          <span class="sr-only">Open main menu</span>
+          [attr.aria-expanded]="isMenuOpen">
+          <span class="sr-only">{{ isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu' }}</span>
           <!-- Icon when menu is closed. -->
           <svg
             [class.hidden]="isMenuOpen"
@@ -43,7 +42,16 @@
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex shrink-0 items-center">
           <img
+            *ngIf="!isDarkMode"
             ngSrc="assets/logo-mini-light-mode.webp"
+            alt="Julien Poudras - Conseiller en Gestion de Patrimoine"
+            width="150"
+            height="147"
+            priority
+            class="h-10 w-auto" />
+          <img
+            *ngIf="isDarkMode"
+            ngSrc="assets/logo-mini-dark-mode.webp"
             alt="Julien Poudras - Conseiller en Gestion de Patrimoine"
             width="150"
             height="147"
@@ -52,25 +60,72 @@
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover-bg-blue-very-light" -->
-            <!-- <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">{{ homepage }}</a> -->
-            <a routerLink="" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-very-light">{{ homepage }}</a>
-            <a [routerLink]="['/']" fragment="about" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-very-light">{{ about }}</a>
-            <a [routerLink]="['/']" fragment="pillars" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-very-light">{{ pillars }}</a>
-            <a [routerLink]="['/']" fragment="news" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-very-light">{{ news }}</a>
-            <a [routerLink]="['/']" fragment="medias" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-very-light">{{ medias }}</a>
-            <a [routerLink]="['/']" fragment="events" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-very-light">{{ events }}</a>
-            <a [routerLink]="['/']" fragment="testimonial" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-very-light">{{
-              feedback
-            }}</a>
-            <a routerLink="/contact" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-very-light">{{ contact }}</a>
-            <button 
+            <a routerLink="" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ homepage }}</a>
+            <a [routerLink]="['/']" fragment="about" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ about }}</a>
+            <a [routerLink]="['/']" fragment="pillars" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ pillars }}</a>
+            <a [routerLink]="['/']" fragment="news" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ news }}</a>
+            <a [routerLink]="['/']" fragment="medias" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ medias }}</a>
+            <a [routerLink]="['/']" fragment="events" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ events }}</a>
+            <a [routerLink]="['/']" fragment="testimonial" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ feedback }}</a>
+            <a routerLink="/contact" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ contact }}</a>
+            <button
               *ngIf="authService.isAuthenticated$ | async"
               (click)="logout()"
-              title="Se déconnecter"
-              class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+              aria-label="Se déconnecter"
+              class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light">
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+              </svg>
+            </button>
+            <button
+              id="theme-toggle"
+              type="button"
+              (click)="toggleTheme()"
+              [attr.aria-label]="isDarkMode ? 'Activer le mode clair' : 'Activer le mode sombre'"
+              [attr.aria-pressed]="isDarkMode"
+              class="relative flex items-center gap-2 text-base hover-bg-blue-light focus:outline-none rounded-lg p-2">
+              <!-- Icône soleil (light mode) -->
+              <svg
+                [class.color-blue]="!isDarkMode"
+                [class.color-grey-medium]="isDarkMode"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 transition-colors duration-200"
+                aria-hidden="true">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+              </svg>
+
+              <!-- Icône lune (dark mode) -->
+              <svg
+                [class.color-blue]="isDarkMode"
+                [class.color-grey-medium]="!isDarkMode"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-5 h-5 transition-colors duration-200"
+                aria-hidden="true">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
               </svg>
             </button>
           </div>
@@ -82,61 +137,93 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="sm:hidden" id="mobile-menu" [class.block]="isMenuOpen" [class.hidden]="!isMenuOpen">
     <div class="space-y-1 px-2 pt-2 pb-3">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover-bg-blue-very-light" -->
-      <!-- <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">{{ presentation }}</a> -->
-      <a routerLink="" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{
-        homepage
-      }}</a>
+      <a routerLink="" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light">{{ homepage }}</a>
       <a
         [routerLink]="['/']"
         fragment="about"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
         >{{ about }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="pillars"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
         >{{ pillars }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="news"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
         >{{ news }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="medias"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
         >{{ medias }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="events"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
         >{{ events }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="testimonial"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
         >{{ feedback }}</a
       >
-      <a routerLink="/contact" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">{{
+      <a routerLink="/contact" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light">{{
         contact
       }}</a>
-      <!-- <button class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-very-light">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+      <button
+        id="theme-toggle"
+        type="button"
+        (click)="toggleTheme()"
+        [attr.aria-label]="isDarkMode ? 'Activer le mode clair' : 'Activer le mode sombre'"
+        [attr.aria-pressed]="isDarkMode"
+        class="relative flex items-center gap-2 text-base hover-bg-blue-light focus:outline-none rounded-lg p-2">
+        <!-- Icône soleil (light mode) -->
+        <svg
+          [class.color-blue]="!isDarkMode"
+          [class.color-grey-medium]="isDarkMode"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 transition-colors duration-200"
+          aria-hidden="true">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
         </svg>
-      </button> -->
+
+        <!-- Icône lune (dark mode) -->
+        <svg
+          [class.color-blue]="isDarkMode"
+          [class.color-grey-medium]="!isDarkMode"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 transition-colors duration-200"
+          aria-hidden="true">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+        </svg>
+      </button>
     </div>
   </div>
 </nav>

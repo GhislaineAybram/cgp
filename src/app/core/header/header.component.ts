@@ -10,6 +10,7 @@ import { CommonModule, isPlatformBrowser, NgOptimizedImage } from '@angular/comm
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   protected authService = inject(AuthService);
-  
+  protected themeService = inject(ThemeService);
+  private readonly router = inject(Router);
+  private readonly platformId = inject(PLATFORM_ID);
+
+  get isDarkMode(): boolean {
+    return this.themeService.isDarkMode;
+  }
+
   isMenuOpen!: boolean;
   logo!: string;
   alt!: string;
@@ -32,7 +40,7 @@ export class HeaderComponent implements OnInit {
   medias!: string;
   events!: string;
   contact!: string;
-  
+
   ngOnInit(): void {
     this.isMenuOpen = false;
     this.homepage = 'Accueil';
@@ -44,9 +52,6 @@ export class HeaderComponent implements OnInit {
     this.feedback = 'Ils me font confiance';
     this.contact = 'Contact';
   }
-
-  private readonly router = inject(Router);
-  private readonly platformId = inject(PLATFORM_ID);
 
   goTo(fragment: string | null) {
     this.isMenuOpen = false;
@@ -62,5 +67,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.signOut();
+  }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
   }
 }

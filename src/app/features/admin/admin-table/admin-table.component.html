@@ -1,6 +1,6 @@
-<div class="relative flex flex-col w-full h-full overflow-auto text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+<div class="relative flex flex-col w-full h-full overflow-auto color-grey-dark bg-white shadow-md rounded-xl bg-clip-border">
   <div class="flex justify-between items-center mb-2 p-5">
-    <h3 class="text-2xl font-semibold text-left rtl:text-right color-blue bg-white dark:text-white dark:bg-gray-800">
+    <h3 class="text-2xl font-semibold text-left rtl:text-right color-blue bg-white">
       {{ databaseTableName }} ({{ databaseItemsCount }})
     </h3>
 
@@ -13,7 +13,7 @@
   </div>
   <!-- En-tête -->
   <div
-    class="grid gap-x-1 text-sm text-gray-700 uppercase bg-grey-very-light dark:bg-gray-700 dark:text-gray-400"
+    class="grid gap-x-1 text-sm color-grey-dark uppercase bg-grey-very-light"
     [style.gridTemplateColumns]="gridTemplateColumns">
     @for (col of databaseTable.columns; track $index) {
       <div class="px-2 py-2 font-semibold">
@@ -25,7 +25,7 @@
   <!-- Lignes -->
   @for (row of databaseTable.rows; track $index) {
     <div
-      class="grid gap-x-1 text-xs border-b bg-white dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+      class="grid gap-x-1 text-xs border-b bg-white border-gray-200"
       [style.gridTemplateColumns]="gridTemplateColumns">
       @for (col of databaseTable.columns; track $index) {
         <div class="px-2 py-2 flex items-start h-[3rem] overflow-hidden">

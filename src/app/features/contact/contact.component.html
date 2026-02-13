@@ -45,7 +45,7 @@
             autocomplete="given-name"
             placeholder="Jean"
             required
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]" />
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:color-grey-medium focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
         </div>
       </div>
       <div>
@@ -58,7 +58,7 @@
             autocomplete="family-name"
             placeholder="Dupont"
             required
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]" />
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:color-grey-medium focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
         </div>
       </div>
       <div>
@@ -71,7 +71,7 @@
             autocomplete="email"
             placeholder="jean.dupont@email.com"
             required
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:color-grey-medium focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]"
             (input)="onEmailInput($event)" />
         </div>
       </div>
@@ -79,13 +79,13 @@
         <label for="phone-number" class="block text-sm/6 font-semibold">Numéro de téléphone <span class="text-red-600">*</span></label>
         <div class="mt-2.5">
           <div
-            class="flex rounded-md bg-white-light outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[color:var(--color-blue-medium)]">
+            class="flex rounded-md bg-white-light outline-1 -outline-offset-1 outline-gray-300 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[color:var(--color-blue-700)]">
             <input
               type="tel"
               name="tel"
               id="phone-number"
               autocomplete="tel"
-              class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"
+              class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base placeholder:color-grey-medium focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]"
               placeholder="06 12 34 56 78 90"
               required />
           </div>
@@ -99,7 +99,7 @@
             id="availability"
             rows="2"
             placeholder="Précisez vos créneaux préférés (matin, après-midi, soirée) et vos jours de disponibilité"
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"></textarea>
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:color-grey-medium focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]"></textarea>
         </div>
       </div>
       <div class="sm:col-span-2">
@@ -111,14 +111,14 @@
             rows="4"
             placeholder="Décrivez brièvement votre situation et vos objectifs patrimoniaux (retraite, fiscalité, transmission, etc.)"
             required
-            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-medium)]"></textarea>
+            class="block w-full rounded-md bg-white-light px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:color-grey-medium focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]"></textarea>
         </div>
       </div>
       <div class="flex gap-x-4 sm:col-span-2 items-baseline">
         <input type="checkbox" id="consent" name="consent" required class="mr-2" style="accent-color: var(--accent-color-blue)" />
         <label for="consent" class="text-sm/6 color-grey-dark">
           En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour vous recontacter, conformément à notre
-          <a routerLink="/privacy" class="color-blue visible-link">politique de protection des données</a>.
+          <a routerLink="/privacy" class="visible-link">politique de protection des données</a>.
         </label>
       </div>
     </div>

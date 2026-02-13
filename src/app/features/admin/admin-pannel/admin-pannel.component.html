@@ -2,14 +2,14 @@
   <h1
     [class]="
       'font-bold uppercase text-xl leading-7 font-bold text-center md:text-left p-6 md:p-8 ' +
-      (activePage === 'admin' ? 'bg-blue-very-light color-blue' : 'color-white hover-bg-blue-very-light')
+      (activePage === 'admin' ? 'bg-blue-very-light color-blue' : 'hover-bg-blue-very-light')
     ">
     Administration
   </h1>
 </a>
 
 <ul class="tab-nav flex flex-col items-center md:items-start sticky top-8">
-  <li class="w-full font-semibold color-white flex items-center">
+  <li class="w-full font-semibold flex items-center">
     <a
       routerLink="/admin/articles"
       [class]="'w-full text-base font-medium ' + (activePage === 'articles' ? 'bg-blue-very-light color-blue' : 'hover-bg-blue-very-light')">
@@ -25,7 +25,7 @@
     </a>
   </li>
 
-  <li class="w-full font-semibold color-white flex">
+  <li class="w-full font-semibold flex">
     <a
       routerLink="/admin/medias"
       [class]="'w-full text-base font-medium ' + (activePage === 'medias' ? 'bg-blue-very-light color-blue' : 'hover-bg-blue-very-light')">
@@ -42,7 +42,7 @@
     </a>
   </li>
 
-  <li class="w-full font-semibold color-white flex items-center gap-4">
+  <li class="w-full font-semibold flex items-center gap-4">
     <a
       routerLink="/admin/events"
       [class]="'w-full text-base font-medium ' + (activePage === 'events' ? 'bg-blue-very-light color-blue' : 'hover-bg-blue-very-light')">
@@ -58,7 +58,7 @@
     </a>
   </li>
 
-  <li class="w-full font-semibold color-white flex items-center gap-4">
+  <li class="w-full font-semibold flex items-center gap-4">
     <a
       routerLink="/admin/feedback"
       [class]="'w-full text-base font-medium ' + (activePage === 'feedback' ? 'bg-blue-very-light color-blue' : 'hover-bg-blue-very-light')">

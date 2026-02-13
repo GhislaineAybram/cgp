@@ -1,27 +1,32 @@
 @use 'variables' as *;
 
 .section-about {
-  background: linear-gradient(135deg, $color-blue-800 30%, $color-blue-700 60%, $color-bronze-400 100%);
+  background: linear-gradient(
+    135deg, 
+    var(--gradient-start) 30%, 
+    var(--gradient-middle) 60%, 
+    var(--gradient-end) 100%
+  );
   position: relative;
   overflow: hidden;
 
   h1.section-line.text-blue {
-    color: $color-blue-100 !important;
+    color: var(--gradient-text-primary) !important;
   }
 
   h2.text-blue-dark {
-    color: $color-bronze-200 !important;
+    color: var(--gradient-text-accent) !important;
     font-weight: 600;
   }
 
   p.color-grey-light,
   li {
-    color: $color-blue-100;
+    color: var(--gradient-text-primary);
   }
 
   li strong,
   ul li::marker {
-    color: $color-bronze-200;
+    color: var(--gradient-text-accent);
     font-weight: 600;
   }
 
@@ -37,8 +42,13 @@
       border-radius: 12px;
     }
 
-    background: linear-gradient(135deg, $color-blue-800 20%, $color-blue-700 80%, $color-bronze-400 100%);
-
+    background: linear-gradient(
+      135deg, 
+      var(--gradient-start) 20%, 
+      var(--gradient-middle) 80%, 
+      var(--gradient-end) 100%
+    );
+    
     &::before,
     &::after {
       opacity: 0.15;

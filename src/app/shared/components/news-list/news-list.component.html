@@ -4,7 +4,7 @@
       <h2 class="text-3xl font-bold tracking-tight text-pretty color-blue sm:text-4xl lg:text-5xl section-line">
         Actualités fiscales et patrimoniales
       </h2>
-      <div class="mt-6 text-base text-gray-700 leading-relaxed sm:text-lg w-full">
+      <div class="mt-6 text-base color-grey-dark leading-relaxed sm:text-lg w-full">
         <p>L'environnement fiscal et réglementaire évolue constamment.</p>
         <p>Découvrez mon analyse des nouvelles dispositions légales et leurs implications concrètes pour votre patrimoine.</p>
       </div>
@@ -15,23 +15,23 @@
           <div class="flex flex-col w-full h-[400px] bg-white-light shadow-sm border border-slate-200 rounded-lg overflow-hidden">
             <div class="flex flex-col justify-between flex-1 p-6">
               <div class="flex justify-between items-center mb-4">
-                <div class="rounded-full bg-blue-dark color-white py-0.5 px-2.5 border border-transparent text-xs shadow-sm w-20 text-center">
+                <div class="rounded-full stabilo-effect py-0.5 px-2.5 border border-transparent text-sm shadow-sm w-20 text-center">
                   {{ article.theme }}
                 </div>
                 <time *ngIf="article.date" class="color-grey-dark text-sm">
                   {{ article.date | date: 'd MMMM yyyy' : '' : 'fr' }}
                 </time>
               </div>
-              <h3 class="mb-2 text-slate-800 text-lg font-semibold min-h-[4.5rem]">
+              <h3 class="color-blue-dark mb-2 text-slate-800 text-lg font-semibold min-h-[4.5rem]">
                 {{ article.title }}
               </h3>
-              <p class="text-sm line-clamp-6 mb-8 text-slate-600 leading-normal font-light">
+              <p class="color-grey-dark text-sm line-clamp-6 mb-8 text-slate-600 leading-normal font-light">
                 {{ article.text }}
               </p>
               <div>
                 <a
                   [href]="article.link"
-                  class="color-blue visible-link text-slate-800 font-semibold text-sm flex items-center underline decoration-current"
+                  class="visible-link text-slate-800 font-semibold text-sm flex items-center underline decoration-current"
                   target="_blank"
                   [attr.aria-label]="'Page site externe - nouvel onglet - Lire l\'article complet ' + (article.title || 'article')"
                   rel="noopener noreferrer">

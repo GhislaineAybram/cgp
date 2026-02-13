@@ -1,12 +1,12 @@
-<div class="footer w-full z-10 font-body color-grey-very-light bg-grey-dark text-sm font-medium p-4 flex flex-col items-center">
+<div class="footer w-full z-10 font-body text-sm font-medium p-4 flex flex-col items-center">
   <div class="cursor-pointer flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto md:space-y-0 md:space-x-4">
-    <p routerLink="/legal" class="px-3 py-2 rounded-md hover-bg-black">
+    <p routerLink="/legal" class="px-3 py-2 rounded-md hover-footer">
       {{ legal }}
     </p>
-    <p routerLink="/privacy" class="px-3 py-2 rounded-md hover-bg-black">
+    <p routerLink="/privacy" class="px-3 py-2 rounded-md hover-footer">
       {{ privacy }}
     </p>
-    <p routerLink="/contact" class="px-3 py-2 rounded-md hover-bg-black">
+    <p routerLink="/contact" class="px-3 py-2 rounded-md hover-footer">
       {{ contact }}
     </p>
     <!-- Facebook -->
@@ -15,14 +15,29 @@
       target="_blank"
       aria-label="Page site externe - nouvel onglet - Aller vers ma page Facebook"
       rel="noopener noreferrer"
-      class="[&>svg]:h-4 [&>svg]:w-4 px-3 py-2 rounded-md hover-bg-black">
+      class="[&>svg]:h-4 [&>svg]:w-4 px-3 py-2 rounded-md hover-footer">
       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 320 512" aria-hidden="true" focusable="false">
         <path
           d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
       </svg>
     </a>
   </div>
-  <img class="mt-6 h-36 w-auto" [src]="logo" alt="Logo du site Julien Poudras" />
+  <img
+    *ngIf="isDarkMode"
+    ngSrc="assets/logo_vertical_dark.webp"
+    alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
+    width="1404"
+    height="893"
+    priority
+    class="mt-6 h-36 w-auto" />
+  <img
+    *ngIf="!isDarkMode"
+    ngSrc="assets/logo_vertical_light.webp"
+    alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
+    width="1404"
+    height="893"
+    priority
+    class="mt-6 h-36 w-auto" />
   <p class="mt-6 text-center w-full text-xs">{{ copyright }}</p>
   <div class="flex-col mt-6 text-center w-full text-[10.5px] font-light">
     <p>Inscrit au R.S.A.C de Nanterre sous le numéro 908 219 108</p>

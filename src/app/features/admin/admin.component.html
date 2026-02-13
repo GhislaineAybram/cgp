@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-col md:flex-row w-full gap-0 min-h-screen">
       <!-- Colonne de navigation - Fond bleu -->
-      <div class="w-full md:max-w-[340px] bg-blue-medium">
+      <div class="w-full md:max-w-[340px] bg-column">
         <app-admin-pannel [activePage]="'admin'"></app-admin-pannel>
       </div>
 
@@ -10,7 +10,7 @@
       <div class="flex-1 bg-blue-very-light p-6 md:p-8 lg:p-10">
         <div class="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
           <!--Metric Card-->
-          <div class="p-10 border-b-4 border-[var(--color-grey-dark)] rounded-lg shadow-xl bg-grey-very-light">
+          <div class="p-10 border-b-4 border-[var(--color-grey-800)] rounded-lg shadow-xl bg-grey-very-light">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">
                 <div class="p-4 bg-grey-dark color-grey-very-light rounded-full">
@@ -30,7 +30,7 @@
           </div>
 
           <!--/Metric Card-->
-          <div class="p-10 border-b-4 border-[var(--color-success-dark)] rounded-lg shadow-xl bg-color-success-light">
+          <div class="p-10 border-b-4 border-[var(--color-success-text)] rounded-lg shadow-xl bg-color-success-light">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">
                 <div class="p-4 bg-color-success-dark color-success-light rounded-full">
@@ -51,7 +51,7 @@
           </div>
 
           <!--Metric Card-->
-          <div class="p-10 border-b-4 border-[var(--color-error-dark)] rounded-lg shadow-xl bg-color-error-light">
+          <div class="p-10 border-b-4 border-[var(--color-error-text)] rounded-lg shadow-xl bg-color-error-light">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">
                 <div class="p-4 bg-color-error-dark color-error-light rounded-full">
@@ -71,7 +71,7 @@
           </div>
 
           <!--Metric Card-->
-          <div class="p-10 border-b-4 border-[var(--color-warning-dark)] rounded-lg shadow-xl bg-color-warning-light">
+          <div class="p-10 border-b-4 border-[var(--color-warning-text)] rounded-lg shadow-xl bg-color-warning-light">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">
                 <div class="p-4 bg-color-warning-dark color-warning-light rounded-full">

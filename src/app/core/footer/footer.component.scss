@@ -5,3 +5,13 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.footer {
+  background-color: var(--color-footer-bg);
+  color: var(--color-footer-text);
+}
+
+.hover-footer:hover {
+  background-color: var(--color-footer-hover);
+  color: #E2E8F0;
+}
