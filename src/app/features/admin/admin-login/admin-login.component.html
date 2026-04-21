@@ -1,6 +1,6 @@
-<div class="w-full relative flex items-center justify-center bg-blue-very-light py-24">
-  <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
-    <h1 class="font-bold uppercase section-line lg:text-3xl text-2xl mb-5 text-center color-blue">Connexion espace administration</h1>
+<div class="w-full relative flex items-center justify-center py-24">
+  <div class="max-w-md w-full color-bg rounded-lg shadow-lg p-8 bg-blue-100 color-text">
+    <h1 class="font-bold uppercase section-line lg:text-3xl text-2xl mb-5 text-center color-blue-700">Connexion espace administration</h1>
 
     <form (ngSubmit)="onSubmit()" class="space-y-6">
       @if (errorMessage) {
@@ -10,26 +10,26 @@
       }
 
       <div>
-        <label for="email" class="block text-sm font-medium color-grey-dark mb-2">Email</label>
+        <label for="email" class="block text-sm font-medium color-grey-800 mb-2">Email</label>
         <input
           type="email"
           id="email"
           [(ngModel)]="email"
           name="email"
           required
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-2 color-grey-800 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]"
           placeholder="votre@email.com" />
       </div>
 
       <div>
-        <label for="password" class="block text-sm font-medium color-grey-dark mb-2">Mot de passe</label>
+        <label for="password" class="block text-sm font-medium color-grey-800 mb-2">Mot de passe</label>
         <input
           type="password"
           id="password"
           [(ngModel)]="password"
           name="password"
           required
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg color-grey-800 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]"
           placeholder="••••••••" />
       </div>
 

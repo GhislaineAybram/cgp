@@ -22,11 +22,10 @@ export const routes: Routes = [
   { path: 'privacy', component: PrivacyComponent, title: 'Politique de Confidentialité - Protection des Données' },
   { path: 'contact', component: ContactComponent, title: 'Contactez votre Conseiller en Gestion de Patrimoine Julien Poudras' },
   { path: 'received', component: ReceivedComponent, title: 'Message reçu - Julien Poudras CGP vous recontacte' },
-  { 
+  {
     path: 'admin/login',
-    loadComponent: () => import('./features/admin/admin-login/admin-login.component')
-      .then(m => m.AdminLoginComponent),
-    title: 'Connexion Administration'
+    loadComponent: () => import('./features/admin/admin-login/admin-login.component').then(m => m.AdminLoginComponent),
+    title: 'Connexion Administration',
   },
   {
     path: 'admin',

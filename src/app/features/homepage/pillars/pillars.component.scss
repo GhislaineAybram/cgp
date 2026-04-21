@@ -1,5 +1,6 @@
 @use 'variables' as *;
+@use '../../../../assets/styles/variables' as *;
 
 .icons {
-  background-color: var(--color-blue-700);
+  background-color: var(--color-blue-200);
 }

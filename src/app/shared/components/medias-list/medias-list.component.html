@@ -1,8 +1,8 @@
-<div class="bg-white-light py-12 sm:py-16">
+<div class="bg-light-mode py-12 sm:py-16">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto lg:mx-0">
-      <h2 class="text-3xl font-bold tracking-tight text-pretty color-blue sm:text-4xl lg:text-5xl section-line">Mes partenaires de confiance</h2>
-      <p class="mt-6 text-base color-grey-dark leading-relaxed sm:text-lg w-full">
+      <h2 class="text-3xl font-bold tracking-tight text-pretty color-blue-800 sm:text-4xl lg:text-5xl section-line">Mes partenaires de confiance</h2>
+      <p class="mt-6 text-base color-grey-800 leading-relaxed sm:text-lg w-full">
         Découvrez les professionnels qualifiés avec lesquels je collabore pour vous offrir une expertise complète et des solutions sur mesure.
       </p>
     </div>
@@ -12,13 +12,13 @@
     } @else {
       <div class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
         @for (media of medias; track media.id) {
-          <article class="flex flex-col p-3 h-full bg-grey-very-light rounded-2xl overflow-hidden shadow-sm">
+          <article class="flex flex-col p-3 h-full bg-grey-100 rounded-2xl overflow-hidden shadow-sm">
             <!-- En-tête avec date et channel -->
             <div class="flex justify-between items-center mb-2">
-              <time *ngIf="media.date" class="text-sm color-grey-dark">
+              <time *ngIf="media.date" class="text-sm color-grey-800">
                 {{ media.date | date: 'd MMMM yyyy' : '' : 'fr' }}
               </time>
-              <p class="relative p-2 z-10 rounded-full bg-grey-dark color-white py-0.5 px-2.5 text-xs font-medium color-blue-dark">
+              <p class="relative p-2 z-10 rounded-full tag py-0.5 px-2.5 text-xs font-medium color-blue-800">
                 {{ media.channel }}
               </p>
             </div>
@@ -41,8 +41,8 @@
                   class="w-full h-48 object-cover rounded-lg group-hover:opacity-90 transition-opacity" />
                 <!-- Icône play -->
                 <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="bg-blue-dark bg-opacity-60 rounded-full p-3 hover:bg-opacity-80 transition-all">
-                    <svg aria-hidden="true" focusable="false" class="w-6 h-6 color-white" fill="currentColor" viewBox="0 0 24 24">
+                  <div class="bg-bronze-600 bg-opacity-60 rounded-full p-3 hover:bg-opacity-80 transition-all">
+                    <svg aria-hidden="true" focusable="false" class="w-6 h-6 color-bg" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </div>
@@ -52,11 +52,11 @@
 
             <!-- Contenu textuel -->
             <div class="flex-1 flex flex-col">
-              <h3 class="text-base uppercase font-semibold color-blue mb-2 min-h-[4.5rem] leading-snug">
+              <h3 class="text-base uppercase font-semibold color-blue-800 mb-2 min-h-[4.5rem] leading-snug">
                 {{ media.title }}
               </h3>
 
-              <div class="text-sm color-grey-dark relative">
+              <div class="text-sm color-grey-800 relative">
                 <p>
                   {{ media.text }}
                 </p>

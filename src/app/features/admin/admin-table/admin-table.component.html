@@ -1,8 +1,6 @@
-<div class="relative flex flex-col w-full h-full overflow-auto color-grey-dark bg-white shadow-md rounded-xl bg-clip-border">
+<div class="relative flex flex-col w-full h-full overflow-auto color-grey-800 bg-grey-100 shadow-md rounded-xl bg-clip-border">
   <div class="flex justify-between items-center mb-2 p-5">
-    <h3 class="text-2xl font-semibold text-left rtl:text-right color-blue bg-white">
-      {{ databaseTableName }} ({{ databaseItemsCount }})
-    </h3>
+    <h3 class="text-2xl font-semibold text-left rtl:text-right color-blue-700 bg-grey-100">{{ databaseTableName }} ({{ databaseItemsCount }})</h3>
 
     <button type="button" (click)="create()" class="px-4.5 py-2.5 gap-3 text-center text-sm font-semibold button-action">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -12,9 +10,7 @@
     </button>
   </div>
   <!-- En-tête -->
-  <div
-    class="grid gap-x-1 text-sm color-grey-dark uppercase bg-grey-very-light"
-    [style.gridTemplateColumns]="gridTemplateColumns">
+  <div class="grid gap-x-1 text-sm color-grey-800 uppercase bg-grey-100" [style.gridTemplateColumns]="gridTemplateColumns">
     @for (col of databaseTable.columns; track $index) {
       <div class="px-2 py-2 font-semibold">
         {{ col.label }}
@@ -24,9 +20,7 @@
 
   <!-- Lignes -->
   @for (row of databaseTable.rows; track $index) {
-    <div
-      class="grid gap-x-1 text-xs border-b bg-white border-gray-200"
-      [style.gridTemplateColumns]="gridTemplateColumns">
+    <div class="grid gap-x-1 text-xs border-b border-gray-200" [style.gridTemplateColumns]="gridTemplateColumns">
       @for (col of databaseTable.columns; track $index) {
         <div class="px-2 py-2 flex items-start h-[3rem] overflow-hidden">
           @switch (col.type) {

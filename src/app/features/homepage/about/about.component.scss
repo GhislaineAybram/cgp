@@ -1,25 +1,21 @@
 @use 'variables' as *;
+@use '../../../../assets/styles/variables' as *;
 
 .section-about {
-  background: linear-gradient(
-    135deg, 
-    var(--gradient-start) 30%, 
-    var(--gradient-middle) 60%, 
-    var(--gradient-end) 100%
-  );
+  background: linear-gradient(135deg, var(--gradient-start) 30%, var(--gradient-middle) 60%, var(--gradient-end) 100%);
   position: relative;
   overflow: hidden;
 
-  h1.section-line.text-blue {
+  h1.section-line.text-primary {
     color: var(--gradient-text-primary) !important;
   }
 
-  h2.text-blue-dark {
+  h2.text-accent {
     color: var(--gradient-text-accent) !important;
     font-weight: 600;
   }
 
-  p.color-grey-light,
+  p.text-primary,
   li {
     color: var(--gradient-text-primary);
   }
@@ -42,13 +38,8 @@
       border-radius: 12px;
     }
 
-    background: linear-gradient(
-      135deg, 
-      var(--gradient-start) 20%, 
-      var(--gradient-middle) 80%, 
-      var(--gradient-end) 100%
-    );
-    
+    background: linear-gradient(135deg, var(--gradient-start) 20%, var(--gradient-middle) 80%, var(--gradient-end) 100%);
+
     &::before,
     &::after {
       opacity: 0.15;

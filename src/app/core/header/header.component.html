@@ -1,5 +1,5 @@
 <a href="#main-content" class="skip-link">Aller au contenu principal</a>
-<nav class="bg-blue-very-light color-blue-dark">
+<nav class="bg-blue-100 color-blue-800">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -7,7 +7,7 @@
         <button
           type="button"
           (click)="isMenuOpen = !isMenuOpen"
-          class="relative inline-flex items-center justify-center rounded-md p-2 color-blue hover-bg-blue-light focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+          class="relative inline-flex items-center justify-center rounded-md p-2 color-blue-800 hover-bg-blue-200 focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
           aria-controls="mobile-menu"
           [attr.aria-expanded]="isMenuOpen">
           <span class="sr-only">{{ isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu' }}</span>
@@ -43,36 +43,35 @@
         <div class="flex shrink-0 items-center">
           <img
             *ngIf="!isDarkMode"
-            ngSrc="assets/logo-mini-light-mode.webp"
+            ngSrc="assets/logo-mini-light-mode.png"
             alt="Julien Poudras - Conseiller en Gestion de Patrimoine"
-            width="150"
-            height="147"
+            width="409"
+            height="409"
             priority
             class="h-10 w-auto" />
           <img
             *ngIf="isDarkMode"
-            ngSrc="assets/logo-mini-dark-mode.webp"
+            ngSrc="assets/logo-mini-dark-mode.png"
             alt="Julien Poudras - Conseiller en Gestion de Patrimoine"
-            width="150"
-            height="147"
+            width="409"
+            height="409"
             priority
             class="h-10 w-auto" />
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a routerLink="" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ homepage }}</a>
-            <a [routerLink]="['/']" fragment="about" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ about }}</a>
-            <a [routerLink]="['/']" fragment="pillars" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ pillars }}</a>
-            <a [routerLink]="['/']" fragment="news" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ news }}</a>
-            <a [routerLink]="['/']" fragment="medias" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ medias }}</a>
-            <a [routerLink]="['/']" fragment="events" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ events }}</a>
-            <a [routerLink]="['/']" fragment="testimonial" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ feedback }}</a>
-            <a routerLink="/contact" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-light">{{ contact }}</a>
+            <a routerLink="" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-200">{{ homepage }}</a>
+            <a [routerLink]="['/']" fragment="pillars" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-200">{{ pillars }}</a>
+            <a [routerLink]="['/']" fragment="news" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-200">{{ news }}</a>
+            <a [routerLink]="['/']" fragment="medias" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-200">{{ medias }}</a>
+            <a [routerLink]="['/']" fragment="events" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-200">{{ events }}</a>
+            <a [routerLink]="['/']" fragment="testimonial" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-200">{{ feedback }}</a>
+            <a routerLink="/contact" class="rounded-md px-3 py-2 text-sm font-medium hover-bg-blue-200">{{ contact }}</a>
             <button
               *ngIf="authService.isAuthenticated$ | async"
               (click)="logout()"
               aria-label="Se déconnecter"
-              class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light">
+              class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200">
               <svg
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
@@ -93,11 +92,11 @@
               (click)="toggleTheme()"
               [attr.aria-label]="isDarkMode ? 'Activer le mode clair' : 'Activer le mode sombre'"
               [attr.aria-pressed]="isDarkMode"
-              class="relative flex items-center gap-2 text-base hover-bg-blue-light focus:outline-none rounded-lg p-2">
+              class="relative flex items-center gap-2 text-base hover-bg-blue-200 focus:outline-none rounded-lg p-2">
               <!-- Icône soleil (light mode) -->
               <svg
-                [class.color-blue]="!isDarkMode"
-                [class.color-grey-medium]="isDarkMode"
+                [class.color-blue-800]="!isDarkMode"
+                [class.color-grey-500]="isDarkMode"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -113,8 +112,8 @@
 
               <!-- Icône lune (dark mode) -->
               <svg
-                [class.color-blue]="isDarkMode"
-                [class.color-grey-medium]="!isDarkMode"
+                [class.color-blue-800]="isDarkMode"
+                [class.color-grey-500]="!isDarkMode"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -137,50 +136,50 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="sm:hidden" id="mobile-menu" [class.block]="isMenuOpen" [class.hidden]="!isMenuOpen">
     <div class="space-y-1 px-2 pt-2 pb-3">
-      <a routerLink="" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light">{{ homepage }}</a>
+      <a routerLink="" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200">{{ homepage }}</a>
       <a
         [routerLink]="['/']"
         fragment="about"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200"
         >{{ about }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="pillars"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200"
         >{{ pillars }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="news"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200"
         >{{ news }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="medias"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200"
         >{{ medias }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="events"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200"
         >{{ events }}</a
       >
       <a
         [routerLink]="['/']"
         fragment="testimonial"
         (click)="isMenuOpen = false"
-        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light"
+        class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200"
         >{{ feedback }}</a
       >
-      <a routerLink="/contact" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-light">{{
+      <a routerLink="/contact" (click)="isMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium hover-bg-blue-200">{{
         contact
       }}</a>
       <button
@@ -189,11 +188,11 @@
         (click)="toggleTheme()"
         [attr.aria-label]="isDarkMode ? 'Activer le mode clair' : 'Activer le mode sombre'"
         [attr.aria-pressed]="isDarkMode"
-        class="relative flex items-center gap-2 text-base hover-bg-blue-light focus:outline-none rounded-lg p-2">
+        class="relative flex items-center gap-2 text-base hover-bg-blue-200 focus:outline-none rounded-lg p-2">
         <!-- Icône soleil (light mode) -->
         <svg
-          [class.color-blue]="!isDarkMode"
-          [class.color-grey-medium]="isDarkMode"
+          [class.color-blue-800]="!isDarkMode"
+          [class.color-grey-500]="isDarkMode"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -209,8 +208,8 @@
 
         <!-- Icône lune (dark mode) -->
         <svg
-          [class.color-blue]="isDarkMode"
-          [class.color-grey-medium]="!isDarkMode"
+          [class.color-blue-800]="isDarkMode"
+          [class.color-grey-500]="!isDarkMode"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

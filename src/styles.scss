@@ -3,74 +3,79 @@
 @use 'assets/styles/variables' as *;
 // Montserrat import
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-// Lato import
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+// AMALFI COAST Police principale Logo
+@font-face {
+  font-family: 'Amalfi';
+  src: url('/assets/fonts/Amalfi_Coast.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+// PRESTIGE ELITE STD BOLD Police Secondaire Logo
+@font-face {
+  font-family: 'Prestige';
+  src: url('/assets/fonts/PrestigeEliteStd-Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+// INTER 28PT Police texte
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  --accent-color-blue: #{$color-blue-700};
   --color-blue-800: #{$color-blue-800};
   --color-blue-700: #{$color-blue-700};
   --color-blue-200: #{$color-blue-200};
   --color-blue-100: #{$color-blue-100};
   --color-bronze-600: #{$color-bronze-600};
   --color-bronze-400: #{$color-bronze-400};
-  --color-bronze-200: #{$color-bronze-200};
-  --color-bg-main: #{$color-white};
-  --color-text-main: #{$color-black};
   --color-grey-800: #{$color-grey-800};
   --color-grey-500: #{$color-grey-500};
   --color-grey-300: #{$color-grey-300};
   --color-grey-100: #{$color-grey-100};
-  --color-warning-text: #{$color-warning-dark};
-  --color-warning-bg: #{$color-warning-light};
-  --color-error-text: #{$color-error-dark};
-  --color-error-bg: #{$color-error-light};
-  --color-success-text: #{$color-success-dark};
-  --color-success-bg: #{$color-success-light};
-  --color-footer-bg: #{$color-grey-800};
-  --color-footer-text: #{$color-grey-100};
-  --color-footer-hover: #{$color-black};
+  --color-bg: #{$color-bg};
+  --color-text: #{$color-text};
+  --color-warning-800: #{$color-warning-800};
+  --color-warning-100: #{$color-warning-100};
+  --color-success-800: #{$color-success-800};
+  --color-success-100: #{$color-success-100};
+  --color-error-800: #{$color-error-800};
+  --color-error-100: #{$color-error-100};
+  --gradient-text-primary: #{$color-blue-100};
+  --gradient-text-accent: #{$color-bronze-400};
   --gradient-start: #{$color-blue-800};
   --gradient-middle: #{$color-blue-700};
   --gradient-end: #{$color-bronze-400};
-  --gradient-text-primary: #{$color-blue-100};
-  --gradient-text-accent: #{$color-bronze-200};
-  --color-stabilo-bg: #{$color-bronze-200};
-  --color-stabilo-text: #{$color-blue-700};
   --color-bg-column: #{$color-blue-700};
+  --color-text-column: #{$color-grey-100};
 }
 .dark {
-  --accent-color-blue: #60A5FA;
-  --color-blue-800: #BFDBFE;
-  --color-blue-700: #60A5FA;
-  --color-blue-200: #2D4A6B;
-  --color-blue-100: #0F1F3A;
-  --color-bronze-600: #D4A574;
-  --color-bronze-400: #C09560;
-  --color-bronze-200: #4A3520;
-  --color-bg-main: #1E293B;
-  --color-text-main: #F1F5F9;
-  --color-grey-800: #E2E8F0;
-  --color-grey-500: #94A3B8;
+  --color-blue-800: #bfdbfe;
+  --color-blue-700: #60a5fa;
+  --color-blue-200: #2d4a6b;
+  --color-blue-100: #0f1f3a;
+  --color-bronze-600: #d4a574;
+  --color-bronze-400: #5a4228;
+  --color-grey-800: #e2e8f0;
+  --color-grey-500: #94a3b8;
   --color-grey-300: #475569;
   --color-grey-100: #334155;
-  --color-warning-text: #FBBF24;
-  --color-warning-bg: #451A03;
-  --color-success-text: #34D399;
-  --color-success-bg: #022C22;
-  --color-error-text: #FB7185;
-  --color-error-bg: #4C0519;
-  --color-footer-bg: #0F172A;
-  --color-footer-text: #CBD5E1;
-  --color-footer-hover: #0F172A;
-  --gradient-start: #0A1628;
-  --gradient-middle: #1E3A5F;
-  --gradient-end: #2D1F10;
-  --gradient-text-primary: #E2E8F0;
-  --gradient-text-accent: #D4A574;
-  --color-stabilo-bg: #5A4228;
-  --color-stabilo-text: #DBEAFE;
-  --color-bg-column: #2D4A6B;
+  --color-bg: #1e293b;
+  --color-text: #f1f5f9;
+  --color-warning-800: #fbbf24;
+  --color-warning-100: #451a03;
+  --color-success-800: #34d399;
+  --color-success-100: #022c22;
+  --color-error-800: #fb7185;
+  --color-error-100: #4c0519;
+  --gradient-start: #0a1628;
+  --gradient-middle: #1e3a5f;
+  --gradient-end: #2d1f10;
+  --gradient-text-primary: #e2e8f0;
+  --gradient-text-accent: #d4a574;
+  --color-bg-column: #2d4a6b;
+  --color-text-column: #cbd5e1;
 }
 
 // ========================================
@@ -83,14 +88,14 @@ h2 {
   font-family: 'Montserrat', sans-serif;
 }
 h3 {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 h4 {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-style: italic;
 }
 p {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 // ========================================
@@ -100,8 +105,9 @@ html,
 body {
   height: 100%;
   margin: 0;
-  background-color: var(--color-bg-main);
-  color: var(--color-text-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
 }
 
 body {
@@ -109,110 +115,133 @@ body {
   flex-direction: column;
 }
 
-.color-grey-dark {
+.color-grey-800 {
   color: var(--color-grey-800);
 }
-.color-grey-medium {
+.color-grey-500 {
   color: var(--color-grey-500);
 }
-.color-blue-dark {
+.color-blue-800 {
   color: var(--color-blue-800);
 }
-.color-blue {
+.color-blue-700 {
   color: var(--color-blue-700);
 }
-.color-grey-light {
+.color-blue-200 {
+  color: var(--color-blue-200);
+}
+.color-blue-100 {
+  color: var(--color-blue-100);
+}
+.color-bronze-600 {
+  color: var(--color-bronze-600);
+}
+.color-bronze-400 {
+  color: var(--color-bronze-400);
+}
+.color-grey-300 {
   color: var(--color-grey-300);
 }
-.color-grey-very-light {
+.color-grey-100 {
   color: var(--color-grey-100);
 }
-.color-white {
-  color: var(--color-bg-main);
+.color-bg {
+  color: var(--color-bg);
 }
-.color-warning-light {
-  color: var(--color-warning-bg);
+.color-warning-100 {
+  color: var(--color-warning-100);
 }
-.color-warning-dark {
-  color: var(--color-warning-text);
+.color-warning-800 {
+  color: var(--color-warning-800);
 }
-.color-error-light {
-  color: var(--color-error-bg);
+.color-error-100 {
+  color: var(--color-error-100);
 }
-.color-error-dark {
-  color: var(--color-error-text);
+.color-error-800 {
+  color: var(--color-error-800);
 }
-.color-success-light {
-  color: var(--color-success-bg);
+.color-success-100 {
+  color: var(--color-success-100);
 }
-.color-success-dark {
-  color: var(--color-success-text);
+.color-success-800 {
+  color: var(--color-success-800);
 }
 
 // background
 .bg-column {
   background-color: var(--color-bg-column);
-  color: var(--color-footer-text);
+  color: var(--color-text-column);
 }
 .hover-bg-black:hover {
-  background-color: var(--color-text-main);
-  color: var(--color-bg-main);
+  background-color: var(--color-bg);
+  color: var(--color-blue-700);
 }
-.bg-white-light {
-  background-color: var(--color-bg-main);
+.bg-light-mode {
+  background-color: var(--color-bg);
 }
-.bg-bronze-light {
-  background-color: var(--color-bronze-200);
+.bg-bronze-600 {
+  background-color: var(--color-bronze-600);
 }
-.bg-blue-very-light {
+.bg-bronze-400 {
+  background-color: var(--color-bronze-400);
+}
+.bg-blue-100 {
   background-color: var(--color-blue-100);
 }
-.hover-bg-blue-very-light:hover {
+.hover-bg-blue-100:hover {
   background-color: var(--color-blue-100);
   color: var(--color-blue-800);
 }
-.bg-blue-light {
+.bg-blue-200 {
   background-color: var(--color-blue-200);
 }
-.hover-bg-blue-light:hover {
+.hover-bg-blue-200:hover {
   background-color: var(--color-blue-200);
   color: var(--color-blue-800);
 }
-.bg-blue-medium {
-  background-color: var(--color-blue-700);
-}
-.bg-blue-dark {
+.bg-blue-800 {
   background-color: var(--color-blue-800);
 }
-.bg-grey-very-light {
+.bg-blue-700 {
+  background-color: var(--color-blue-700);
+}
+.bg-blue-200 {
+  background-color: var(--color-blue-200);
+}
+.bg-grey-100 {
   background-color: var(--color-grey-100);
 }
-.bg-grey-dark {
+.bg-grey-800 {
   background-color: var(--color-grey-800);
 }
-.bg-color-warning-dark {
-  background-color: var(--color-warning-text);
+.bg-color-warning-800 {
+  background-color: var(--color-warning-800);
 }
-.bg-color-warning-light {
-  background-color: var(--color-warning-bg);
+.bg-color-warning-100 {
+  background-color: var(--color-warning-100);
 }
-.bg-color-error-dark {
-  background-color: var(--color-error-text);
+.bg-color-error-800 {
+  background-color: var(--color-error-800);
 }
-.bg-color-error-light {
-  background-color: var(--color-error-bg);
+.bg-color-error-100 {
+  background-color: var(--color-error-100);
 }
-.bg-color-success-dark {
-  background-color: var(--color-success-text);
+.bg-color-success-800 {
+  background-color: var(--color-success-800);
 }
-.bg-color-success-light {
-  background-color: var(--color-success-bg);
+.bg-color-success-100 {
+  background-color: var(--color-success-100);
+}
+
+.tag {
+  background-color: var(--color-blue-200);
+  color: var(--color-bg);
 }
 
 // effects
 .stabilo-effect {
-  background-color: var(--color-stabilo-bg);
-  color: var(--color-stabilo-text);
+  background-color: var(--color-bronze-400);
+  color: var(--color-blue-700);
 }
 
 // title decoration
@@ -234,7 +263,7 @@ html.dark {
   bottom: 0;
   width: 75px;
   height: 8px;
-  background-color: var(--color-bronze-400);
+  background-color: var(--color-bronze-600);
 }
 
 // title decoration when center
@@ -262,12 +291,12 @@ html.dark {
 .button-action {
   font-size: 0.875rem;
   align-items: center;
-  background-color: var(--color-blue-700);
+  background-color: var(--color-bronze-600);
   border: 1.5px solid var(--color-blue-800);
   border-radius: 0.375rem;
-  box-shadow: var(--color-blue-100) 0 1px 3px 0;
+  box-shadow: var(--color-bronze-400) 0 1px 3px 0;
   box-sizing: border-box;
-  color: var(--color-bg-main);
+  color: var(--color-bg);
   cursor: pointer;
   display: inline-flex;
   justify-content: center;
@@ -280,16 +309,18 @@ html.dark {
 }
 .button-action:hover,
 .button-action:focus {
-  box-shadow: var(--color-blue-200) 0 4px 12px;
-  color: var(--color-bronze-200);
+  box-shadow: var(--color-bronze-400) 0 4px 12px;
+  color: var(--color-bronze-400);
 }
 .button-action:hover {
   transform: translateY(-1px);
+  background-color: var(--color-bronze-400);
+  color: var(--color-blue-800);
 }
 .button-action:active {
-  background-color: var(--color-blue-800);
   box-shadow: var(--color-blue-200) 0 2px 4px;
-  color: var(--color-bronze-200);
+  background-color: var(--color-bronze-400);
+  color: var(--color-blue-800);
   transform: translateY(0);
 }
 
@@ -297,12 +328,12 @@ html.dark {
 .button-info {
   font-size: 0.875rem;
   align-items: center;
-  background-color: var(--color-bg-main);
-  border: 1.5px solid var(--color-blue-700);
+  background-color: var(--color-bg);
+  border: 1.5px solid var(--color-bronze-600);
   border-radius: 0.375rem;
   box-shadow: var(--color-blue-200) 0 1px 3px 0;
   box-sizing: border-box;
-  color: var(--color-blue-700);
+  color: var(--color-bronze-600);
   cursor: pointer;
   display: inline-flex;
   justify-content: center;
@@ -315,14 +346,15 @@ html.dark {
 }
 .button-info:hover,
 .button-info:focus {
-  box-shadow: var(--color-blue-200) 0 4px 12px;
+  background-color: var(--color-bronze-400);
+  box-shadow: var(--color-bronze-400) 0 4px 12px;
 }
 .button-info:hover {
   transform: translateY(-1px);
 }
 .button-info:active {
-  background-color: var(--color-blue-200);
-  box-shadow: var(--color-blue-200) 0 2px 4px;
+  background-color: var(--color-bronze-400);
+  box-shadow: var(--color-bronze-400) 0 2px 4px;
   transform: translateY(0);
 }
 
@@ -332,7 +364,7 @@ html.dark {
 .visible-link {
   color: var(--color-blue-800);
   text-decoration: underline;
-  text-decoration-color: var(--color-blue-800);
+  text-decoration-color: var(--color-bronze-600);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
   transition:
@@ -341,7 +373,7 @@ html.dark {
 }
 .visible-link:hover {
   color: var(--color-bronze-600);
-  text-decoration-color: var(--color-bronze-600);
+  text-decoration-color: var(--color-bronze-400);
   transform: translateY(-1px);
 }
 
@@ -359,7 +391,7 @@ html.dark {
 
 .visible-delete-button {
   cursor: pointer;
-  color: var(--color-error-text);
+  color: var(--color-error-800);
   transition:
     color 0.3s ease,
     transform 0.2s ease;
@@ -371,7 +403,7 @@ html.dark {
 
 // columns chapters
 .summary-link {
-  color: var(--color-footer-text);
+  color: var(--color-text-column);
 }
 .summary-link:hover {
   color: var(--gradient-text-accent);

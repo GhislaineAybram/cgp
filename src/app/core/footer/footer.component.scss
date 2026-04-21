@@ -1,3 +1,5 @@
+@use '../../../assets/styles/variables' as *;
+
 :host {
   margin-top: auto; /* Pousse le footer vers le bas */
 }
@@ -7,11 +9,11 @@
 }
 
 .footer {
-  background-color: var(--color-footer-bg);
-  color: var(--color-footer-text);
+  background-color: $color-blue-800;
+  color: $color-bg;
 }
 
 .hover-footer:hover {
-  background-color: var(--color-footer-hover);
-  color: #E2E8F0;
+  background-color: $color-blue-200;
+  color: $color-text;
 }

@@ -1,4 +1,4 @@
-<section class="w-full relative overflow-hidden bg-white-light">
+<section class="w-full relative overflow-hidden bg-light-mode">
   <div>
     <div class="flex flex-col md:flex-row w-full gap-0 min-h-screen">
       <!-- Colonne de navigation - Fond bleu -->
@@ -7,13 +7,13 @@
       </div>
 
       <!-- Corps de texte - Fond bleu ciel -->
-      <div class="flex-1 bg-blue-very-light p-6 md:p-8 lg:p-10">
+      <div class="flex-1 bg-blue-100 p-6 md:p-8 lg:p-10">
         <div class="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
           <!--Metric Card-->
-          <div class="p-10 border-b-4 border-[var(--color-grey-800)] rounded-lg shadow-xl bg-grey-very-light">
+          <div class="p-10 border-b-4 border-[var(--color-grey-800)] rounded-lg shadow-xl bg-grey-100">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">
-                <div class="p-4 bg-grey-dark color-grey-very-light rounded-full">
+                <div class="p-4 bg-grey-800 color-grey-100 rounded-full">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="size-8">
                     <path
                       stroke-linecap="round"
@@ -23,17 +23,17 @@
                 </div>
               </div>
               <div class="flex-1 text-right md:text-center">
-                <h2 class="font-bold color-grey-dark uppercase">Articles</h2>
+                <h2 class="font-bold color-grey-800 uppercase">Articles</h2>
                 <h3 class="text-4xl font-bold">{{ articlesCount() }}</h3>
               </div>
             </div>
           </div>
 
           <!--/Metric Card-->
-          <div class="p-10 border-b-4 border-[var(--color-success-text)] rounded-lg shadow-xl bg-color-success-light">
+          <div class="p-10 border-b-4 border-[var(--color-success-800)] rounded-lg shadow-xl bg-color-success-100">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">
-                <div class="p-4 bg-color-success-dark color-success-light rounded-full">
+                <div class="p-4 bg-color-success-800 color-success-100 rounded-full">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="size-8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     <path
@@ -44,17 +44,17 @@
                 </div>
               </div>
               <div class="flex-1 text-right md:text-center">
-                <h2 class="font-bold color-grey-dark uppercase">Vidéos</h2>
+                <h2 class="font-bold color-grey-800 uppercase">Vidéos</h2>
                 <h3 class="text-4xl font-bold">{{ videosCount() }}</h3>
               </div>
             </div>
           </div>
 
           <!--Metric Card-->
-          <div class="p-10 border-b-4 border-[var(--color-error-text)] rounded-lg shadow-xl bg-color-error-light">
+          <div class="p-10 border-b-4 border-[var(--color-error-800)] rounded-lg shadow-xl bg-color-error-100">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">
-                <div class="p-4 bg-color-error-dark color-error-light rounded-full">
+                <div class="p-4 bg-color-error-800 color-error-100 rounded-full">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="size-8">
                     <path
                       stroke-linecap="round"
@@ -64,17 +64,17 @@
                 </div>
               </div>
               <div class="flex-1 text-right md:text-center">
-                <h2 class="font-bold color-grey-dark uppercase">Évènements</h2>
+                <h2 class="font-bold color-grey-800 uppercase">Évènements</h2>
                 <h3 class="text-4xl font-bold">{{ eventsCount() }}</h3>
               </div>
             </div>
           </div>
 
           <!--Metric Card-->
-          <div class="p-10 border-b-4 border-[var(--color-warning-text)] rounded-lg shadow-xl bg-color-warning-light">
+          <div class="p-10 border-b-4 border-[var(--color-warning-800)] rounded-lg shadow-xl bg-color-warning-100">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">
-                <div class="p-4 bg-color-warning-dark color-warning-light rounded-full">
+                <div class="p-4 bg-color-warning-800 color-warning-100 rounded-full">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="size-8">
                     <path
                       stroke-linecap="round"
@@ -84,7 +84,7 @@
                 </div>
               </div>
               <div class="flex-1 text-right md:text-center">
-                <h2 class="font-bold color-grey-dark uppercase">Retours clients</h2>
+                <h2 class="font-bold color-grey-800 uppercase">Retours clients</h2>
                 <h3 class="text-4xl font-bold">{{ feedbackCount() }}</h3>
               </div>
             </div>

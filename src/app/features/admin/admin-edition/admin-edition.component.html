@@ -14,12 +14,12 @@
     <div class="relative bg-white rounded-lg shadow-sm">
       <!-- Modal header -->
       <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
-        <h3 class="text-xl font-semibold color-grey-dark">
+        <h3 class="text-xl font-semibold color-grey-800">
           {{ editionTitle }}
         </h3>
         <button
           type="button"
-          class="color-grey-medium bg-transparent hover:bg-gray-200 hover:color-grey-dark rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+          class="color-grey-500 bg-transparent hover:bg-gray-200 hover:color-grey-800 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
           (click)="close()"
           data-modal-hide="static-modal">
           <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -33,26 +33,26 @@
         <form class="space-y-4" action="#">
           @for (col of databaseTable.columns; track $index) {
             <div>
-              <label [for]="col.key" class="block mb-2 text-sm font-medium color-grey-dark">{{ col.label }}</label>
+              <label [for]="col.key" class="block mb-2 text-sm font-medium color-grey-800">{{ col.label }}</label>
               @if (col.weight && col.weight >= 3) {
                 <textarea
                   [id]="col.key"
                   rows="4"
                   [value]="getValue(col.key)"
-                  class="block w-full p-2.5 text-sm color-grey-dark bg-grey-very-light rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]">
+                  class="block w-full p-2.5 text-sm color-grey-800 bg-grey-100 rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]">
                 </textarea>
               } @else if (col.type === 'hour') {
                 <input
                   type="time"
                   [id]="col.key"
                   [value]="getValue(col.key)"
-                  class="block w-full p-2.5 text-sm color-grey-dark bg-grey-very-light rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
+                  class="block w-full p-2.5 text-sm color-grey-800 bg-grey-100 rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
               } @else if (col.type === 'date') {
                 <input
                   type="date"
                   [id]="col.key"
                   [value]="getValue(col.key)"
-                  class="block w-full p-2.5 text-sm color-grey-dark bg-grey-very-light rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
+                  class="block w-full p-2.5 text-sm color-grey-800 bg-grey-100 rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
               } @else if (col.type === 'number') {
                 <input
                   type="number"
@@ -62,9 +62,9 @@
                   max="5"
                   step="1"
                   (input)="markInvalid(col.key, $any($event.target).value)"
-                  class="block w-full p-2.5 text-sm color-grey-dark bg-grey-very-light rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
+                  class="block w-full p-2.5 text-sm color-grey-800 bg-grey-100 rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
                 @if (invalidValues[col.key]) {
-                  <p class="mt-1 text-sm color-error-dark">Valeur invalide - la valeur doit être comprise entre 0 et 5</p>
+                  <p class="mt-1 text-sm color-error-800">Valeur invalide - la valeur doit être comprise entre 0 et 5</p>
                 }
               } @else if (col.type === 'image') {
                 <div class="flex gap-4 items-start">
@@ -76,10 +76,10 @@
                   <div class="flex-1">
                     <label
                       [for]="col.key"
-                      class="flex flex-col items-center justify-center w-full h-32 bg-grey-very-light border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100">
+                      class="flex flex-col items-center justify-center w-full h-32 bg-grey-100 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100">
                       <div class="flex flex-col items-center justify-center text-center pt-5 pb-6 px-4">
                         <svg
-                          class="w-8 h-8 mb-2 color-grey-medium"
+                          class="w-8 h-8 mb-2 color-grey-500"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -91,10 +91,8 @@
                             stroke-width="2"
                             d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2" />
                         </svg>
-                        <p class="mb-2 text-sm color-grey-medium">
-                          <span class="font-semibold">Cliquer pour télécharger</span> ou glisser-déposer
-                        </p>
-                        <p class="text-xs color-grey-medium">PNG, JPG ou JPEG</p>
+                        <p class="mb-2 text-sm color-grey-500"><span class="font-semibold">Cliquer pour télécharger</span> ou glisser-déposer</p>
+                        <p class="text-xs color-grey-500">PNG, JPG ou JPEG</p>
                       </div>
                       <input [id]="col.key" type="file" accept="image/*" (change)="onFileSelected($event, col.key)" class="hidden" />
                     </label>
@@ -105,7 +103,7 @@
                   type="text"
                   [id]="col.key"
                   [value]="getValue(col.key)"
-                  class="block w-full p-2.5 text-sm color-grey-dark bg-grey-very-light rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
+                  class="block w-full p-2.5 text-sm color-grey-800 bg-grey-100 rounded-lg border border-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-[color:var(--color-blue-700)]" />
               }
             </div>
           }

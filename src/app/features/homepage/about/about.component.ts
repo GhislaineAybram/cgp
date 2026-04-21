@@ -6,14 +6,21 @@
  * @copyright Copyright (c) 2025 Julien Poudras. All rights reserved.
  */
 
-import { NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
 })
-export class AboutComponent {}
+export class AboutComponent {
+  protected themeService = inject(ThemeService);
+
+  get isDarkMode(): boolean {
+    return this.themeService.isDarkMode;
+  }
+}

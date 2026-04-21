@@ -47,7 +47,7 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
     const emptyItem: Partial<T> = {};
     this.databaseTable.columns.forEach(col => {
       if (String(col.key) === 'id') return;
-      
+
       const key = col.key as keyof T;
       if (col.type === 'number') {
         (emptyItem as Record<keyof T, T[keyof T]>)[key] = 0 as T[keyof T];
@@ -140,7 +140,7 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
         this.updateItem.emit(updatedItem as T);
       }
     }
-    
+
     this.workingCopy = null;
     this.invalidValues = {};
     this.selectedFiles.clear();
@@ -159,9 +159,9 @@ export class AdminEditionComponent<T extends object> implements OnChanges {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       this.selectedFiles.set(colKey, input.files[0]);
-      
+
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         if (this.workingCopy && e.target?.result) {
           (this.workingCopy as Record<keyof T, T[keyof T]>)[colKey] = e.target.result as T[keyof T];
         }

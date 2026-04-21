@@ -1,8 +1,8 @@
-import { isPlatformBrowser } from "@angular/common";
-import { inject, Injectable, PLATFORM_ID } from "@angular/core";
-import { SupabaseService } from "../../supabase.service";
-import { Router } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
+import { isPlatformBrowser } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { SupabaseService } from '../../supabase.service';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class AuthService {
   private readonly platformId = inject(PLATFORM_ID);
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
-  
+
   constructor() {
     this.initAuthState();
   }
@@ -21,11 +21,11 @@ export class AuthService {
   private async initAuthState() {
     const authenticated = await this.isAuthenticated();
     this.isAuthenticatedSubject.next(authenticated);
-    
+
     if (isPlatformBrowser(this.platformId)) {
       const supabase = this.supabaseService.getSupabaseClient();
       if (supabase) {
-        supabase.auth.onAuthStateChange((session) => {
+        supabase.auth.onAuthStateChange(session => {
           this.isAuthenticatedSubject.next(!!session);
         });
       }
@@ -80,7 +80,9 @@ export class AuthService {
       return false;
     }
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     return !!user;
   }
 }

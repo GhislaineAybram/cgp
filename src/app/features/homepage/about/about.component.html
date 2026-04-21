@@ -2,52 +2,68 @@
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="flex flex-col-reverse lg:flex-row lg:items-center lg:gap-8">
       <div class="mx-auto w-full max-w-3xl lg:mx-0 text-left">
-        <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl section-line text-blue">Qui suis-je ?</h1>
+        <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl section-line text-primary">Qui suis-je ?</h1>
 
-        <h2 class="mt-8 text-lg sm:text-xl font-bold text-blue-dark">Mon parcours vers le conseil en gestion de patrimoine</h2>
-        <p class="mt-2 text-base leading-relaxed color-grey-light">
+        <h2 class="mt-8 text-lg sm:text-xl font-bold text-accent">Mon parcours vers le conseil en gestion de patrimoine</h2>
+        <p class="mt-2 text-base leading-relaxed text-primary">
           Après 13 années d'expérience dans le secteur des services, j'ai ressenti le besoin d'évoluer professionnellement et de donner un nouveau
           sens à ma carrière. Cette aspiration au changement m'a conduit vers une reconversion qui correspond parfaitement à mes valeurs et à mes
           ambitions.
         </p>
-        <p class="mt-2 text-base leading-relaxed color-grey-light">
+        <p class="mt-2 text-base leading-relaxed text-primary">
           La rencontre avec un conseiller en gestion de patrimoine a été déterminante. Séduit par cette profession centrée sur l'accompagnement humain
           et la création de valeur durable, j'ai entrepris de passer les habilitations nécessaires en parallèle de mon activité professionnelle.
         </p>
 
-        <h2 class="mt-8 text-lg sm:text-xl font-bold text-blue-dark">Mes certifications et garanties</h2>
-        <p class="mt-2 text-base leading-relaxed color-grey-light">
+        <h2 class="mt-8 text-lg sm:text-xl font-bold text-accent">Mes certifications et garanties</h2>
+        <p class="mt-2 text-base leading-relaxed text-primary">
           Certifié par la CCI de Toulouse et inscrit à l'ORIAS sous le n°22001454, j'exerce sous le contrôle de l'ACPR. Membre de l'ANACOFI
           (association agréée AMF), je bénéficie d'une assurance responsabilité civile professionnelle auprès de Zurich Insurance.
         </p>
-        <p class="mt-2 text-base leading-relaxed color-grey-light">
+        <p class="mt-2 text-base leading-relaxed text-primary">
           Ces certifications vous garantissent un conseil professionnel, éthique et sécurisé pour tous vos projets patrimoniaux.
         </p>
 
-        <h2 class="mt-8 text-lg sm:text-xl font-bold text-blue-dark">Ma mission : vous accompagner dans vos projets patrimoniaux</h2>
-        <p class="mt-2 text-base leading-relaxed color-grey-light">
+        <h2 class="mt-8 text-lg sm:text-xl font-bold text-accent">Ma mission : vous accompagner dans vos projets patrimoniaux</h2>
+        <p class="mt-2 text-base leading-relaxed text-primary">
           En tant que conseiller en gestion de patrimoine à Meudon, je m'engage à vous accompagner sur le long terme dans la réalisation de vos
           objectifs financiers et patrimoniaux :
         </p>
         <ul class="mt-2 list-disc list-inside text-base leading-relaxed">
-          <li><strong>Constituer et développer votre patrimoine</strong> selon vos capacités et vos projets de vie</li>
-          <li><strong>Protéger vos proches</strong> grâce à des solutions d'assurance et de prévoyance adaptées</li>
-          <li><strong>Préparer sereinement votre retraite</strong> avec des stratégies d'épargne personnalisées</li>
-          <li><strong>Optimiser votre fiscalité</strong> en tirant parti des dispositifs légaux existants</li>
+          <li class="text-accent"><strong>Constituer et développer votre patrimoine</strong> selon vos capacités et vos projets de vie</li>
+          <li class="text-accent"><strong>Protéger vos proches</strong> grâce à des solutions d'assurance et de prévoyance adaptées</li>
+          <li class="text-accent"><strong>Préparer sereinement votre retraite</strong> avec des stratégies d'épargne personnalisées</li>
+          <li class="text-accent"><strong>Optimiser votre fiscalité</strong> en tirant parti des dispositifs légaux existants</li>
         </ul>
-        <p class="mt-2 text-base leading-relaxed color-grey-light">
+        <p class="mt-2 text-base leading-relaxed text-primary">
           Cet accompagnement sur mesure peut s'effectuer à votre domicile dans la région parisienne ou en visioconférence.
         </p>
 
-        <h2 class="mt-8 text-lg sm:text-xl font-bold text-blue-dark">Mes valeurs : indépendance et équilibre de vie</h2>
-        <p class="mt-2 text-base leading-relaxed color-grey-light">
+        <h2 class="mt-8 text-lg sm:text-xl font-bold text-accent">Mes valeurs : indépendance et équilibre de vie</h2>
+        <p class="mt-2 text-base leading-relaxed text-primary">
           Cette reconversion professionnelle me permet aujourd'hui d'exercer en toute indépendance, tout en préservant mes priorités essentielles : ma
           famille et ma qualité de vie.
         </p>
-        <p class="mt-2 text-base leading-relaxed color-grey-light">
+        <p class="mt-2 text-base leading-relaxed text-primary">
           C'est cet équilibre que je souhaite également vous aider à atteindre dans la gestion de votre patrimoine : créer de la richesse sans
           sacrifier votre sérénité.
         </p>
+        <img
+          *ngIf="isDarkMode"
+          ngSrc="assets/logo-secondaire-dark-mode.png"
+          alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
+          width="1130"
+          height="265"
+          priority
+          class="ml-4 mt-8 h-16 md:hidden w-auto" />
+        <img
+          *ngIf="!isDarkMode"
+          ngSrc="assets/logo-secondaire-light-mode.png"
+          alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
+          width="1130"
+          height="265"
+          priority
+          class="ml-4 mt-8 h-16 md:hidden w-auto" />
       </div>
 
       <div class="mb-8 lg:mb-0 lg:w-1/3 shrink-0">
@@ -59,6 +75,23 @@
           priority
           sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 33vw"
           class="w-full max-w-xs sm:max-w-sm lg:max-w-md mx-auto lg:mx-0 object-cover rounded-lg" />
+
+        <img
+          *ngIf="isDarkMode"
+          ngSrc="assets/logo-secondaire-dark-mode.png"
+          alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
+          width="1130"
+          height="265"
+          priority
+          class="ml-4 my-18 h-24 hidden md:block w-auto" />
+        <img
+          *ngIf="!isDarkMode"
+          ngSrc="assets/logo-secondaire-light-mode.png"
+          alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
+          width="1130"
+          height="265"
+          priority
+          class="ml-4 my-18 h-24 hidden md:block w-auto" />
       </div>
     </div>
   </div>

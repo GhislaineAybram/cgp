@@ -1,4 +1,4 @@
-<section class="w-full relative overflow-hidden bg-white-light">
+<section class="w-full relative overflow-hidden bg-light-mode">
   <div>
     <div class="flex flex-col md:flex-row w-full gap-0 min-h-screen">
       <!-- Colonne de navigation - Fond bleu -->
@@ -7,7 +7,7 @@
       </div>
 
       <!-- Corps de texte - Fond bleu ciel -->
-      <div class="flex-1 bg-blue-very-light p-6 md:p-8 lg:p-10">
+      <div class="flex-1 bg-blue-100 p-6 md:p-8 lg:p-10">
         <app-admin-table
           databaseTableName="Évènements"
           [databaseItemsCount]="eventsCount"
@@ -16,17 +16,17 @@
           (createClicked)="onCreation()"
           (deleteClicked)="onDelete($event)">
         </app-admin-table>
-      <app-admin-edition
-        [isVisible]="isModalOpen"
-        [selectedItem]="selectedEvening"
-        [mode]="modalMode"
-        editionTitle="Éditer l'événement"
-        creationTitle="Créer un nouvel événement"
-        [databaseTable]="eventsTable"
-        (closeModal)="closeModal()"
-        (updateItemWithFiles)="onUpdate($event)"
-        (createItemWithFiles)="onCreate($event)">
-      </app-admin-edition>
+        <app-admin-edition
+          [isVisible]="isModalOpen"
+          [selectedItem]="selectedEvening"
+          [mode]="modalMode"
+          editionTitle="Éditer l'événement"
+          creationTitle="Créer un nouvel événement"
+          [databaseTable]="eventsTable"
+          (closeModal)="closeModal()"
+          (updateItemWithFiles)="onUpdate($event)"
+          (createItemWithFiles)="onCreate($event)">
+        </app-admin-edition>
         <app-modal-success [(isVisible)]="showSuccessModal"></app-modal-success>
         <app-modal-error [(isVisible)]="showErrorModal"></app-modal-error>
         <app-modal-confirmation [(isVisible)]="showConfirmationModal" (confirmed)="confirmDelete()"> </app-modal-confirmation>
