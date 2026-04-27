@@ -1,12 +1,13 @@
 <div class="bg-light-mode py-12 sm:py-16">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:text-center">
+    <div class="mx-auto max-w-4xl lg:text-center">
       <h2 class="text-3xl font-bold text-center tracking-tight text-pretty color-blue-800 sm:text-4xl lg:text-5xl section-line">Mes services</h2>
-      <p class="mt-6 text-base color-grey-800 leading-relaxed sm:text-lg sm:max-w-2xl sm:mx-auto">
+      <p class="mt-6 text-base color-grey-800 leading-relaxed sm:text-lg sm:mx-auto">
         Découvrez mes domaines d'expertise et les solutions que je peux vous apporter :
       </p>
     </div>
-    <div class="mx-auto mt-12 max-w-2xl lg:max-w-4xl">
+
+    <div class="mx-auto mt-8 max-w-4xl lg:max-w-4xl">
       <div class="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
         @for (pillar of pillars; track pillar.id) {
           <article class="bg-blue-100 rounded-2xl p-6 hover:shadow-md transition-shadow duration-300">
@@ -26,12 +27,46 @@
               </span>
               {{ pillar.name }}
             </h3>
-
             <p class="mt-2 ml-16 text-sm sm:text-base color-grey-800 leading-snug">
               {{ pillar.description }}
             </p>
           </article>
         }
+      </div>
+
+      <!-- Encart partenaire -->
+      <div class="mt-8">
+        <div class="bg-grey-100 border border-color-bronze-600 rounded-2xl p-6 shadow-sm">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+            <div class="flex-1 text-center sm:text-left">
+              <p class="text-base font-semibold color-blue-800 uppercase tracking-wide">Partenaire</p>
+              <p class="mt-2 text-sm color-text italic leading-relaxed">
+                En ce moment, l'un de mes partenaires vous permet de simuler et comparer votre assurance emprunteur en quelques minutes - la
+                résiliation de votre ancien contrat est prise en charge.
+              </p>
+            </div>
+
+            <div class="flex justify-center sm:flex-shrink-0">
+              <a
+                href="https://comparer-assurance-pret.april.fr"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center px-4 py-2.5 text-sm font-semibold button-action rounded-lg whitespace-nowrap">
+                Faire une simulation
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  focusable="false"
+                  class="ml-2 h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
