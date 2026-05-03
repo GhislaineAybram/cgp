@@ -14,7 +14,7 @@ import { ModalConfirmationComponent } from '../../../shared/components/modal-con
   standalone: true,
   imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmationComponent],
   templateUrl: './admin-medias.component.html',
-  styleUrls: ['./admin-medias.component.scss'],
+  styleUrls: [],
 })
 export class AdminMediasComponent implements OnInit {
   videosCount = 0;

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './admin-edition.component.html',
-  styleUrl: './admin-edition.component.scss',
+  styleUrls: [],
 })
 export class AdminEditionComponent<T extends object> implements OnChanges {
   @Input() isVisible = false;

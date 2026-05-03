@@ -14,7 +14,7 @@ import { ModalConfirmationComponent } from '../../../shared/components/modal-con
   standalone: true,
   imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmationComponent],
   templateUrl: './admin-feedback.component.html',
-  styleUrl: './admin-feedback.component.scss',
+  styleUrls: [],
 })
 export class AdminFeedbackComponent implements OnInit {
   feedbacksCount = 0;

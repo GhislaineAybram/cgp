@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './admin-pannel.component.html',
-  styleUrl: './admin-pannel.component.scss',
+  styleUrls: [],
 })
 export class AdminPannelComponent {
   @Input() activePage = '';

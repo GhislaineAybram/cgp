@@ -14,7 +14,7 @@ import { ModalConfirmationComponent } from '../../../shared/components/modal-con
   standalone: true,
   imports: [AdminPannelComponent, AdminTableComponent, AdminEditionComponent, ModalSuccessComponent, ModalErrorComponent, ModalConfirmationComponent],
   templateUrl: './admin-events.component.html',
-  styleUrls: ['./admin-events.component.scss'],
+  styleUrls: [],
 })
 export class AdminEventsComponent implements OnInit {
   eventsCount = 0;

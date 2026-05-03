@@ -20,7 +20,7 @@ import { FeedbackService } from '../../core/services/feedback.service';
   standalone: true,
   imports: [AdminPannelComponent],
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+  styleUrls: [],
 })
 export class AdminComponent {
   articlesCount = signal<number>(0);

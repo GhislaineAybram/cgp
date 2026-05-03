@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './modal-confirmation.component.html',
-  styleUrls: ['./modal-confirmation.component.scss'],
+  styleUrls: [],
 })
 export class ModalConfirmationComponent {
   @Input() isVisible = false;

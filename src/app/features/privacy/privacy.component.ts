@@ -16,7 +16,7 @@ import ownerData from '../../../assets/owner-data.json';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './privacy.component.html',
-  styleUrls: ['./privacy.component.scss'],
+  styleUrls: [],
 })
 export class PrivacyComponent implements OnInit {
   private meta = inject(Meta);

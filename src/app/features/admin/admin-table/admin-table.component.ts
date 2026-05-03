@@ -7,7 +7,7 @@ import { Table, TableColumn } from '../../../models/table';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './admin-table.component.html',
-  styleUrl: './admin-table.component.scss',
+  styleUrls: [],
 })
 export class AdminTableComponent<T extends object> {
   @Input() databaseTableName = 'Table name';

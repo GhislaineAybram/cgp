@@ -14,7 +14,7 @@ import { Pillar } from '../../../models/pillar';
   standalone: true,
   imports: [],
   templateUrl: './pillars.component.html',
-  styleUrls: ['./pillars.component.scss'],
+  styleUrls: [],
 })
 export class PillarsComponent implements OnInit {
   pillars: Pillar[] = [];

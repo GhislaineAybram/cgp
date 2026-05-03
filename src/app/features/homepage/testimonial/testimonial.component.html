@@ -18,14 +18,10 @@
           <p class="text-center py-8">Aucun témoignage disponible</p>
         } @else {
           <!-- Testimonials Section -->
-          <section class="relative isolate overflow-hidden bg-light-mode px-6 py-12 sm:py-16 lg:px-8">
-            <div class="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,var(--color-blue-100),white)] opacity-20"></div>
-            <div
-              class="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-light-mode shadow-xl ring-1 shadow-[0_20px_25px_-5px_var(--color-blue-700)] ring-[color:var(--color-blue-100)] sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
-
+          <section class="relative isolate overflow-hidden bg-light-mode px-6 py-5 sm:py-8 lg:px-8">
             <div class="mx-auto max-w-2xl lg:max-w-2xl">
               <!-- Carousel Container -->
-              <div class="relative h-[200px] flex items-center">
+              <div class="relative flex flex-col">
                 <!-- Navigation Arrows -->
                 <button
                   (click)="previousSlide()"
@@ -48,12 +44,16 @@
                 </button>
 
                 <!-- Feedback Content -->
-                <figure class="px-6 sm:px-16 py-6 w-full transition-all duration-500 ease-in-out">
-                  <blockquote class="text-center mx-auto max-w-md text-base italic font-medium sm:text-lg md:text-xl/8">
-                    <p class="transition-opacity duration-300">"{{ currentFeedback?.feedback }}"</p>
+                <div class="relative bg-grey-100 p-8 sm:p-10 flex flex-col overflow-hidden w-full">
+                  <div class="absolute top-0 left-0 w-[3px] h-full bg-current color-bronze-600"></div>
+                  <div class="text-[4.5rem] leading-none mb-1 select-none color-bronze-600" style="font-family: 'Cormorant Garamond', serif">“</div>
+                  <blockquote class="italic text-sm sm:text-base leading-relaxed color-grey-800 flex-1 mb-7">
+                    <p class="transition-opacity duration-300">{{ currentFeedback?.feedback }}</p>
                   </blockquote>
 
-                  <div class="flex justify-center items-center space-x-8 mb-4 mt-8">
+                  <div class="h-px bg-bronze-400 mb-4"></div>
+
+                  <div class="flex items-center justify-between">
                     <div class="color-grey-800 text-sm font-semibold sm:text-base">
                       {{ currentFeedback?.author }}
                     </div>
@@ -63,7 +63,7 @@
                       }
                     </div>
                   </div>
-                </figure>
+                </div>
               </div>
 
               <!-- Dots Navigation -->
@@ -79,19 +79,6 @@
             </div>
           </section>
         }
-      </div>
-    </div>
-
-    <div class="mt-6 flex flex-col lg:flex-row justify-center items-center lg:space-x-36">
-      <div class="text-center lg:text-left">
-        <h2 class="text-3xl p-2 stabilo-effect tracking-tight text-balance sm:text-4xl">Rejoignez mes clients satisfaits</h2>
-        <p class="mt-4 p-2 text-lg/8 text-pretty">Planifions un premier échange gratuit pour faire connaissance.</p>
-      </div>
-
-      <div class="mt-4 lg:mt-0">
-        <a href="/contact">
-          <button class="px-10 py-4 !text-lg font-semibold button-action rounded-xl shadow-md">Je prends contact</button>
-        </a>
       </div>
     </div>
   </div>

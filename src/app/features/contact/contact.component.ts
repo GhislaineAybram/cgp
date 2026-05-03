@@ -17,7 +17,7 @@ import ownerData from '../../../assets/owner-data.json';
   standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss'],
+  styleUrls: [],
 })
 export class ContactComponent implements OnInit {
   private meta = inject(Meta);

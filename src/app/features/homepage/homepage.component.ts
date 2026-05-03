@@ -7,20 +7,29 @@
  */
 
 import { Component, inject, OnInit } from '@angular/core';
-import { TestimonialComponent } from '../testimonial/testimonial.component';
-import { EventsComponent } from '../events/events.component';
-import { PillarsComponent } from '../pillars/pillars.component';
-import { AboutComponent } from '../about/about.component';
+import { TestimonialComponent } from './testimonial/testimonial.component';
+import { EventsComponent } from './events/events.component';
+import { PillarsComponent } from './pillars/pillars.component';
+import { AboutComponent } from './about/about.component';
 import { Meta } from '@angular/platform-browser';
-import { NewsPreviewComponent } from '../news-preview/news-preview.component';
-import { MediasPreviewComponent } from '../medias-preview/medias-preview.component';
+import { NewsPreviewComponent } from './news-preview/news-preview.component';
+import { MediasPreviewComponent } from './medias-preview/medias-preview.component';
+import { ContactSectionComponent } from './contact-section/contact-section.component';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [AboutComponent, PillarsComponent, TestimonialComponent, EventsComponent, MediasPreviewComponent, NewsPreviewComponent],
+  imports: [
+    AboutComponent,
+    PillarsComponent,
+    TestimonialComponent,
+    EventsComponent,
+    MediasPreviewComponent,
+    NewsPreviewComponent,
+    ContactSectionComponent,
+  ],
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss'],
+  styleUrls: [],
 })
 export class HomepageComponent implements OnInit {
   private meta = inject(Meta);

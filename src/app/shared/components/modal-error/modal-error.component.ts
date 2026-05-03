@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './modal-error.component.html',
-  styleUrls: ['./modal-error.component.scss'],
+  styleUrls: [],
 })
 export class ModalErrorComponent {
   @Input() isVisible = false;

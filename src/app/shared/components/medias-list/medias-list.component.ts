@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule, NgOptimizedImage],
   templateUrl: './medias-list.component.html',
-  styleUrls: ['./medias-list.component.scss'],
+  styleUrls: [],
 })
 export class MediasListComponent {
   @Input() medias: Video[] = [];

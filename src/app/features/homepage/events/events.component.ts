@@ -16,7 +16,7 @@ import { EventsService } from '../../../core/services/events.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss'],
+  styleUrls: [],
 })
 export class EventsComponent implements OnInit {
   evenings: Evening[] = [];

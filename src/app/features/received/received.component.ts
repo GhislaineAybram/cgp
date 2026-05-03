@@ -14,7 +14,7 @@ import { Meta } from '@angular/platform-browser';
   standalone: true,
   imports: [],
   templateUrl: './received.component.html',
-  styleUrls: ['./received.component.scss'],
+  styleUrls: [],
 })
 export class ReceivedComponent implements OnInit {
   private meta = inject(Meta);

@@ -18,7 +18,7 @@ import { Article } from '../../../models/article';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss'],
+  styleUrls: [],
 })
 export class NewsListComponent {
   @Input() articles: Article[] = [];

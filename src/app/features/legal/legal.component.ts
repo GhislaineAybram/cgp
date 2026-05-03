@@ -16,7 +16,7 @@ import ownerData from '../../../assets/owner-data.json';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './legal.component.html',
-  styleUrls: ['./legal.component.scss'],
+  styleUrls: [],
 })
 export class LegalComponent implements OnInit {
   private meta = inject(Meta);

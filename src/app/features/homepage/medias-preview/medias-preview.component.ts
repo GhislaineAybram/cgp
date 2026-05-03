@@ -18,7 +18,7 @@ import { MediasListComponent } from '../../../shared/components/medias-list/medi
   standalone: true,
   imports: [CommonModule, RouterModule, MediasListComponent],
   templateUrl: './medias-preview.component.html',
-  styleUrls: ['./medias-preview.component.scss'],
+  styleUrls: [],
 })
 export class MediasPreviewComponent implements OnInit {
   medias: Video[] = [];

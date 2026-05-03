@@ -13,6 +13,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './page-not-found.component.html',
-  styleUrl: './page-not-found.component.scss',
+  styleUrls: [],
 })
 export class PageNotFoundComponent {}

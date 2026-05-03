@@ -18,7 +18,7 @@ import { NewsListComponent } from '../../shared/components/news-list/news-list.c
   standalone: true,
   imports: [CommonModule, RouterModule, NewsListComponent],
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss'],
+  styleUrls: [],
 })
 export class NewsComponent implements OnInit {
   articles: Article[] = [];

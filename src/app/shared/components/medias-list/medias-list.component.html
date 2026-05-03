@@ -34,11 +34,11 @@
                 <img
                   [ngSrc]="mediasService.getMediaThumbnail(media.link)"
                   [alt]="'Aperçu vidéo : ' + (media.title || 'vidéo')"
-                  [width]="480"
-                  [height]="270"
+                  width="320"
+                  height="180"
                   loading="lazy"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  class="w-full h-48 object-cover rounded-lg group-hover:opacity-90 transition-opacity" />
+                  class="w-full aspect-video object-cover rounded-lg group-hover:opacity-90 transition-opacity" />
                 <!-- Icône play -->
                 <div class="absolute inset-0 flex items-center justify-center">
                   <div class="bg-bronze-600 bg-opacity-60 rounded-full p-3 hover:bg-opacity-80 transition-all">

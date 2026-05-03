@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './admin-login.component.html',
-  styleUrls: ['./admin-login.component.scss'],
+  styleUrls: [],
 })
 export class AdminLoginComponent {
   private readonly authService = inject(AuthService);

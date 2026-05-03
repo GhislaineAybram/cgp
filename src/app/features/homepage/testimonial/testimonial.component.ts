@@ -16,7 +16,7 @@ import { FeedbackService } from '../../../core/services/feedback.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './testimonial.component.html',
-  styleUrls: ['./testimonial.component.scss'],
+  styleUrls: [],
 })
 export class TestimonialComponent implements OnInit {
   feedbacks: Feedback[] = [];

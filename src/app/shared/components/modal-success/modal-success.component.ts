@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './modal-success.component.html',
-  styleUrls: ['./modal-success.component.scss'],
+  styleUrls: [],
 })
 export class ModalSuccessComponent {
   @Input() isVisible = false;

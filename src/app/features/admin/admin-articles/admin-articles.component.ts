@@ -23,7 +23,7 @@ import { ModalConfirmationComponent } from '../../../shared/components/modal-con
     ModalConfirmationComponent,
   ],
   templateUrl: './admin-articles.component.html',
-  styleUrls: ['./admin-articles.component.scss'],
+  styleUrls: [],
 })
 export class AdminArticlesComponent implements OnInit {
   articlesCount = 0;
