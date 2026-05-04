@@ -1,53 +1,111 @@
-<div class="footer w-full z-10 font-body text-sm font-medium p-8 flex flex-col items-center">
-  <div class="cursor-pointer flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto md:space-y-0 md:space-x-4">
-    <p routerLink="/legal" class="px-3 py-2 rounded-md hover-footer">
-      {{ legal }}
-    </p>
-    <p routerLink="/privacy" class="px-3 py-2 rounded-md hover-footer">
-      {{ privacy }}
-    </p>
-    <p routerLink="/contact" class="px-3 py-2 rounded-md hover-footer">
-      {{ contact }}
-    </p>
-    <!-- Facebook -->
-    <a
-      [href]="ownerData.facebook"
-      target="_blank"
-      aria-label="Page site externe - nouvel onglet - Aller vers ma page Facebook"
-      rel="noopener noreferrer"
-      class="[&>svg]:h-4 [&>svg]:w-4 px-3 py-2 rounded-md hover-footer">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 320 512" aria-hidden="true" focusable="false">
-        <path
-          d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
-      </svg>
-    </a>
+<footer class="footer w-full">
+  <div class="mx-auto max-w-screen-2xl px-8 lg:px-16 py-10 lg:py-12">
+    <!-- ── Ligne du haut : 4 colonnes ── -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 pb-10">
+      <!-- Col 1 : Identité + Facebook -->
+      <div class="flex flex-col gap-4">
+        <div>
+          <p class="text-base font-semibold font-light">
+            Julien
+            <span class="color-bronze-600">Poudras</span>
+          </p>
+          <p class="text-xs uppercase font-light mt-0.5">Conseiller en Gestion de Patrimoine</p>
+        </div>
+
+        <!-- logo -->
+        <img
+          *ngIf="isDarkMode"
+          ngSrc="assets/logo-principal-dark-mode.png"
+          alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
+          width="1128"
+          height="764"
+          priority
+          class="mt-10 w-56 h-auto mx-auto sm:mx-0" />
+        <img
+          *ngIf="!isDarkMode"
+          ngSrc="assets/logo-principal-dark-mode.png"
+          alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
+          width="1128"
+          height="764"
+          priority
+          class="mt-10 w-56 h-auto mx-auto sm:mx-0" />
+      </div>
+
+      <!-- Col 2 : Navigation -->
+      <div>
+        <p class="text-xs tracking-widest uppercase font-light font-medium mb-4">Navigation</p>
+        <div class="flex flex-col gap-2">
+          <a href="#about" class="text-sm summary-link">À propos</a>
+          <a href="#pillars" class="text-sm summary-link">Services</a>
+          <a href="#news" class="text-sm summary-link">Actualités</a>
+          <a href="#medias" class="text-sm summary-link">Médias</a>
+          <a href="#testimonial" class="text-sm summary-link">Témoignages</a>
+        </div>
+      </div>
+
+      <!-- Col 3 : Légal -->
+      <div>
+        <p class="text-xs tracking-widest uppercase font-light font-medium mb-4">Légal</p>
+        <div class="flex flex-col gap-2">
+          <p routerLink="/legal" class="text-sm summary-link">
+            {{ legal }}
+          </p>
+          <p routerLink="/privacy" class="text-sm summary-link">
+            {{ privacy }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Col 4 : Contact -->
+      <div>
+        <p class="text-xs tracking-widest uppercase font-light font-medium mb-4">Contact</p>
+        <div class="flex flex-col gap-2">
+          <p routerLink="/contact" class="text-sm summary-link">
+            {{ contact }}
+          </p>
+          <a
+            [href]="ownerData.facebook"
+            target="_blank"
+            aria-label="Aller vers ma page Facebook - nouvel onglet"
+            rel="noopener noreferrer"
+            class="w-8 h-8 flex items-center justify-center border text-sm summary-link">
+            <svg
+              class="h-3.5 w-3.5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 320 512"
+              aria-hidden="true"
+              focusable="false">
+              <path
+                d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7
+                    20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4
+                    0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- fin grille 4 colonnes -->
+
+    <div class="h-px bg-bronze-600 mb-2"></div>
+
+    <!-- ── Ligne du bas : copyright + mentions légales ── -->
+    <div class="pt-4 flex flex-col lg:flex-row justify-between items-start gap-4">
+      <p class="text-xs font-light shrink-0">
+        {{ copyright }}
+      </p>
+
+      <div class="flex flex-col gap-1 text-[9px] font-light lg:text-right max-w-2xl">
+        <p>Inscrit au R.S.A.C de Nanterre sous le numéro 908 219 108</p>
+        <p>
+          Mandataire d’intermédiaire en assurances, Intermédiaire en opérations de banque et de services de paiement, inscrit à l’ORIAS sous le
+          n°22001454 (www.orias.fr )
+        </p>
+        <p>Sous le contrôle de l’Autorité de Contrôle Prudentiel et de Résolution (ACPR), 4 Place de Budapest - 75436 PARIS Cedex 09</p>
+        <p>Assurance RCP auprès de ZURICH INSURANCE PLC - 112, avenue de Wagram 75017 PARIS</p>
+        <p>Attestation d’habilitation délivrée par la CCI de Toulouse n° unique d’immatriculation 384 850 095</p>
+        <p>Membre de l’ANACOFI association agréée par l’AMF</p>
+      </div>
+    </div>
   </div>
-  <img
-    *ngIf="isDarkMode"
-    ngSrc="assets/logo-principal-dark-mode.png"
-    alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
-    width="1128"
-    height="764"
-    priority
-    class="mt-10 h-48 w-auto" />
-  <img
-    *ngIf="!isDarkMode"
-    ngSrc="assets/logo-principal-dark-mode.png"
-    alt="Logo du site Julien Poudras - Conseiller en Gestion de Patrimoine"
-    width="1128"
-    height="764"
-    priority
-    class="mt-10 h-48 w-auto" />
-  <p class="mt-12 text-center w-full text-xs">{{ copyright }}</p>
-  <div class="flex-col mt-6 text-center w-full text-[10.5px] font-light">
-    <p>Inscrit au R.S.A.C de Nanterre sous le numéro 908 219 108</p>
-    <p>
-      Mandataire d’intermédiaire en assurances, Intermédiaire en opérations de banque et de services de paiement, inscrit à l’ORIAS sous le n°22001454
-      (www.orias.fr )
-    </p>
-    <p>Sous le contrôle de l’Autorité de Contrôle Prudentiel et de Résolution (ACPR), 4 Place de Budapest - 75436 PARIS Cedex 09</p>
-    <p>Assurance RCP auprès de ZURICH INSURANCE PLC - 112, avenue de Wagram 75017 PARIS</p>
-    <p>Attestation d’habilitation délivrée par la CCI de Toulouse n° unique d’immatriculation 384 850 095</p>
-    <p>Membre de l’ANACOFI association agréée par l’AMF</p>
-  </div>
-</div>
+</footer>

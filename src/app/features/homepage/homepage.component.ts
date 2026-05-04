@@ -15,6 +15,7 @@ import { Meta } from '@angular/platform-browser';
 import { NewsPreviewComponent } from './news-preview/news-preview.component';
 import { MediasPreviewComponent } from './medias-preview/medias-preview.component';
 import { ContactSectionComponent } from './contact-section/contact-section.component';
+import { HeroComponent } from './hero/hero.component';
 
 @Component({
   selector: 'app-homepage',
@@ -27,6 +28,7 @@ import { ContactSectionComponent } from './contact-section/contact-section.compo
     MediasPreviewComponent,
     NewsPreviewComponent,
     ContactSectionComponent,
+    HeroComponent,
   ],
   templateUrl: './homepage.component.html',
   styleUrls: [],
