@@ -25,6 +25,7 @@ export class FooterComponent implements OnInit {
   legal!: string;
   privacy!: string;
   contact!: string;
+  sitemap!: string;
   copyright!: string;
   ownerData = ownerData;
 
@@ -36,6 +37,7 @@ export class FooterComponent implements OnInit {
     this.legal = 'Mentions légales';
     this.privacy = 'Politique de confidentialité';
     this.contact = 'Contact';
+    this.sitemap = 'Plan du site';
     this.copyright = '© 2025 Julien POUDRAS - Tous droits réservés';
   }
 }

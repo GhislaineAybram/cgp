@@ -1,7 +1,7 @@
 <footer class="footer w-full">
   <div class="mx-auto max-w-screen-2xl px-8 lg:px-16 py-10 lg:py-12">
-    <!-- ── Ligne du haut : 4 colonnes ── -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 pb-10">
+    <!-- ── Ligne du haut : 5 colonnes ── -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-10 pb-10">
       <!-- Col 1 : Identité + Facebook -->
       <div class="flex flex-col gap-4">
         <div>
@@ -84,8 +84,19 @@
           </a>
         </div>
       </div>
+
+      <!-- Col 5 : Accessibilité -->
+      <div>
+        <p class="text-xs tracking-widest uppercase font-light font-medium mb-4">Accessibilité</p>
+        <div class="flex flex-col gap-2">
+          <p routerLink="/sitemap" class="text-sm summary-link">
+            {{ sitemap }}
+          </p>
+        </div>
+      </div>
+      
     </div>
-    <!-- fin grille 4 colonnes -->
+    <!-- fin grille 5 colonnes -->
 
     <div class="h-px bg-bronze-600 mb-2"></div>
 
