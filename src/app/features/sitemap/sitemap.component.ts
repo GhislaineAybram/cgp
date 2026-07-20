@@ -5,8 +5,6 @@ import { RouterLink } from '@angular/router';
   selector: 'app-sitemap',
   imports: [RouterLink],
   templateUrl: './sitemap.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
-export class SitemapComponent {
-
-}
+export class SitemapComponent {}

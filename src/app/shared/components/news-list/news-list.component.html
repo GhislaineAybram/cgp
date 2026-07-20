@@ -33,7 +33,12 @@
                   [href]="article.link"
                   class="visible-link text-slate-800 font-semibold text-sm flex items-center underline decoration-current"
                   target="_blank"
-                  [attr.aria-label]="'Page site externe - nouvel onglet - Lire l\'article complet ' + (article.title || 'article')"
+                  [attr.aria-label]="
+                    'Page site externe - nouvel onglet - Lire l\'article complet sur ' +
+                    (article.source || 'source') +
+                    ' - ' +
+                    (article.title || 'article')
+                  "
                   rel="noopener noreferrer">
                   <span>
                     Lire l'article complet sur <i>{{ article.source }}</i>

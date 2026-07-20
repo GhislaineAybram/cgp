@@ -25,7 +25,7 @@
         <div class="px-2 py-2 flex items-start h-[3rem] overflow-hidden">
           @switch (col.type) {
             @case ('image') {
-              <img [src]="row[col.key]" alt="image evenement" class="w-10 h-8 rounded object-cover" />
+              <img [src]="row[col.key]" alt="" class="w-10 h-8 rounded object-cover" />
             }
             @case ('number') {
               <span class="flex items-center gap-1">
