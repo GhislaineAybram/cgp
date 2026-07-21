@@ -16,27 +16,27 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^20.1.1",
-    "@angular/compiler": "^20.1.1",
-    "@angular/core": "^20.1.1",
-    "@angular/forms": "^20.1.1",
-    "@angular/platform-browser": "^20.1.1",
-    "@angular/platform-browser-dynamic": "^20.1.1",
-    "@angular/platform-server": "^20.1.1",
-    "@angular/router": "^20.1.1",
-    "@angular/ssr": "^20.1.1",
-    "@supabase/supabase-js": "^2.75.1",
+    "@angular/common": "^20.3.26",
+    "@angular/compiler": "^20.3.26",
+    "@angular/core": "^20.3.26",
+    "@angular/forms": "^20.3.26",
+    "@angular/platform-browser": "^20.3.26",
+    "@angular/platform-browser-dynamic": "^20.3.26",
+    "@angular/platform-server": "^20.3.26",
+    "@angular/router": "^20.3.26",
+    "@angular/ssr": "^20.3.26",
+    "@supabase/supabase-js": "^2.110.8",
     "@tailwindcss/postcss": "^4.1.8",
     "dotenv": "^17.2.1",
-    "express": "^4.18.2",
+    "express": "^4.22.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.1.1",
-    "@angular/cli": "^20.1.1",
-    "@angular/compiler-cli": "^20.1.1",
+    "@angular/build": "^20.3.32",
+    "@angular/cli": "^20.3.32",
+    "@angular/compiler-cli": "^20.3.26",
     "@stylistic/eslint-plugin": "^5.3.1",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
@@ -56,10 +56,5 @@
     "tailwindcss": "^4.1.18",
     "typescript": "~5.8.3",
     "typescript-eslint": "8.40.0"
-  },
-  "overrides": {
-    "@supabase/supabase-js": {
-      "@supabase/auth-js": "2.61.0"
-    }
   }
 }
