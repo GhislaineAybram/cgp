@@ -18,59 +18,85 @@ export class ArticlesService {
   private readonly supabase = inject(SupabaseService);
 
   async getAllArticles(): Promise<Article[]> {
-    let result: Article[] = [];
-    const { data, error } = await this.supabase.getAllArticles();
+    if (!this.supabase.isAvailable) {
+      return [];
+    }
+
+    const { data, error } = await this.supabase.client.from('article').select('*').order('date', { ascending: false });
+
     if (error) {
       console.error('Error fetching articles:', error);
-    } else {
-      result = data ?? [];
+      throw error;
     }
-    return result;
+
+    return data ?? [];
   }
 
   async getFirstArticles(limit: number): Promise<Article[]> {
-    let result: Article[] = [];
-    const { data, error } = await this.supabase.getArticlesByLimit(limit);
+    if (!this.supabase.isAvailable) {
+      return [];
+    }
+    const { data, error } = await this.supabase.client.from('article').select('*').order('date', { ascending: false }).limit(limit);
+
     if (error) {
       console.error('Error fetching first articles:', error);
-    } else {
-      result = data ?? [];
+      throw error;
     }
-    return result;
+
+    return data ?? [];
   }
 
-  async loadArticlesCount() {
-    let result = 0;
-    const { data, error } = await this.supabase.getArticlesCount();
+  async loadArticlesCount(): Promise<number> {
+    if (!this.supabase.isAvailable) {
+      return 0;
+    }
+    const { count, error } = await this.supabase.client.from('article').select('*', { count: 'exact', head: true });
+
     if (error) {
       console.error('Error fetching articles count:', error);
-    } else {
-      result = data ?? 0;
+      throw error;
     }
-    return result;
+
+    return count ?? 0;
   }
 
-  async updateArticle(id: string, updates: Partial<Article>): Promise<{ data: Article | null; error: Error | null }> {
-    const { data, error } = await this.supabase.updateArticle(id, updates);
+  async updateArticle(id: string, updates: Partial<Article>) {
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
+    }
+    const { data, error } = await this.supabase.client.from('article').update(updates).eq('id', id).select().single();
+
     if (error) {
       console.error('Error updating article:', error);
+      throw error;
     }
-    return { data, error };
+
+    return data;
   }
 
-  async createArticle(newArticle: ArticleNew): Promise<{ data: Article | null; error: Error | null }> {
-    const result = await this.supabase.newArticle(newArticle);
-    if (result.error) {
-      console.error('Error creating article:', result.error);
+  async createArticle(article: ArticleNew) {
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
     }
-    return result;
+    const { data, error } = await this.supabase.client.from('article').insert(article).select().single();
+
+    if (error) {
+      console.error('Error creating article:', error);
+      throw error;
+    }
+
+    return data;
   }
 
-  async deleteArticle(id: string): Promise<{ error: Error | null }> {
-    const result = await this.supabase.deleteArticle(id);
-    if (result.error) {
-      console.error('Error deleting article:', result.error);
+  async deleteArticle(id: string): Promise<void> {
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
     }
-    return result;
+    const { error } = await this.supabase.client.from('article').delete().eq('id', id);
+
+    if (error) {
+      console.error('Error deleting article:', error);
+      throw error;
+    }
   }
 }

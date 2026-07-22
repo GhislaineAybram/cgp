@@ -71,31 +71,29 @@ export class AdminMediasComponent implements OnInit {
       return;
     }
 
-    const { error } = await this.mediasService.updateVideo(updatedVideo.id, updatedVideo);
-
-    if (error) {
-      console.error('Erreur lors de la sauvegarde:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.mediasService.updateVideo(updatedVideo.id, updatedVideo);
       this.showSuccessModal = true;
       await this.loadVideos();
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.closeModal();
     }
-
-    this.closeModal();
   }
 
   async onCreate(newVideo: Partial<Video>) {
-    const { error } = await this.mediasService.createVideo(newVideo as VideoNew);
-
-    if (error) {
-      console.error('Erreur lors de la création:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.mediasService.createVideo(newVideo as VideoNew);
       this.showSuccessModal = true;
       await this.loadVideos();
+    } catch (error) {
+      console.error('Erreur lors de la création:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.closeModal();
     }
-
-    this.closeModal();
   }
 
   onDelete(video: Video) {
@@ -106,16 +104,15 @@ export class AdminMediasComponent implements OnInit {
   async confirmDelete() {
     if (!this.videoToDelete) return;
 
-    const { error } = await this.mediasService.deleteVideo(this.videoToDelete.id);
-
-    if (error) {
-      console.error('Erreur lors de la suppression:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.mediasService.deleteVideo(this.videoToDelete.id);
       this.showSuccessModal = true;
       await this.loadVideos();
+    } catch (error) {
+      console.error('Erreur lors de la suppression:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.videoToDelete = null;
     }
-
-    this.videoToDelete = null;
   }
 }

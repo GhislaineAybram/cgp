@@ -82,31 +82,29 @@ export class AdminArticlesComponent implements OnInit {
       return;
     }
 
-    const { error } = await this.articlesService.updateArticle(updatedArticle.id, updatedArticle);
-
-    if (error) {
-      console.error('Erreur lors de la sauvegarde:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.articlesService.updateArticle(updatedArticle.id, updatedArticle);
       this.showSuccessModal = true;
       await this.loadArticles();
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.closeModal();
     }
-
-    this.closeModal();
   }
 
   async onCreate(newArticle: Partial<Article>) {
-    const { error } = await this.articlesService.createArticle(newArticle as ArticleNew);
-
-    if (error) {
-      console.error('Erreur lors de la création:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.articlesService.createArticle(newArticle as ArticleNew);
       this.showSuccessModal = true;
       await this.loadArticles();
+    } catch (error) {
+      console.error('Erreur lors de la création:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.closeModal();
     }
-
-    this.closeModal();
   }
 
   onDelete(article: Article) {
@@ -117,16 +115,15 @@ export class AdminArticlesComponent implements OnInit {
   async confirmDelete() {
     if (!this.articleToDelete) return;
 
-    const { error } = await this.articlesService.deleteArticle(this.articleToDelete.id);
-
-    if (error) {
-      console.error('Erreur lors de la suppression:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.articlesService.deleteArticle(this.articleToDelete.id);
       this.showSuccessModal = true;
       await this.loadArticles();
+    } catch (error) {
+      console.error('Erreur lors de la suppression:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.articleToDelete = null;
     }
-
-    this.articleToDelete = null;
   }
 }

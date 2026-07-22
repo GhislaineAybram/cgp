@@ -71,31 +71,29 @@ export class AdminFeedbackComponent implements OnInit {
       return;
     }
 
-    const { error } = await this.feedbackService.updateFeedback(updatedFeedback.id, updatedFeedback);
-
-    if (error) {
-      console.error('Erreur lors de la sauvegarde:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.feedbackService.updateFeedback(updatedFeedback.id, updatedFeedback);
       this.showSuccessModal = true;
       await this.loadFeedbacks();
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.closeModal();
     }
-
-    this.closeModal();
   }
 
   async onCreate(newFeedback: Partial<Feedback>) {
-    const { error } = await this.feedbackService.createFeedback(newFeedback as FeedbackNew);
-
-    if (error) {
-      console.error('Erreur lors de la création:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.feedbackService.createFeedback(newFeedback as FeedbackNew);
       this.showSuccessModal = true;
       await this.loadFeedbacks();
+    } catch (error) {
+      console.error('Erreur lors de la création:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.closeModal();
     }
-
-    this.closeModal();
   }
 
   onDelete(feedback: Feedback) {
@@ -106,16 +104,15 @@ export class AdminFeedbackComponent implements OnInit {
   async confirmDelete() {
     if (!this.feedbackToDelete) return;
 
-    const { error } = await this.feedbackService.deleteFeedback(this.feedbackToDelete.id);
-
-    if (error) {
-      console.error('Erreur lors de la suppression:', error);
-      this.showErrorModal = true;
-    } else {
+    try {
+      await this.feedbackService.deleteFeedback(this.feedbackToDelete.id);
       this.showSuccessModal = true;
       await this.loadFeedbacks();
+    } catch (error) {
+      console.error('Erreur lors de la suppression:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.feedbackToDelete = null;
     }
-
-    this.feedbackToDelete = null;
   }
 }

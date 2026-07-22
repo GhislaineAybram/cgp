@@ -19,90 +19,117 @@ export class MediasService {
   private readonly supabase = inject(SupabaseService);
 
   async getAllVideos(): Promise<Video[]> {
-    let result: Video[] = [];
-    const { data, error } = await this.supabase.getAllVideos();
+    if (!this.supabase.isAvailable) {
+      return [];
+    }
+    const { data, error } = await this.supabase.client.from('video').select('*').order('date', { ascending: false });
+
     if (error) {
       console.error('Error fetching videos:', error);
-    } else {
-      result = data ?? [];
+      throw error;
     }
-    return result;
+
+    return data ?? [];
   }
 
-  async loadMediasCount() {
-    let result = 0;
-    const { data, error } = await this.supabase.getVideosCount();
-    if (error) {
-      console.error('Error fetching medias count:', error);
-    } else {
-      result = data ?? 0;
+  async loadMediasCount(): Promise<number> {
+    if (!this.supabase.isAvailable) {
+      return 0;
     }
-    return result;
+    const { count, error } = await this.supabase.client.from('video').select('*', {
+      count: 'exact',
+      head: true,
+    });
+
+    if (error) {
+      console.error('Error fetching videos count:', error);
+      throw error;
+    }
+
+    return count ?? 0;
   }
 
   async getFirstVideos(limit: number): Promise<Video[]> {
-    let result: Video[] = [];
-    const { data, error } = await this.supabase.getVideosByLimit(limit);
-    if (error) {
-      console.error('Error fetching first videos:', error);
-    } else {
-      result = data ?? [];
+    if (!this.supabase.isAvailable) {
+      return [];
     }
-    return result;
+    const { data, error } = await this.supabase.client.from('video').select('*').order('date', { ascending: false }).limit(limit);
+
+    if (error) {
+      console.error('Error fetching videos:', error);
+      throw error;
+    }
+
+    return data ?? [];
   }
 
   getMediaThumbnail(link: string): string {
-    let result = 'assets/default-video-thumbnail.png';
+    const defaultThumbnail = 'assets/default-video-thumbnail.png';
 
-    // YouTube (youtu.be or youtube.com)
     const youtubeMatch = link.match(/(?:youtu\.be\/|youtube\.com.*[?&]v=)([^&]+)/);
+
     if (youtubeMatch) {
-      result = `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`;
+      return `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`;
     }
 
-    // Vimeo
     const vimeoMatch = link.match(/vimeo\.com\/(\d+)/);
+
     if (vimeoMatch) {
-      result = `https://vumbnail.com/${vimeoMatch[1]}.jpg`;
+      return `https://vumbnail.com/${vimeoMatch[1]}.jpg`;
     }
 
-    // Dailymotion classique
     const dailymotionMatch = link.match(/dailymotion\.com\/video\/([a-zA-Z0-9]+)/);
+
     if (dailymotionMatch) {
-      result = `https://www.dailymotion.com/thumbnail/video/${dailymotionMatch[1]}`;
+      return `https://www.dailymotion.com/thumbnail/video/${dailymotionMatch[1]}`;
     }
 
-    // Dailymotion embedded (geo.dailymotion.com/player.html?video=ID)
     const dailymotionEmbedMatch = link.match(/geo\.dailymotion\.com\/player\.html\?video=([a-zA-Z0-9]+)/);
+
     if (dailymotionEmbedMatch) {
-      result = `https://www.dailymotion.com/thumbnail/video/${dailymotionEmbedMatch[1]}`;
+      return `https://www.dailymotion.com/thumbnail/video/${dailymotionEmbedMatch[1]}`;
     }
 
-    // BFMTV (pas de miniature officielle, on utilise un placeholder)
-    return result;
+    return defaultThumbnail;
   }
 
   async updateVideo(id: string, updates: Partial<Video>): Promise<{ data: Video | null; error: Error | null }> {
-    const { data, error } = await this.supabase.updateVideo(id, updates);
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
+    }
+    const { data, error } = await this.supabase.client.from('video').update(updates).eq('id', id).select().single();
+
     if (error) {
       console.error('Error updating video:', error);
+      throw error;
     }
-    return { data, error };
+
+    return data;
   }
 
   async createVideo(newVideo: VideoNew): Promise<{ data: Video | null; error: Error | null }> {
-    const result = await this.supabase.newVideo(newVideo);
-    if (result.error) {
-      console.error('Error creating video:', result.error);
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
     }
-    return result;
+    const { data, error } = await this.supabase.client.from('video').insert(newVideo).select().single();
+
+    if (error) {
+      console.error('Error creating video:', error);
+      throw error;
+    }
+
+    return data;
   }
 
-  async deleteVideo(id: string): Promise<{ error: Error | null }> {
-    const result = await this.supabase.deleteVideo(id);
-    if (result.error) {
-      console.error('Error deleting video:', result.error);
+  async deleteVideo(id: string): Promise<void> {
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
     }
-    return result;
+    const { error } = await this.supabase.client.from('video').delete().eq('id', id);
+
+    if (error) {
+      console.error('Error deleting video:', error);
+      throw error;
+    }
   }
 }

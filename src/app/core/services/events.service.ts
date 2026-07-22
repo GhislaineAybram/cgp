@@ -17,68 +17,105 @@ import { Evening, EveningNew } from '../../models/evening';
 export class EventsService {
   private readonly supabase = inject(SupabaseService);
 
-  async loadEveningsCount() {
-    let result = 0;
-    const { data, error } = await this.supabase.getEveningsCount();
-    if (error) {
-      console.error('Error fetching events count:', error);
-    } else {
-      result = data ?? 0;
+  async loadEveningsCount(): Promise<number> {
+    if (!this.supabase.isAvailable) {
+      return 0;
     }
-    return result;
+    const { count, error } = await this.supabase.client.from('evening').select('*', { count: 'exact', head: true });
+
+    if (error) {
+      console.error('Error fetching evenings count:', error);
+      throw error;
+    }
+
+    return count ?? 0;
   }
 
   async getAllFutureEvenings(): Promise<Evening[]> {
-    let result: Evening[] = [];
-    const { data, error } = await this.supabase.getAllFutureEvenings();
+    if (!this.supabase.isAvailable) {
+      return [];
+    }
+    const today = new Date().toISOString().split('T')[0];
+
+    const { data, error } = await this.supabase.client.from('evening').select('*').gte('date', today).order('date', { ascending: true });
+
     if (error) {
       console.error('Error fetching future evenings:', error);
-    } else {
-      result = data ?? [];
+      throw error;
     }
-    return result;
+
+    return data ?? [];
   }
 
   async getAllEvenings(): Promise<Evening[]> {
-    let result: Evening[] = [];
-    const { data, error } = await this.supabase.getAllEvenings();
-    if (error) {
-      console.error('Error fetching evenings:', error);
-    } else {
-      result = data ?? [];
+    if (!this.supabase.isAvailable) {
+      return [];
     }
-    return result;
+    const { data, error } = await this.supabase.client.from('evening').select('*').order('date', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching all evenings:', error);
+      throw error;
+    }
+
+    return data ?? [];
   }
 
-  async updateEvening(id: string, updates: Partial<Evening>): Promise<{ data: Evening | null; error: Error | null }> {
-    const { data, error } = await this.supabase.updateEvening(id, updates);
+  async updateEvening(id: string, updates: Partial<Evening>) {
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
+    }
+    const { data, error } = await this.supabase.client.from('evening').update(updates).eq('id', id).select().single();
+
     if (error) {
       console.error('Error updating evening:', error);
+      throw error;
     }
-    return { data, error };
+
+    return data;
   }
 
-  async uploadEveningPicture(file: File): Promise<{ data: string | null; error: Error | null }> {
-    const { data, error } = await this.supabase.uploadEveningPicture(file);
+  async uploadEveningPicture(file: File): Promise<string> {
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
+    }
+    const filename = `${Date.now()}-${file.name}`;
+
+    const { error } = await this.supabase.client.storage.from('evenings pictures').upload(filename, file);
+
     if (error) {
-      console.error('Error uploading picture', error);
+      console.error('Error uploading evening picture:', error);
+      throw error;
     }
-    return { data, error };
+
+    const { data } = this.supabase.client.storage.from('evenings pictures').getPublicUrl(filename);
+
+    return data.publicUrl;
   }
 
-  async createEvening(newEvening: EveningNew): Promise<{ data: Evening | null; error: Error | null }> {
-    const result = await this.supabase.newEvening(newEvening);
-    if (result.error) {
-      console.error('Error creating evening:', result.error);
+  async createEvening(evening: EveningNew) {
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
     }
-    return result;
+    const { data, error } = await this.supabase.client.from('evening').insert(evening).select().single();
+
+    if (error) {
+      console.error('Error creating evening:', error);
+      throw error;
+    }
+
+    return data;
   }
 
-  async deleteEvening(id: string): Promise<{ error: Error | null }> {
-    const result = await this.supabase.deleteEvening(id);
-    if (result.error) {
-      console.error('Error deleting evening:', result.error);
+  async deleteEvening(id: string): Promise<void> {
+    if (!this.supabase.isAvailable) {
+      throw new Error('Supabase client unavailable');
     }
-    return result;
+    const { error } = await this.supabase.client.from('evening').delete().eq('id', id);
+
+    if (error) {
+      console.error('Error deleting evening:', error);
+      throw error;
+    }
   }
 }

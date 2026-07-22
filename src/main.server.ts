@@ -6,7 +6,6 @@ import localeFr from '@angular/common/locales/fr';
 
 registerLocaleData(localeFr);
 
-const bootstrap = (context: BootstrapContext) =>
-  bootstrapApplication(AppComponent, config, context);
+const bootstrap = (context: BootstrapContext) => bootstrapApplication(AppComponent, config, context);
 
 export default bootstrap;

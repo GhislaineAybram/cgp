@@ -66,81 +66,59 @@ export class AdminEventsComponent implements OnInit {
   }
 
   async onUpdate(data: { item: Evening; files: Map<keyof Evening, File> }) {
-    let pictureUrl = data.item.picture;
+    try {
+      let picture = data.item.picture;
 
-    // Upload de la nouvelle image si présente
-    const pictureFile = data.files.get('picture' as keyof Evening);
-    if (pictureFile) {
-      const { data: uploadData, error: uploadError } = await this.eventsService.uploadEveningPicture(pictureFile);
+      const file = data.files.get('picture');
 
-      if (uploadError) {
-        console.error("Erreur lors de l'upload de l'image:", uploadError);
-        this.showErrorModal = true;
-        return;
+      if (file) {
+        picture = await this.eventsService.uploadEveningPicture(file);
       }
 
-      pictureUrl = uploadData || pictureUrl;
-    }
+      await this.eventsService.updateEvening(data.item.id, {
+        ...data.item,
+        picture,
+      });
 
-    const updatedEvening = {
-      ...data.item,
-      picture: pictureUrl,
-    };
-
-    if (!updatedEvening.id) {
-      console.error('Impossible de sauvegarder : ID manquant');
-      this.showErrorModal = true;
-      return;
-    }
-
-    const { error } = await this.eventsService.updateEvening(updatedEvening.id, updatedEvening);
-
-    if (error) {
-      console.error('Erreur lors de la mise à jour:', error);
-      this.showErrorModal = true;
-    } else {
       this.showSuccessModal = true;
-      await this.loadEvenings();
-    }
 
-    this.closeModal();
+      await this.loadEvenings();
+    } catch (error) {
+      console.error(error);
+      this.showErrorModal = true;
+    } finally {
+      this.closeModal();
+    }
   }
 
   async onCreate(data: { item: Partial<Evening>; files: Map<keyof Evening, File> }) {
-    let pictureUrl = '';
+    try {
+      let picture = '';
 
-    const pictureFile = data.files.get('picture' as keyof Evening);
-    if (pictureFile) {
-      const { data: uploadData, error: uploadError } = await this.eventsService.uploadEveningPicture(pictureFile);
+      const pictureFile = data.files.get('picture');
 
-      if (uploadError) {
-        console.error("Erreur lors de l'upload de l'image:", uploadError);
-        this.showErrorModal = true;
-        return;
+      if (pictureFile) {
+        picture = await this.eventsService.uploadEveningPicture(pictureFile);
       }
 
-      pictureUrl = uploadData || '';
-    }
+      const newEvening: EveningNew = {
+        title: data.item.title ?? '',
+        location: data.item.location ?? '',
+        date: data.item.date ?? new Date(),
+        hour: data.item.hour ?? '',
+        picture,
+      };
 
-    const newEvening: EveningNew = {
-      title: (data.item.title as string) || '',
-      location: (data.item.location as string) || '',
-      date: (data.item.date as Date) || new Date(),
-      hour: (data.item.hour as string) || '',
-      picture: pictureUrl,
-    };
+      await this.eventsService.createEvening(newEvening);
 
-    const { error } = await this.eventsService.createEvening(newEvening);
-
-    if (error) {
-      console.error('Erreur lors de la création:', error);
-      this.showErrorModal = true;
-    } else {
       this.showSuccessModal = true;
       await this.loadEvenings();
+    } catch (error) {
+      console.error('Erreur lors de la création:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.closeModal();
     }
-
-    this.closeModal();
   }
 
   onDelete(event: Evening) {
@@ -151,16 +129,16 @@ export class AdminEventsComponent implements OnInit {
   async confirmDelete() {
     if (!this.eventToDelete) return;
 
-    const { error } = await this.eventsService.deleteEvening(this.eventToDelete.id);
+    try {
+      await this.eventsService.deleteEvening(this.eventToDelete.id);
 
-    if (error) {
-      console.error('Erreur lors de la suppression:', error);
-      this.showErrorModal = true;
-    } else {
       this.showSuccessModal = true;
       await this.loadEvenings();
+    } catch (error) {
+      console.error('Erreur lors de la suppression:', error);
+      this.showErrorModal = true;
+    } finally {
+      this.eventToDelete = null;
     }
-
-    this.eventToDelete = null;
   }
 }
