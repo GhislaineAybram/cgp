@@ -1,7 +1,7 @@
 export interface TableColumn<T> {
   key: keyof T;
   label: string;
-  type?: 'text' | 'date' | 'hour' | 'number' | 'image';
+  type?: 'text' | 'date' | 'hour' | 'number' | 'image' | 'status';
   weight?: number;
 }
 

@@ -1,0 +1,34 @@
+<section class="w-full relative overflow-hidden bg-light-mode">
+  <div>
+    <div class="flex flex-col md:flex-row w-full gap-0 min-h-screen">
+      <!-- Colonne de navigation - Fond bleu -->
+      <div class="w-full md:max-w-[340px] bg-column">
+        <app-admin-pannel [activePage]="'contact'"></app-admin-pannel>
+      </div>
+
+      <!-- Corps de texte - Fond bleu ciel -->
+      <div class="flex-1 bg-blue-100 p-6 md:p-8 lg:p-10">
+        <app-admin-table
+          databaseTableName="Messages reçus via le formulaire de contact"
+          [databaseItemsCount]="contactMessagesCount"
+          [databaseTable]="contactMessagesTable"
+          [showCreateButton]="false"
+          [showEditButton]="false"
+          (statusChanged)="onStatusChanged($event)"
+          (deleteClicked)="onDelete($event)">
+        </app-admin-table>
+        <app-admin-edition
+          [isVisible]="isModalOpen"
+          [selectedItem]="selectedContactMessage"
+          [mode]="modalMode"
+          editionTitle="Éditer le message de contact"
+          [databaseTable]="contactMessagesTable"
+          (closeModal)="closeModal()">
+        </app-admin-edition>
+        <app-modal-success [(isVisible)]="showSuccessModal"></app-modal-success>
+        <app-modal-error [(isVisible)]="showErrorModal"></app-modal-error>
+        <app-modal-confirmation [(isVisible)]="showConfirmationModal" (confirmed)="confirmDelete()"> </app-modal-confirmation>
+      </div>
+    </div>
+  </div>
+</section>

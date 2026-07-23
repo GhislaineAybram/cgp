@@ -14,6 +14,7 @@ import { AdminFeedbackComponent } from './features/admin/admin-feedback/admin-fe
 import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 import { authGuard } from './core/guards/auth.gard';
 import { SitemapComponent } from './features/sitemap/sitemap.component';
+import { AdminContactComponent } from './features/admin/admin-contact/admin-contact.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'Julien Poudras | CGP Indépendant Meudon (92) - Conseil en Gestion de Patrimoine' },
@@ -34,6 +35,7 @@ export const routes: Routes = [
     canActivateChild: [authGuard],
     children: [
       { path: '', component: AdminComponent, title: 'Administration' },
+      { path: 'contact', component: AdminContactComponent, title: 'Gestion des réponses au formulaire de contact' },
       { path: 'articles', component: AdminArticlesComponent, title: 'Gestion des articles' },
       { path: 'medias', component: AdminMediasComponent, title: 'Gestion des médias' },
       { path: 'events', component: AdminEventsComponent, title: 'Gestion des événements' },

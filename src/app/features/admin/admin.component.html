@@ -10,6 +10,29 @@
       <div class="flex-1 bg-blue-100 p-6 md:p-8 lg:p-10">
         <div class="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
           <!--Metric Card-->
+          <div class="p-10 border-b-4 border-[var(--color-bronze-600)] rounded-lg shadow-xl bg-bronze-400">
+            <div class="flex flex-row items-center">
+              <div class="flex-shrink pr-4">
+                <div class="p-4 bg-bronze-600 color-bronze-400 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="size-8">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 text-right md:text-center">
+                <h2 class="font-bold color-grey-800 uppercase">Messages reçus</h2>
+                <h3 class="text-4xl font-bold">{{ contactsMessagesCount() }}</h3>
+                @if (contactsMessagesPendingCount() > 0) {
+                  <p class="text-sm color-grey-600 mt-2">dont {{ contactsMessagesPendingCount() }} en attente de réponse</p>
+                }
+              </div>
+            </div>
+          </div>
+
+          <!--Metric Card-->
           <div class="p-10 border-b-4 border-[var(--color-grey-800)] rounded-lg shadow-xl bg-grey-100">
             <div class="flex flex-row items-center">
               <div class="flex-shrink pr-4">

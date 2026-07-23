@@ -14,6 +14,7 @@ import { ArticlesService } from '../../core/services/articles.service';
 import { EventsService } from '../../core/services/events.service';
 import { AdminPannelComponent } from './admin-pannel/admin-pannel.component';
 import { FeedbackService } from '../../core/services/feedback.service';
+import { ContactsService } from '../../core/services/contacts.service';
 
 @Component({
   selector: 'app-admin',
@@ -27,23 +28,30 @@ export class AdminComponent {
   videosCount = signal<number>(0);
   eventsCount = signal<number>(0);
   feedbackCount = signal<number>(0);
+  contactsMessagesCount = signal<number>(0);
+  contactsMessagesPendingCount = signal<number>(0);
 
   protected mediasService = inject(MediasService);
   protected articlesService = inject(ArticlesService);
   protected eventsService = inject(EventsService);
   protected feedbackService = inject(FeedbackService);
+  protected contactsService = inject(ContactsService);
 
   dataEffect = effect(async () => {
-    const [articles, videos, events, feedback] = await Promise.all([
+    const [articles, videos, events, feedback, contactsMessages, contactsMessagesPending] = await Promise.all([
       this.articlesService.loadArticlesCount(),
       this.mediasService.loadMediasCount(),
       this.eventsService.loadEveningsCount(),
       this.feedbackService.loadFeedbackCount(),
+      this.contactsService.loadContactsMessagesCount(),
+      this.contactsService.loadPendingContactsMessagesCount(),
     ]);
 
     this.articlesCount.set(articles);
     this.videosCount.set(videos);
     this.eventsCount.set(events);
     this.feedbackCount.set(feedback);
+    this.contactsMessagesCount.set(contactsMessages);
+    this.contactsMessagesPendingCount.set(contactsMessagesPending);
   });
 }
